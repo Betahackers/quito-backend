@@ -5,5 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validate :first_name, :last_name, :role, presence: true
+  
+  def admin?
+    role == 'admin'
+  end
 
 end
