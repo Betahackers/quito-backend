@@ -33,6 +33,8 @@ gem 'geocoder'
 gem 'pry'
 gem 'pry-rails'
 
+gem 'foursquare2'
+
 group :test, :development do
   gem 'dotenv-rails'
   gem 'rspec', '>= 3.0.0.beta2'
