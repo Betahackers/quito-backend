@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, path: 'd'
 
-  resources :articles
-  resources :users
+  api_version(:module => "V1", :path => {:value => "v1"}, :default => true) do
+    resources :articles
+    resources :users
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
