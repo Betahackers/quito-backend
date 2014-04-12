@@ -16,10 +16,10 @@ module V1
         # locations = 
         # @article.locations = locations
         if @article.save
-          format.html
+          format.html {redirect_to @article, notice: 'Success'}
           format.json { render json: @article }
         else
-          format.html
+          format.html {render :new, alert: 'failed :('}
           format.json
         end
       end
@@ -31,10 +31,10 @@ module V1
     def update
       respond_to do |format|
         if @article.update_attribtues(article_params)
-          format.html
+          format.html {redirect_to @article, notice: 'Success'}
           format.json { render json: @article }
         else
-          format.html
+          format.html {render :new, alert: 'failed :('}
           format.json
         end
       end
