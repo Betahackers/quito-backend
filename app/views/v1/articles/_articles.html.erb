@@ -2,11 +2,9 @@
    <table class="table table-striped">
      <thead>
        <tr>
-         <th>#</th>
-         <th>Header</th>
-         <th>Header</th>
-         <th>Header</th>
-         <th>Header</th>
+         <%= content_tag :th, t(:title) %>
+         <%= content_tag :th, t(:content) %>
+         <%= content_tag :th, t(:actions) %>
        </tr>
      </thead>
      <tbody>

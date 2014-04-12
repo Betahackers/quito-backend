@@ -9,7 +9,6 @@ module V1
     end
 
     def show
-      @article = Article.find(params[:id])
     end
 
     def new
@@ -17,6 +16,8 @@ module V1
   
     def create    
       respond_to do |format|
+        # locations = 
+        # @article.locations = locations
         if @article.save
           format.html
           format.json { render json: @article }
@@ -48,7 +49,7 @@ module V1
     private
   
     def article_params
-      params.require(:article).permit(:title, :content)
+      params.require(:article).permit(:title, :content, :foursquare_ids)
     end
 
   end
