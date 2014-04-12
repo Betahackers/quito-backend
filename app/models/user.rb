@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   validate :first_name, :last_name, :role, presence: true
 
+  has_many :articles
+
 end
