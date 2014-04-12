@@ -2,6 +2,7 @@ json.article do
   json.id article.id
   json.title article.title
   json.moods article.mood_list
+  json.categories article.category_list
   json.content article.content
   json.type article.article_type
   json.author do

@@ -22,6 +22,4 @@ ActiveRecord::Base.transaction do
   article3.locations  =[ Location.create!(name: 'Muntanya de Montjuïc', latitude: 41.3641667, longitude: 2.1580556),
                          Location.create!(name: 'Tibidabo', latitude: 41.4209857, longitude: 2.1187937)]
 
-
-
 end
