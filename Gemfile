@@ -33,8 +33,8 @@ gem 'pry'
 gem 'pry-rails'
 
 group :test, :development do
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem 'rspec', '>= 3.0.0.beta2'
+  gem 'rspec-rails', '>= 3.0.0.beta2'
 
   gem 'factory_girl_rails'
 
