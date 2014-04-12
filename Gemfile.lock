@@ -35,6 +35,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.0.1)
+      rails (>= 3, < 5)
     arel (5.0.0)
     bcrypt (3.1.7)
     bootstrap-sass (3.1.1.0)
@@ -173,6 +175,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    select2-rails (3.5.2)
+      thor (~> 0.14)
     slop (3.5.0)
     spring (1.1.2)
     sprockets (2.11.0)
@@ -210,6 +214,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   bootstrap-sass (~> 3.1.1)
   cancancan
   coffee-rails (~> 4.0.0)
@@ -232,6 +237,7 @@ DEPENDENCIES
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  select2-rails
   simple_form!
   spring
   sqlite3
