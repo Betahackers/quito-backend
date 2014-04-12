@@ -21,3 +21,9 @@ All articles
 Filter by author id
 
 /v1/articles.json?author_id={AUTHOR_ID}
+
+Filter by mood
+/v1/articles.json?author_id={MOOD}
+
+Filter by category
+/v1/articles.json?author_id={CATEGORY}

@@ -5,6 +5,8 @@ module V1
     def index
       @articles = Article.all
       @articles = @articles.where(user_id: params[:author_id] ) if params[:author_id]
+      @articles = @articles.tagged_with(params[:moods], on: :moods) if params[:moods]
+      @articles = @articles.tagged_with(params[:category], on: :categories) if params[:category]
       @articles
     end
 
