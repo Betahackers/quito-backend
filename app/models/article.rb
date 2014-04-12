@@ -6,12 +6,9 @@ class Article < ActiveRecord::Base
   acts_as_taggable_on :moods, :categories
   
   MOODS = ['Illegal', 'Sociable', 'Adventure', 'Active', 'Cultural', 'Romantic', 'Relaxed', 'Solitary']
-  CATEGORIES = []
+  CATEGORIES = ['Eat', 'Drink', 'Healthy Life', 'Culture', 'Shopping', 'Dancing', 'Live Music', 'Walks']
 
   #TODO obtain from moods
-  def mood_list
-    .sample(rand(3..5))
-  end
 
   def author
     user
