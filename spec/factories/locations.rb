@@ -21,5 +21,11 @@ FactoryGirl.define do
       latitude 41.3641667
       longitude 2.1580556
     end
+
+    factory :tibidabo do
+      name 'Tibidabo'
+      latitude 41.4209857
+      longitude 2.1187937
+    end
   end
 end
