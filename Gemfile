@@ -32,6 +32,9 @@ gem 'pg'
 group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'
+
+  gem 'factory_girl_rails'
+
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-shell'
