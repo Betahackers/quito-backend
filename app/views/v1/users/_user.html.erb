@@ -1,7 +1,6 @@
 <tr>
-  <td>1,001</td>
-  <td>Lorem</td>
-  <td>ipsum</td>
-  <td>dolor</td>
-  <td>sit</td>
+  <%= content_tag :td, user.first_name %>
+  <%= content_tag :th, user.last_name %>
+  <%= content_tag :th, user.email %>
+  <%= content_tag :th, user.role %>
 </tr>

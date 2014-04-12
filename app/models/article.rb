@@ -2,6 +2,9 @@ class Article < ActiveRecord::Base
   belongs_to :user
 
   has_many :locations
+  
+  acts_as_taggable_on :moods, :categories
+  
 
   #TODO obtain from moods
   def moods

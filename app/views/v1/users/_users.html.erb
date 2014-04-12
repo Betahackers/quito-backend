@@ -1,12 +1,11 @@
 <div class="table-responsive">
    <table class="table table-striped">
      <thead>
-       <tr>
-         <th>#</th>
-         <th>Header</th>
-         <th>Header</th>
-         <th>Header</th>
-         <th>Header</th>
+       <tr>        
+         <%= content_tag :th, t(:first_name) %>
+         <%= content_tag :th, t(:last_name) %>
+         <%= content_tag :th, t(:email) %>
+         <%= content_tag :th, t(:role) %>
        </tr>
      </thead>
      <tbody>
