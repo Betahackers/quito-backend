@@ -63,6 +63,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (0.10.0)
+    dotenv-rails (0.10.0)
+      dotenv (= 0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -219,6 +222,7 @@ DEPENDENCIES
   cancancan
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   factory_girl_rails
   geocoder
   guard

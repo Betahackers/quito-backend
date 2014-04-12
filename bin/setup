@@ -8,4 +8,7 @@ printf 'Add superuser role to user... '
 echo 'ALTER ROLE quito SUPERUSER;' | psql -h localhost -d template1 > /dev/null
 echo 'done'
 
+printf 'Copy dotenv... '
+cp -f .env.example .env
+
 echo 'Setup complete'
