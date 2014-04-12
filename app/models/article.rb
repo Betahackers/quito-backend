@@ -7,12 +7,20 @@ class Article < ActiveRecord::Base
   
 
   #TODO obtain from moods
-  def moods
-    ['Illegal','Sociable','Adventure','Active','Cultural','Romantic','Relaxed','Solitary'].sample(rand(3..5))
+  def mood_list
+    ['Illegal', 'Sociable', 'Adventure', 'Active', 'Cultural', 'Romantic', 'Relaxed', 'Solitary'].sample(rand(3..5))
   end
 
   def author
     user
+  end
+
+  def article_type
+    if locations.length > 1
+      "itinerary"
+    else
+      "review"
+    end
   end
 
 end
