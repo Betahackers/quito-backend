@@ -29,7 +29,10 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.0)
     bcrypt (3.1.7)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.2.2)
+    cancancan (1.7.1)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -162,6 +165,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    simple_form (1.4.1)
     slop (3.5.0)
     spring (1.1.2)
     sprockets (2.11.0)
@@ -195,6 +199,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (~> 3.1.1)
+  cancancan
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
@@ -215,6 +221,7 @@ DEPENDENCIES
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   sqlite3
   turbolinks
