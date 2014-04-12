@@ -1,8 +1,9 @@
 json.article @articles do |article|
   json.id article.id
   json.title article.title
-  json.moods article.moods
+  json.moods article.mood_list
   json.content article.content
+  json.type article.article_type
   json.author do
     json.id article.author.id
     json.first_name article.author.first_name
