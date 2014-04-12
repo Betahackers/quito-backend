@@ -30,10 +30,19 @@ gem 'devise'
 gem 'cancancan'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'geocoder'
+
+gem 'simple_form'
+
+gem 'pry'
+gem 'pry-rails'
 
 group :test, :development do
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem 'rspec', '>= 3.0.0.beta2'
+  gem 'rspec-rails', '>= 3.0.0.beta2'
+
+  gem 'factory_girl_rails'
+
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-shell'

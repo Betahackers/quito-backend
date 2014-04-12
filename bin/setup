@@ -1,1 +1,11 @@
+#!/bin/bash
+
+printf 'Create User... '
 createuser -w -d -l -R -S quito -h localhost
+echo 'done'
+
+printf 'Add superuser role to user... '
+echo 'ALTER ROLE quito SUPERUSER;' | psql -h localhost -d template1 > /dev/null
+echo 'done'
+
+echo 'Setup complete'
