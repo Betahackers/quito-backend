@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'pg'
+gem 'geocoder'
 
 gem 'pry'
 gem 'pry-rails'

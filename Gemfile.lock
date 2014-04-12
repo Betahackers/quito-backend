@@ -59,6 +59,7 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.3)
     formatador (0.2.4)
+    geocoder (1.1.9)
     guard (2.6.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -197,6 +198,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
+  geocoder
   guard
   guard-rspec
   guard-shell

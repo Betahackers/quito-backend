@@ -5,7 +5,7 @@ describe Article do
 
   context '#valid' do
     describe '#title' do
-      subject { FactoryGirl.create!(:article).title }
+      subject { FactoryGirl.create(:article).title }
 
       it { is_expected.not_to be_nil }
     end
