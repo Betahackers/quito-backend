@@ -12,5 +12,4 @@ class Article < ActiveRecord::Base
     user
   end
 
-  def
 end
