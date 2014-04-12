@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20140412171452) do
     t.datetime "updated_at"
   end
 
+  add_index "locations", ["foursquare_id"], name: "index_locations_on_foursquare_id", unique: true, using: :btree
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
