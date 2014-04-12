@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.1.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -27,8 +27,15 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'devise'
+gem 'cancancan'
 gem 'pg'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'geocoder'
+gem 'versionist'
+gem 'acts-as-taggable-on'
+gem "select2-rails"
+
+gem 'simple_form', 					github: 'plataformatec/simple_form'
 
 gem 'pry'
 gem 'pry-rails'

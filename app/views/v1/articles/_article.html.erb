@@ -1,0 +1,9 @@
+<tr>
+  <%= content_tag :td, article.title %>
+  <%= content_tag :td, article.content %>
+  <%= content_tag :td do %>
+    <%= link_to t(:show), article_path(article)%>
+    <%= link_to t(:edit), edit_article_path(article)%>
+    <%= link_to t(:destroy), article_path(article), method: :delete, data: {confirm: 'Are you sure?'}%>
+  <% end %>
+</tr>
