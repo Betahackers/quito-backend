@@ -12,4 +12,6 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
+  has_many :articles
+
 end

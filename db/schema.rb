@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140412153615) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "locations", force: true do |t|
