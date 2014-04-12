@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   validate :first_name, :last_name, :role, presence: true
   
+  ROLES = ['member', 'admin']
+  
   def admin?
     role == 'admin'
   end
