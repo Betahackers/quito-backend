@@ -6,7 +6,7 @@ describe Location do
       let(:location) { FactoryGirl.create(:betahaus) }
 
       it 'doesn\'t call out to foursquare' do
-        expect(Object).not_to receive(:fetch_venue)
+        expect(Foursquare).not_to receive(:fetch_venue)
         described_class.by_foursquare_id(location.foursquare_id)
       end
 
@@ -23,7 +23,7 @@ describe Location do
       let(:loaded_object) { described_class.by_foursquare_id(foursquare_hash['id']) }
 
       before(:each) do
-        allow(Object).to receive(:fetch_venue).and_return(foursquare_hash)
+        allow(Foursquare).to receive(:fetch_venue).and_return(foursquare_hash)
       end
 
       it 'creates new object' do

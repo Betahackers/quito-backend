@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe FoursquareController do
   describe 'POST list' do
+    let(:list_of_venues) {
+      Array.new(2) { FactoryGirl.build(:foursquare_hash) }
+    }
+
     context 'metadata' do
       before(:each) do
+        allow(Foursquare).to receive(:search_venues).and_return(list_of_venues)
         post :list_venues
       end
 
@@ -18,9 +23,6 @@ describe FoursquareController do
 
     context 'data' do
       let(:search_input) { 'Beta' }
-      let(:list_of_venues) {
-        Array.new(2) { FactoryGirl.build(:foursquare_hash) }
-      }
 
       before(:each) do
         allow(Foursquare)
