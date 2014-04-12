@@ -3,12 +3,15 @@ module V1
     load_and_authorize_resource
   
     def index
+      @articles = Article.all
+      @articles = @articles.where(user_id: params[:author_id] ) if params[:author_id]
+      @articles
     end
-  
+
     def show
       @article = Article.find(params[:id])
     end
-  
+
     def new
     end
   
