@@ -8,5 +8,7 @@ class CreateLocations < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :locations, :foursquare_id, unique: true
   end
 end
