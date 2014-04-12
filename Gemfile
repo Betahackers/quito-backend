@@ -27,7 +27,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'devise'
+gem 'cancancan'
 gem 'pg'
+gem 'bootstrap-sass', '~> 3.1.1'
 
 group :test, :development do
   gem 'rspec'
