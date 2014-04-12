@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20140412113310) do
     t.datetime "updated_at"
   end
 
+  add_index "locations", ["foursquare_id"], name: "index_locations_on_foursquare_id", unique: true, using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

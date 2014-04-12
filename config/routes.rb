@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  match '/foursquare' => 'foursquare#index', via: :get
+  match '/foursquare/list_venues' => 'foursquare#list_venues', via: :post
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
