@@ -32,7 +32,7 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'geocoder'
 
-gem 'simple_form'
+gem 'simple_form', 					github: 'plataformatec/simple_form'
 
 gem 'pry'
 gem 'pry-rails'
