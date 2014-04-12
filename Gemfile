@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'pg'
 
+gem 'pry'
+gem 'pry-rails'
+
 group :test, :development do
   gem 'rspec'
   gem 'rspec-rails'

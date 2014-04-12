@@ -100,6 +100,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -193,6 +195,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   pg
+  pry
+  pry-rails
   rails (= 4.1.0)
   rb-fchange
   rb-fsevent
