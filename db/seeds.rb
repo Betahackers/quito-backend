@@ -25,10 +25,10 @@ ActiveRecord::Base.transaction do
   article1.save!
   article2.save!
   article3.save!
-  
-  article1.locations = [Location.create!(name: 'Betahaus', latitude: 41.4069647, longitude: 2.1568569)]
-  article2.locations = [Location.create!(name: 'Can Tresó', latitude: 41.402982, longitude: 2.153739)]
-  article3.locations  =[ Location.create!(name: 'Muntanya de Montjuïc', latitude: 41.3641667, longitude: 2.1580556),
-                         Location.create!(name: 'Tibidabo', latitude: 41.4209857, longitude: 2.1187937)]
+
+  article1.locations = [Location.create!(name: 'Betahaus', foursquare_id: '4fab92ade4b066f573d4bf89',latitude: 41.4069647, longitude: 2.1568569)]
+  article2.locations = [Location.create!(name: 'Can Tresó', foursquare_id: '4c49eac320ab1b8d4bb76c17', latitude: 41.402982, longitude: 2.153739)]
+  article3.locations  =[Location.create!(name: 'Muntanya de Montjuïc', foursquare_id: '4d26c189342d6dcbb4c3e6ca', latitude: 41.3641667, longitude: 2.1580556),
+                         Location.create!(name: 'Tibidabo', foursquare_id: '4adcda50f964a520654121e3', latitude: 41.4209857, longitude: 2.1187937)]
 
 end
