@@ -14,13 +14,15 @@ bin/setup
 
 # API Usage
 
-## List all Articles
+## Articles
+
+### List All Articles
 
 ```
 http://www.fromto.es/v1/articles.json
 ```
 
-## Get an Article
+### Get an Article
 
 ```
 http://www.fromto.es/v1/articles.json
