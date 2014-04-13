@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :locations
     resources :users
+    match '/configuration' => 'configuration#show', via: :get
+    
   end
 end
