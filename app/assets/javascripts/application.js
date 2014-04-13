@@ -43,7 +43,7 @@ $(".foursquare_location_select").select2({
     placeholder: "Search for a place",
     minimumInputLength: 4,
     ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-        url: "http://localhost:3000/v1/foursquare",
+        url: "/v1/foursquare",
         dataType: 'json',
         data: function (term, page) {
             return {
@@ -62,7 +62,7 @@ $(".foursquare_location_select").select2({
         // using its formatResult renderer - that way the movie name is shown preselected
         var id=$(element).val();
         if (id!=="") {
-            $.ajax("http://localhost:3000/v1/foursquare/"+id+".json", {
+            $.ajax("/v1/foursquare/"+id+".json", {
                 dataType: "json"
             }).done(function(data) { callback(data); });
         }
