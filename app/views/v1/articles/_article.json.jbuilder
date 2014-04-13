@@ -11,6 +11,8 @@ json.article do
     json.last_name article.author.last_name
   end
   json.locations article.locations do |location|
+    json.id location.id
+
     json.name location.name
     json.longitude location.longitude
     json.latitude location.latitude

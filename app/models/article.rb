@@ -14,7 +14,9 @@ class Article < ActiveRecord::Base
   # validates :categories, inclusion: {in: CATEGORIES}
   
   def location
+    #this is fake, just to use the form field
   end
+  
   def author
     user
   end
