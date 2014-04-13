@@ -33,6 +33,12 @@ module V1
     end
   
     def update
+      # required for settings form to submit when password is left blank
+      if params[:user][:password].blank?
+         params[:user].delete("password")
+         params[:user].delete("password_confirmation")
+      end
+      
 
       respond_to do |format|
 
@@ -65,7 +71,7 @@ module V1
   
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about,
-                                   :role, :website_url, :twitter_handle, :expert_in, :nationality, :profession)
+                                    :website_url, :twitter_handle, :expert_in, :nationality, :profession)
     end
   
   end

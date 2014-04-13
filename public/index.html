@@ -1,0 +1,74 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Fromto</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/cccabaa1.main.css">
+        <link rel="stylesheet" href="styles/bootstrap.css">
+
+        <style>
+            html { 
+                height: 100% 
+            }
+            
+            body { 
+                height: 100%; 
+                margin: 0; 
+                padding: 0;
+                font-family: sans-serif;
+            }
+            
+            .splash-container {
+                width: 100%;
+                height: 100%;
+            }
+            
+            .splash {
+                width: 100%;
+                height: 100%;
+                background: url(splash_images/fromto_hola_01.png) no-repeat center bottom fixed;
+                display: block;
+            }
+        </style>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="splash-container">
+            <a href="app.html" class="splash">&nbsp;</a>
+        </div>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var colors  = [
+                { pure: '#49c4c1', line: '#69e4e1' }  ,
+                { pure: '#9a92d2', line: '#bab2f2' } ,
+                { pure: '#93cc3a', line: '#b3ec6a' } ];        
+            backcolorIndex = Math.floor((Math.random()*colors.length));
+            $(".splash-container").css("background-color", colors[backcolorIndex].pure);
+
+            var imageIndex = Math.floor(Math.random() * 23) + 1;
+            var imageUrl = "splash_images/fromto_hola_" + (imageIndex < 10 ? "0" : "") + imageIndex + ".png";
+            $(".splash").css("background-image", "url(" + imageUrl + ")");
+        
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-45895640-2', 'fromto.es');ga('send','pageview');
+        </script>
+</body>
+</html>

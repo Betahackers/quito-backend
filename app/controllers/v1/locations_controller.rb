@@ -3,7 +3,6 @@ module V1
     load_and_authorize_resource
 
     def index
-      
       @locations = Location.all
       @locations = @locations.near(params[:ll], params[:radius].to_f / 1000, units: :km) if params[:ll]
       @locations = @locations.with_mood(params[:mood]) if params[:mood]

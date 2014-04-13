@@ -4,6 +4,7 @@ settings: &settings
     value: 'Illegal, Sociable, Adventure, Active, Cultural, Romantic, Relaxed, Solitary'
     editable: true
     deletable: false
+    typecast: ArrayTypecaster
     validations:
       presence: true
       
@@ -12,6 +13,7 @@ settings: &settings
     value: 'Eat, Drink, Healthy Life, Culture, Shopping, Dancing, Live Music, Walks'
     editable: true
     deletable: false
+    typecast: ArrayTypecaster
     validations:
       presence: true
 
