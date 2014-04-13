@@ -8,7 +8,8 @@ class Location < ActiveRecord::Base
 
   scope :with_mood, ->(mood) { joins(:moods).where(tags: {name: mood.downcase})}
   scope :with_category, ->(category) { joins(:category).where(tags: {name: category.downcase})}
-
+  scope :by_user_id, ->(user_id) { joins(:articles).where(user_id: user_id)}
+  
   def foursquare_fields
     @foursquare_fields ||= Foursquare.fetch_venue(self.foursquare_id)
   end

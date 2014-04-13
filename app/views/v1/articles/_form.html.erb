@@ -4,9 +4,8 @@
       <%= f.simple_fields_for :article_locations do |a| %>
         <%= a.input :foursquare_id, input_html: {class: 'foursquare_location_select'} %>
       <% end %>
-      <%= f.input :title, 
-            hint: 'Give a title to your recommendation, e.g. Weirdest cocktail in the world/Ponle un título a tu recomendación, por ej. Un restaurante chino con clientes chinos' %>
-      <%= f.input :content, input_html: {rows: 10}, hint: ''%>
+      <%= f.input :title %>
+      <%= f.input :content, input_html: {rows: 10}%>
       <%= f.input :mood_list, collection: Article::MOODS, input_html: {multiple: true, class: 'select2_tags'} %>
       <%= f.input :category_list, collection: Article::CATEGORIES, input_html: {multiple: true, class: 'select2_tags'} %>
       <%= f.submit %>
