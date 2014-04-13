@@ -4,3 +4,6 @@ json.about user.about
 json.profession user.profession
 json.nationality user.nationality
 json.expert_in user.expert_in
+json.articles do
+  json.partial! user.articles
+end
