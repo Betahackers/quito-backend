@@ -1,6 +1,6 @@
 module V1
   class LocationsController < ApplicationController
-    load_and_authorize_resource
+    load_and_authorize_resource only: :index
 
     def index
       @locations = Location.all
@@ -9,6 +9,14 @@ module V1
       @locations = @locations.with_category(params[:category]) if params[:category]
       @locations = @locations.by_user_id(params[:user_id]) if params[:user_id]
       @locations = @locations.includes(:articles) if params[:include_articles]
+    end
+
+    def show
+      if params[:id].to_i.to_s == params[:id]
+        @location = Location.find_by!(id: params[:id])
+      else
+        @location = Location.find_by!(foursquare_id: params[:id])
+      end
     end
   end
 end
