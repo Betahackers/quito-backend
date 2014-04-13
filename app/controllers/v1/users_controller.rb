@@ -20,10 +20,10 @@ module V1
     def create    
       respond_to do |format|
         if @user.save
-          format.html
+          format.html {redirect_to users_path}
           format.json { render json: @user }
         else
-          format.html
+          format.html {render :new}
           format.json
         end
       end
