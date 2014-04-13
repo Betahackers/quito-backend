@@ -6,7 +6,7 @@ module V1
 
     def index
       @articles = Article.all
-      @articles = @articles.where(user_id: params[:author_id]) if params[:author_id]
+      @articles = @articles.where(user_id: params[:user_id] ) if params[:user_id]
       @articles = @articles.tagged_with(params[:mood], on: :moods) if params[:mood]
       @articles = @articles.tagged_with(params[:category], on: :categories) if params[:category]
       @articles
@@ -22,8 +22,6 @@ module V1
     def create
       @article.user = current_user
       respond_to do |format|
-        # locations = 
-        # @article.locations = locations
         if @article.save
           format.html { redirect_to @article, notice: 'Article added' }
           format.json { render json: @article }
