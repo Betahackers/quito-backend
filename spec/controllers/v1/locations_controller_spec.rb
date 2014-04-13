@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe V1::LocationsController do
+  before(:each) do
+    allow(Foursquare)
+      .to receive(:fetch_venue)
+      .and_return(FactoryGirl.build(:foursquare_hash))
+  end
+
   describe '#index' do
     context 'metadata' do
       it 'returns json' do
