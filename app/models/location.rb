@@ -3,6 +3,8 @@ class Location < ActiveRecord::Base
 
   has_many :article_locations
   has_many :articles, through: :article_locations
+  has_many :base_tags, through: :articles
+  
 
   def self.by_foursquare_id foursquare_id
     find_or_create_by!(foursquare_id: foursquare_id) do |l|

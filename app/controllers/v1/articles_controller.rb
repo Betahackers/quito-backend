@@ -14,6 +14,7 @@ module V1
     end
 
     def new
+      @article.article_locations.new
     end
   
     def create    
@@ -31,6 +32,7 @@ module V1
     end
   
     def edit
+      @article.article_locations.first_or_initialize
     end
   
     def update
@@ -56,7 +58,7 @@ module V1
     private
   
     def article_params
-      params.require(:article).permit(:title, :content, :foursquare_ids, mood_list:[], category_list:[])
+      params.require(:article).permit(:title, :content, :foursquare_ids, article_locations_attributes: [:id, :foursquare_id], mood_list:[], category_list:[])
     end
 
   end

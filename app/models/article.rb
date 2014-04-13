@@ -4,7 +4,10 @@ class Article < ActiveRecord::Base
   has_many :article_locations
   has_many :locations, through: :article_locations
   
+  accepts_nested_attributes_for :article_locations
+  
   acts_as_taggable_on :moods, :categories
+  
   
   MOODS = ['Illegal', 'Sociable', 'Adventure', 'Active', 'Cultural', 'Romantic', 'Relaxed', 'Solitary']
   CATEGORIES = ['Eat', 'Drink', 'Healthy Life', 'Culture', 'Shopping', 'Dancing', 'Live Music', 'Walks']

@@ -34,6 +34,7 @@ gem 'acts-as-taggable-on'
 gem "select2-rails"
 gem 'rails_12factor'
 gem 'figaro'
+gem 'settler'
 
 gem 'simple_form', 					github: 'plataformatec/simple_form'
 
@@ -46,6 +47,9 @@ group :test, :development do
   gem 'dotenv-rails'
   gem 'rspec', '>= 3.0.0.beta2'
   gem 'rspec-rails', '>= 3.0.0.beta2'
+  
+  gem 'better_errors'
+  gem 'binding_of_caller'
 
   gem 'factory_girl_rails'
 

@@ -21,18 +21,16 @@
 $(document).ready(function() {
   
 
-  function locationFormatResult(location) {
+  function locationFormatResult(result) {
       var markup = "<table class='location-result'><tr>";
-      // if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
-      //     markup += "<td class='movie-image'><img src='" + movie.posters.thumbnail + "'/></td>";
-      // }
-      markup += "<td class='location-info'><div class='location-title'>" + location.name + "</div>";
-      // if (movie.critics_consensus !== undefined) {
-      //     markup += "<div class='movie-synopsis'>" + movie.critics_consensus + "</div>";
-      // }
-      // else if (movie.synopsis !== undefined) {
-      //     markup += "<div class='movie-synopsis'>" + movie.synopsis + "</div>";
-      // }
+      if (result.categories !== undefined) {
+          var category = result.categories[0]
+          markup += "<td class='location-thumbnail'><img src='" + category.icon.prefix + "32" + category.icon.suffix + "'/></td>";
+      }
+      markup += "<td class='location-info'><div class='location-title'>" + result.name + "</div>";
+      if (result.location !== undefined) {
+          markup += "<small class='location-address'>" + result.location.address + "</small>";
+      }
       markup += "</td></tr></table>";
       return markup;
   }
@@ -42,9 +40,9 @@ $(document).ready(function() {
   }
 
 
-$("#foursquare_location_select").select2({
+$(".foursquare_location_select").select2({
     placeholder: "Search for a place",
-    minimumInputLength: 1,
+    minimumInputLength: 4,
     ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
         url: "http://localhost:3000/v1/foursquare",
         dataType: 'json',
@@ -59,17 +57,17 @@ $("#foursquare_location_select").select2({
             return {results: data};
         }
     },
-    initSelection: function(element, callback) {
-        // the input tag has a value attribute preloaded that points to a preselected movie's id
-        // this function resolves that id attribute to an object that select2 can render
-        // using its formatResult renderer - that way the movie name is shown preselected
-        var id=$(element).val();
-        if (id!=="") {
-            $.ajax("http://localhost:3000/v1/foursquare/"+id+".json", {
-                dataType: "json"
-            }).done(function(data) { callback(data); });
-        }
-    },
+    // initSelection: function(element, callback) {
+    //     // the input tag has a value attribute preloaded that points to a preselected movie's id
+    //     // this function resolves that id attribute to an object that select2 can render
+    //     // using its formatResult renderer - that way the movie name is shown preselected
+    //     var id=$(element).val();
+    //     if (id!=="") {
+    //         $.ajax("http://localhost:3000/v1/foursquare/"+id+".json", {
+    //             dataType: "json"
+    //         }).done(function(data) { callback(data); });
+    //     }
+    // },
     formatResult: locationFormatResult, // omitted for brevity, see the source of this page
     formatSelection: locationFormatSelection,  // omitted for brevity, see the source of this page
     dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
