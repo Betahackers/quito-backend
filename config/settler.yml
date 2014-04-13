@@ -17,10 +17,6 @@ settings: &settings
 
 development:
   <<: *settings  
-  google_analytics_key:
-    <<: *google
-    label: Development Google analytics key
-    value: 'UA-xxxxxx-1'
 
 test:
   <<: *settings
