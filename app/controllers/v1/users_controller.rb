@@ -33,12 +33,14 @@ module V1
     end
   
     def update
+
       respond_to do |format|
+
         if @user.update_attributes(user_params)
-          format.html
+          format.html  {redirect_to users_path}
           format.json { render json: @user }
         else
-          format.html
+          format.html {render :edit}
           format.json
         end
       end
@@ -62,7 +64,8 @@ module V1
     end
   
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about,
+                                   :role, :website_url, :twitter_handle, :expert_in, :nationality, :profession)
     end
   
   end
