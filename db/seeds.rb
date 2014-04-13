@@ -22,7 +22,9 @@ ActiveRecord::Base.transaction do
   article1.category_list.add(Article::CATEGORIES.sample)
   article2.category_list.add(Article::CATEGORIES.sample)
   article3.category_list.add(Article::CATEGORIES.sample)
-  
+  article1.save!
+  article2.save!
+  article3.save!
   
   article1.locations = [Location.create!(name: 'Betahaus', latitude: 41.4069647, longitude: 2.1568569)]
   article2.locations = [Location.create!(name: 'Can Tresó', latitude: 41.402982, longitude: 2.153739)]
