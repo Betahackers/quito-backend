@@ -25,7 +25,7 @@ http://www.fromto.es/v1/articles.json
 ### Get an Article
 
 ```
-http://www.fromto.es/v1/articles.json
+http://www.fromto.es/v1/articles/{ARTICLE_ID}.json
 ```
 
 ### Filtering Articles
