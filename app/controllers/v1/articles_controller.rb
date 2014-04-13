@@ -9,7 +9,6 @@ module V1
       @articles = @articles.where(user_id: params[:user_id] ) if params[:user_id]
       @articles = @articles.tagged_with(params[:mood], on: :moods) if params[:mood]
       @articles = @articles.tagged_with(params[:category], on: :categories) if params[:category]
-      @articles
     end
 
     def show

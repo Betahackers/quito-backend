@@ -44,8 +44,6 @@ ActiveRecord::Schema.define(version: 20140413171911) do
     t.datetime "updated_at"
   end
 
-  add_index "locations", ["foursquare_id"], name: "index_locations_on_foursquare_id", unique: true, using: :btree
-
   create_table "settings", force: true do |t|
     t.string   "key",        null: false
     t.string   "label"

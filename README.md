@@ -72,3 +72,5 @@ GET http://www.fromto.es/v1/users/{USER_ID}.json
 ```
 GET http://www.fromto.es/v1/locations.json
 ```
+
+### Filter Locations by 
