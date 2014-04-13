@@ -4,4 +4,13 @@ class Location < ActiveRecord::Base
   has_many :article_locations
   has_many :articles, through: :article_locations
 
+  def self.by_foursquare_id foursquare_id
+    find_or_create_by!(foursquare_id: foursquare_id) do |l|
+      hash = Foursquare.fetch_venue(foursquare_id)
+      l.foursquare_id = hash['id']
+      l.name = hash['name']
+      l.latitude = hash['location']['lat']
+      l.longitude = hash['location']['lng']
+    end
+  end
 end
