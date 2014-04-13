@@ -78,6 +78,9 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.9.3)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formatador (0.2.4)
     foursquare2 (1.9.8)
       faraday (~> 0.8)
@@ -238,6 +241,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_girl_rails
+  figaro
   foursquare2
   geocoder
   guard

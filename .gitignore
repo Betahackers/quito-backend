@@ -17,3 +17,6 @@
 /tmp
 
 .idea/*
+
+# Ignore figaro env file
+/config/application.yml

@@ -28,7 +28,7 @@ module V1
   
     def update
       respond_to do |format|
-        if @user.update_attribtues(user_params)
+        if @user.update_attributes(user_params)
           format.html
           format.json { render json: @user }
         else
@@ -39,6 +39,11 @@ module V1
     end
   
     def destroy
+      @user.destroy
+      respond_to do |format|
+        format.html {redirect_to users_path }
+        format.json
+      end
     end
   
   

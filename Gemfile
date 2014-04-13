@@ -33,6 +33,7 @@ gem 'versionist'
 gem 'acts-as-taggable-on'
 gem "select2-rails"
 gem 'rails_12factor'
+gem 'figaro'
 
 gem 'simple_form', 					github: 'plataformatec/simple_form'
 

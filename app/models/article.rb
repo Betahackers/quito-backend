@@ -13,6 +13,8 @@ class Article < ActiveRecord::Base
   # validates :mood_list, inclusion: {in: MOODS}
   # validates :categories, inclusion: {in: CATEGORIES}
   
+  def location
+  end
   def author
     user
   end
