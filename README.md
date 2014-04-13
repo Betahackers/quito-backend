@@ -19,13 +19,13 @@ bin/setup
 ### List All Articles
 
 ```
-http://www.fromto.es/v1/articles.json
+GET http://www.fromto.es/v1/articles.json
 ```
 
-### Get an Article
+### Retrieve an Article
 
 ```
-http://www.fromto.es/v1/articles/{ARTICLE_ID}.json
+GET http://www.fromto.es/v1/articles/{ARTICLE_ID}.json
 ```
 
 ### Filtering Articles
@@ -36,17 +36,17 @@ articles that satisfy all filters.
 
 Filter by author id
 ```
-http://www.fromto.es/v1/articles.json?author_id={AUTHOR_ID}
+GET http://www.fromto.es/v1/articles.json?author_id={AUTHOR_ID}
 ```
 
 Filter by mood
 ```
-http://www.fromto.es/v1/articles.json?mood={MOOD}
+GET http://www.fromto.es/v1/articles.json?mood={MOOD}
 ```
 
 Filter by category
 ```
-http://www.fromto.es/v1/articles.json?category={CATEGORY}
+GET http://www.fromto.es/v1/articles.json?category={CATEGORY}
 ```
 
 ## Users
@@ -55,11 +55,11 @@ http://www.fromto.es/v1/articles.json?category={CATEGORY}
 ### List All Users
 
 ```
-http://www.fromto.es/v1/users.json
+GET http://www.fromto.es/v1/users.json
 ```
 
-### Get a User
+### Retrieve a User
 
 ```
-http://www.fromto.es/v1/users/{USER_ID}.json
+GET http://www.fromto.es/v1/users/{USER_ID}.json
 ```
