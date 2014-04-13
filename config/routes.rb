@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, path: 'd'
+  devise_for :users, path: 'session'
 
 
 

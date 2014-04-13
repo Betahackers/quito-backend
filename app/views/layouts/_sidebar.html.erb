@@ -1,6 +1,7 @@
   <ul class="nav nav-sidebar">
-    <%= content_tag :li, link_to(t(:users), users_path)%>
+    <% if current_user && current_user.admin? %>
+        <%= content_tag :li, link_to(t(:users), users_path)%>
+    <% end %>
     <%= content_tag :li, link_to(t(:articles), articles_path)%>
-
   </ul>
 

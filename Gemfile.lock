@@ -69,9 +69,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    dotenv (0.10.0)
-    dotenv-rails (0.10.0)
-      dotenv (= 0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -130,6 +127,8 @@ GEM
     multipart-post (1.2.0)
     nio4r (1.0.0)
     orm_adapter (0.5.0)
+    paranoia (2.0.2)
+      activerecord (~> 4.0)
     pg (0.17.1)
     polyglot (0.3.4)
     pry (0.9.12.6)
@@ -250,7 +249,6 @@ DEPENDENCIES
   cancancan
   coffee-rails (~> 4.0.0)
   devise
-  dotenv-rails
   factory_girl_rails
   figaro
   foursquare2
@@ -260,6 +258,7 @@ DEPENDENCIES
   guard-shell
   jbuilder (~> 2.0)
   jquery-rails
+  paranoia
   pg
   pry
   pry-rails
