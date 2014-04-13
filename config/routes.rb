@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     root 'articles#index'
     match '/foursquare' => 'foursquare#search', via: :get
     resources :articles
+    resources :locations
     resources :users
   end
 end
