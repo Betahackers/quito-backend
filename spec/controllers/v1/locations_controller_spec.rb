@@ -37,4 +37,30 @@ describe V1::LocationsController do
       end
     end
   end
+
+  describe '#show' do
+    let(:location) { FactoryGirl.create(:betahaus) }
+
+    context 'id' do
+      it 'finds location with existing ID' do
+        get :show, format: :json, id: location.id
+        expect(response).to be_ok
+      end
+    end
+
+    context 'foursquare id' do
+      it 'finds location with existing foursquare ID' do
+        get :show, format: :json, id: location.foursquare_id
+        expect(response).to be_ok
+      end
+    end
+
+    context 'non-existing id' do
+      it 'doesn\'t find non-existing ID' do
+        expect {
+          get :show, format: :json, id: "NOT_#{location.id}"
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end
