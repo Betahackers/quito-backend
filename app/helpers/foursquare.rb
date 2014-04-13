@@ -5,8 +5,8 @@ module Foursquare
     return @client if @client
 
     Foursquare2::Client.new(
-      client_id: ENV['foursquare_client_id'],
-      client_secret: ENV['foursquare_client_secret'],
+      client_id: ENV['FOURSQUARE_CLIENT_ID'],
+      client_secret: ENV['FOURSQUARE_CLIENT_SECRET'],
       api_version: '20140412',
       connection_middleware: [[FaradayMiddleware::Caching, Rails.cache]],
     )
