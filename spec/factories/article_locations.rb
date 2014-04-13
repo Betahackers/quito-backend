@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :article_location do
+    association :article
+    association :location
   end
 end

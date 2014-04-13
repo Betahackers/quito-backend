@@ -1,9 +1,11 @@
 <div class='row'>
   <div class='col-md-5'>
     <%= simple_form_for @article do |f| %>
-      <%= f.input :location, input_html: {id: 'foursquare_location_select'}%>
-      <%= f.input :title %>
-      <%= f.input :content, input_html: {rows: 10}%>
+      <%= f.simple_fields_for :article_locations do |a| %>
+        <%= a.input :foursquare_id, input_html: {class: 'foursquare_location_select'} %>
+      <% end %>
+      <%= f.input :title, hint: 'Your name + surname/Nombre y apellido' %>
+      <%= f.input :content, input_html: {rows: 10}, hint: ''%>
       <%= f.input :mood_list, collection: Article::MOODS, input_html: {multiple: true, class: 'select2_tags'} %>
       <%= f.input :category_list, collection: Article::CATEGORIES, input_html: {multiple: true, class: 'select2_tags'} %>
       <%= f.submit %>

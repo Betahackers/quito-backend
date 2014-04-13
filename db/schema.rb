@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412171452) do
+ActiveRecord::Schema.define(version: 20140413142934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,18 @@ ActiveRecord::Schema.define(version: 20140412171452) do
     t.datetime "updated_at"
   end
 
-  add_index "locations", ["foursquare_id"], name: "index_locations_on_foursquare_id", unique: true, using: :btree
+  create_table "settings", force: true do |t|
+    t.string   "key",        null: false
+    t.string   "label"
+    t.text     "value"
+    t.boolean  "editable"
+    t.boolean  "deletable"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["key"], name: "index_settings_on_key", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
