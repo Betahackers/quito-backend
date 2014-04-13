@@ -31,7 +31,8 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'geocoder'
 gem 'versionist'
 gem 'acts-as-taggable-on'
-gem "select2-rails"
+gem 'paranoia'
+gem 'select2-rails'
 gem 'rails_12factor'
 gem 'figaro'
 gem 'settler'
@@ -47,7 +48,7 @@ group :test, :development do
   gem 'dotenv-rails'
   gem 'rspec', '>= 3.0.0.beta2'
   gem 'rspec-rails', '>= 3.0.0.beta2'
-  
+
   gem 'better_errors'
   gem 'binding_of_caller'
 
