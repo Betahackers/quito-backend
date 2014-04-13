@@ -17,7 +17,8 @@ module V1
       @article.article_locations.new
     end
   
-    def create    
+    def create
+      @article.user = current_user
       respond_to do |format|
         # locations = 
         # @article.locations = locations

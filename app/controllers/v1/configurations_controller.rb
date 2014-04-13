@@ -3,6 +3,7 @@ module V1
     load_and_authorize_resource
   
     def show
+      
     end
     
     def update
