@@ -1,7 +1,14 @@
-  <ul class="nav nav-sidebar">
-    <% if current_user && current_user.admin? %>
-        <%= content_tag :li, link_to(t(:users), users_path)%>
-    <% end %>
-    <%= content_tag :li, link_to(t(:articles), articles_path)%>
-  </ul>
+<ul class="nav nav-sidebar">
+  <% if current_user %>
+
+      <%= content_tag :li, (link_to "Change Password", edit_user_password_path) %>
+
+      <% if current_user.admin? %>
+          <%= content_tag :li, link_to(t(:users), users_path) %>
+      <% end %>
+
+      <%= content_tag :li, link_to(t(:articles), articles_path) %>
+  <% end %>
+
+</ul>
 
