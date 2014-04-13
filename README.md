@@ -14,12 +14,19 @@ bin/setup
 
 # API Usage
 
-Retrieve all articles
+## List all Articles
+
 ```
 http://www.fromto.es/v1/articles.json
 ```
 
-## Filtering Articles
+## Get an Article
+
+```
+http://www.fromto.es/v1/articles.json
+```
+
+### Filtering Articles
 
 A number of filtering options are available, and can be used in combination with
 each other.  Specifying more than 1 filter will narrow the search to all
