@@ -48,3 +48,18 @@ Filter by category
 ```
 http://www.fromto.es/v1/articles.json?category={CATEGORY}
 ```
+
+## Users
+
+
+### List All Users
+
+```
+http://www.fromto.es/v1/users.json
+```
+
+### Get a User
+
+```
+http://www.fromto.es/v1/users/{USER_ID}.json
+```
