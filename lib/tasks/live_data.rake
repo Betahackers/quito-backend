@@ -47,6 +47,7 @@ namespace :data do
 
   desc 'import the member data from the german XML export'
    task seed: :environment do
+    Location.by_foursquare_id('4fab92ade4b066f573d4bf89')
     path = '/u/6253/quito.csv'
 
     conn = Faraday.new(:url => 'https://dl.dropboxusercontent.com')
