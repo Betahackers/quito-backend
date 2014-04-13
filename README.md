@@ -63,3 +63,12 @@ GET http://www.fromto.es/v1/users.json
 ```
 GET http://www.fromto.es/v1/users/{USER_ID}.json
 ```
+
+
+## Locations
+
+### List All Locations
+
+```
+GET http://www.fromto.es/v1/locations.json
+```
