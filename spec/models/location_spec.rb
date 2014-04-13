@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe Location do
+  describe '#foursquare_fields' do
+    let(:subject) { FactoryGirl.build(:betahaus) }
+    let(:foursquare_hash) { FactoryGirl.build(:foursquare_hash) }
+
+    before(:each) do
+      allow(Foursquare)
+        .to receive(:fetch_venue)
+        .with(subject.foursquare_id)
+        .and_return(foursquare_hash)
+    end
+
+    it 'queries foursquare for fields' do
+      expect(subject.foursquare_fields).to eq(foursquare_hash)
+    end
+  end
+
   describe '.by_foursquare_id' do
     context 'existing location' do
       let(:location) { FactoryGirl.create(:betahaus) }
