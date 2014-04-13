@@ -4,8 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to new_user_session_path, flash: { error: "Please log in first." }
-
+    if user_signed_in?
+      render 'shared/access_denied'
+    else
+      redirect_to new_user_session_path
+    end
   end
-  
+
 end

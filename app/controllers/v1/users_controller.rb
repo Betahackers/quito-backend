@@ -1,8 +1,14 @@
 module V1
   class UsersController < ApplicationController
     load_and_authorize_resource
+
+    before_action :authorize_json_only
   
     def index
+      respond_to do |format|
+        format.html { authorize! :manage, User, :message => "Unable to view users" }
+        format.json
+      end
     end
   
     def show
@@ -48,6 +54,12 @@ module V1
   
   
     private
+
+    def authorize_json_only
+      if request.format != :json
+        authorize! :manage, User, :message => "Unable to view users"
+      end
+    end
   
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about)
