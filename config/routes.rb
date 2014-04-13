@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, path: 'd'
+  devise_for :users, path: 'session'
 
-  root 'articles#index'
+  root 'v1/articles#index'
 
 
   api_version(:module => "V1", :path => {:value => "v1"}, :default => true) do
