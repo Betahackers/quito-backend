@@ -2,10 +2,13 @@ module Foursquare
   extend self
 
   def client
-    @client ||= Foursquare2::Client.new(
+    return @client if @client
+
+    Foursquare2::Client.new(
       client_id: ENV['foursquare_client_id'],
       client_secret: ENV['foursquare_client_secret'],
-      api_version: '20140412'
+      api_version: '20140412',
+      connection_middleware: [[FaradayMiddleware::Caching, Rails.cache]],
     )
   end
 
