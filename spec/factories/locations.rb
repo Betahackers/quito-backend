@@ -18,12 +18,14 @@ FactoryGirl.define do
 
     factory :montjuic do
       name 'Muntanya de Montjuïc'
+      foursquare_id '4d26c189342d6dcbb4c3e6ca'
       latitude 41.3641667
       longitude 2.1580556
     end
 
     factory :tibidabo do
       name 'Tibidabo'
+      foursquare_id '4adcda50f964a520654121e3'
       latitude 41.4209857
       longitude 2.1187937
     end
