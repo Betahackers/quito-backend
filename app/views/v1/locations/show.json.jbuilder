@@ -6,4 +6,17 @@ json.location do
   json.longitude @location.longitude
   json.latitude @location.latitude
   json.foursquare_fields @location.foursquare_fields
+  json.articles @location.articles do |article|
+    json.id article.id
+    json.title article.title
+    json.moods article.mood_list
+    json.categories article.category_list
+    json.content article.content
+    json.type article.article_type
+    json.author do
+      json.id article.author.try(:id)
+      json.first_name article.author.try(:first_name)
+      json.last_name article.author.try(:last_name)
+    end
+  end
 end
