@@ -9,11 +9,10 @@ class Location < ActiveRecord::Base
   scope :with_mood, ->(mood) { joins(:moods).where(tags: {name: mood.downcase})}
   scope :with_category, ->(category) { joins(:category).where(tags: {name: category.downcase})}
   scope :by_user_id, ->(user_id) { joins(:articles).where(user_id: user_id)}
-  
+
   validates :latitude , numericality: { greater_than:  -90, less_than:  90 }
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }
-  
-  
+
   def foursquare_fields
     @foursquare_fields ||= Foursquare.fetch_venue(self.foursquare_id)
   end
@@ -25,6 +24,6 @@ class Location < ActiveRecord::Base
       l.name = hash['name']
       l.latitude = hash['location']['lat']
       l.longitude = hash['location']['lng']
-    end
+    end rescue nil
   end
 end
