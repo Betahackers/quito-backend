@@ -65,7 +65,7 @@ module V1
   
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about,
-                                   :role, :website_url, :twitter_handle, :expert_in, :nationality, :profession)
+                                    :website_url, :twitter_handle, :expert_in, :nationality, :profession)
     end
   
   end
