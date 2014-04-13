@@ -8,6 +8,7 @@ class Ability
       elsif user.member?
         can :manage, User, id: user.id
         can :manage, Article
+        can :read, Location
       else
         can :read, :all
       end
