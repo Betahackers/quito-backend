@@ -14,16 +14,28 @@ bin/setup
 
 # API Usage
 
-All articles
+Retrieve all articles
+```
+http://www.fromto.es/v1/articles.json
+```
 
-/v1/articles.json
+## Filtering Articles
+
+A number of filtering options are available, and can be used in combination with
+each other.  Specifying more than 1 filter will narrow the search to all
+articles that satisfy all filters.
 
 Filter by author id
-
-/v1/articles.json?author_id={AUTHOR_ID}
+```
+http://www.fromto.es/v1/articles.json?author_id={AUTHOR_ID}
+```
 
 Filter by mood
-/v1/articles.json?author_id={MOOD}
+```
+http://www.fromto.es/v1/articles.json?mood={MOOD}
+```
 
 Filter by category
-/v1/articles.json?author_id={CATEGORY}
+```
+http://www.fromto.es/v1/articles.json?category={CATEGORY}
+```
