@@ -9,6 +9,10 @@ class Article < ActiveRecord::Base
   MOODS = ['Illegal', 'Sociable', 'Adventure', 'Active', 'Cultural', 'Romantic', 'Relaxed', 'Solitary']
   CATEGORIES = ['Eat', 'Drink', 'Healthy Life', 'Culture', 'Shopping', 'Dancing', 'Live Music', 'Walks']
 
+  # FIXME: doesn't work like this. Need to write a custom validator that validates an array against an array
+  # validates :mood_list, inclusion: {in: MOODS}
+  # validates :categories, inclusion: {in: CATEGORIES}
+  
   def author
     user
   end

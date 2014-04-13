@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+  
+  has_many :articles
 
   validate :first_name, :last_name, :role, presence: true
   
@@ -12,8 +14,12 @@ class User < ActiveRecord::Base
     role == 'admin'
     true
   end
+  
+  def member?
+    role == 'member'
+  end
+  
 
-  has_many :articles
 
   def full_name
     "#{first_name} #{last_name}"

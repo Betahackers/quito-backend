@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $(".select2_tags").select2 tags: []
+  $(".select2_tags").select2()
   return

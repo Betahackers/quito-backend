@@ -35,7 +35,7 @@ module V1
   
     def update
       respond_to do |format|
-        if @article.update_attribtues(article_params)
+        if @article.update_attributes(article_params)
           format.html {redirect_to @article, notice: 'Success'}
           format.json { render json: @article }
         else
@@ -46,12 +46,17 @@ module V1
     end
   
     def destroy
+      @article.destroy
+      respond_to do |format|
+        format.html {redirect_to articles_path, notice: 'Success'}
+        format.json 
+      end
     end
   
     private
   
     def article_params
-      params.require(:article).permit(:title, :content, :foursquare_ids)
+      params.require(:article).permit(:title, :content, :foursquare_ids, mood_list:[], category_list:[])
     end
 
   end

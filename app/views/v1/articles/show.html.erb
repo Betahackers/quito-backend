@@ -1,0 +1,10 @@
+<%= content_tag :h3, @article.title %>
+
+<dl class="dl-horizontal">
+  <dt><%= t(:content)%></dt>
+  <dd><%= @article.content%></dd>
+  <dt><%= t(:moods)%></dt>
+  <dd><%= @article.mood_list%></dd>
+  <dt><%= t(:categories)%></dt>
+  <dd><%= @article.category_list%></dd>
+</dl>
