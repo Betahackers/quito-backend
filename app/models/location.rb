@@ -6,8 +6,8 @@ class Location < ActiveRecord::Base
   has_many :moods, through: :articles
   has_many :categories, through: :articles
 
-  scope :with_mood, ->(mood) { joins(:moods).where(tags: {name: mood})}
-  scope :with_category, ->(category) { joins(:category).where(tags: {name: category})}
+  scope :with_mood, ->(mood) { joins(:moods).where(tags: {name: mood.lower})}
+  scope :with_category, ->(category) { joins(:category).where(tags: {name: category.lower})}
   
   def self.by_foursquare_id foursquare_id
     find_or_create_by!(foursquare_id: foursquare_id) do |l|
