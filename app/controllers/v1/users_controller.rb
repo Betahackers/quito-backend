@@ -33,6 +33,12 @@ module V1
     end
   
     def update
+      # required for settings form to submit when password is left blank
+      if params[:user][:password].blank?
+         params[:user].delete("password")
+         params[:user].delete("password_confirmation")
+      end
+      
 
       respond_to do |format|
 
