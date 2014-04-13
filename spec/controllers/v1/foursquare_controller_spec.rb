@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe FoursquareController do
-  describe 'POST list' do
+describe V1::FoursquareController do
+  describe 'GET search' do
     let(:list_of_venues) {
       Array.new(2) { FactoryGirl.build(:foursquare_hash) }
     }
@@ -9,7 +9,7 @@ describe FoursquareController do
     context 'metadata' do
       before(:each) do
         allow(Foursquare).to receive(:search_venues).and_return(list_of_venues)
-        post :list_venues
+        get :search
       end
 
       it 'returns 200 status code' do
@@ -29,7 +29,7 @@ describe FoursquareController do
           .to receive(:search_venues)
           .with('Beta')
           .and_return(list_of_venues)
-        post :list_venues, query: search_input
+        get :search, query: search_input
       end
 
       it 'returns correct json data' do
