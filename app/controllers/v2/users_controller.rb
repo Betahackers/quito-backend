@@ -11,12 +11,7 @@ module V2
     has_scope :by_location, type: :array
   
     def index
-      @users = apply_scopes(@users).includes(:articles, :locations)      
-      
-      respond_to do |format|
-        format.html { authorize! :manage, User, :message => "Unable to view users" }
-        format.json
-      end
+      @users = apply_scopes(@users).includes(:articles, :locations)
     end
   
     def show

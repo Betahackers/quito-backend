@@ -1,6 +1,6 @@
 
 <ul class="nav nav-pills nav-stacked sidebar">
-  <%= content_tag :li, link_to(t(:users), users_path) if can? :manage, User %>
+  <%= content_tag :li, link_to(t(:users), users_path) if current_user.admin? %>
   <%= content_tag :li, link_to(t(:articles), articles_path) %>
   <%= content_tag :li, link_to(t(:add_an_article), new_article_path) if can? :create, Article %>      
 </ul>
