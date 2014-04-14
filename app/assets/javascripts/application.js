@@ -26,9 +26,9 @@ $(document).ready(function() {
           var category = result.categories[0]
           markup += "<td class='location-thumbnail'><img src='" + category.icon.prefix + "32" + category.icon.suffix + "'/></td>";
       }
-      markup += "<td class='location-info'><div class='location-title'>" + result.name + "</div>";
+      markup += "<td class='location-info'><div class='location-title'>&nbsp;" + result.name + "</div>";
       if (result.location !== undefined) {
-          markup += "<small class='location-address'>" + result.location.address + "</small>";
+          markup += "<small class='location-address'>&nbsp;" + result.location.address + "</small>";
       }
       markup += "</td></tr></table>";
       return markup;
