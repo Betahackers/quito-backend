@@ -23,7 +23,6 @@ class Article < ActiveRecord::Base
   # validates :mood_list, inclusion: {in: MOODS}
   # validates :categories, inclusion: {in: CATEGORIES}
 
-
   def author
     user
   end
