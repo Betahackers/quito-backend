@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   has_many :articles
 
-
   ROLES = ['member', 'admin']
 
   validate :first_name, :last_name, :role, presence: true

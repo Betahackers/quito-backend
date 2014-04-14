@@ -10,5 +10,13 @@ module V1
       @locations = @locations.by_user_id(params[:user_id]) if params[:user_id]
       @locations = @locations.includes(:articles) if params[:include_articles]
     end
+
+    def show
+      if params[:id].to_i.to_s == params[:id]
+        @location = Location.find_by!(id: params[:id])
+      else
+        @location = Location.find_by!(foursquare_id: params[:id])
+      end
+    end
   end
 end
