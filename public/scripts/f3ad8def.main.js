@@ -21086,55 +21086,39 @@ _.extend(Marionette.Module, {
           // http://www.fromto.es/v1/locations/1.json
           var articleList = []
           var articles = this.marker.articles;
+          var model = new QuitoFrontend.Models.Profile();
+          var foursquare = {};
           var article = this.marker.articles[0]
-          var articleId = article.id;
-          url = "http://" + Config.DevProxy + "www.fromto.es/v1/articles/" + articleId + ".json"
-          var jqxhr = $.get(url, function (data) {
-            console.log("success");
-
-            var model = new QuitoFrontend.Models.Profile();
-            model.set("firstName",data.article.user.first_name)
-            model.set("lastName",data.article.user.last_name)
-            model.set("article",data.article)
-            model.set("moods",data.article.moods)
-//            model.set("desc","Dancing about Architecture")
+          if (typeof article !== 'undefined') {
+            var articleId = article.id;
+            url = "http://" + Config.DevProxy + "www.fromto.es/v1/articles/" + articleId + ".json"
+            var jqxhr = $.get(url, function (data) {
+              console.log("success");
+              model.set("firstName",data.article.user.first_name)
+              model.set("lastName",data.article.user.last_name)
+              model.set("article",data.article)
+              model.set("moods",data.article.moods)
+              //220x120
+//            width220
+              var photoUrlOrig = data.article.locations[0].foursquare_fields.photos.groups[0].items[1].prefix + "width220" + data.article.locations[0].foursquare_fields.photos.groups[0].items[1].suffix
+              var photoUrlArr = photoUrlOrig.split("://");
+              var photoUrl = ""
+              if (Config.DevProxy.length > 0) {
+                photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
+              } else {
+                photoUrl = photoUrlOrig
+              }
+              foursquare.photoUrl = photoUrl;
+              foursquare.name = data.article.locations[0].foursquare_fields.name;
+              model.set("foursquare",foursquare)
+              displayProfileView(model)
+            })
+          } else {
+            foursquare.name = this.marker.name
+            foursquare.id = this.marker.foursquare_id
+            model.set("foursquare",foursquare)
             displayProfileView(model)
-
-          })
-
-
-//          QuitoFrontend.ArticleList = new QuitoFrontend.Collections.ArticleCollection()
-//          QuitoFrontend.ArticleList.fetch (
-//            {
-//              success: function(collection, response, options) {
-//                console.log("item count: " + collection.length);
-////                QuitoFrontend.ProfileListView = new QuitoFrontend.Views.ProfileListView({collection:QuitoFrontend.ProfileList,itemView : QuitoFrontend.Views.ProfileItemView});
-////                QuitoFrontend.profileListRegion.show(QuitoFrontend.ProfileListView)
-////                var model = new QuitoFrontend.Models.Profile({url:"http://QuitoFrontendwww.fromto.es/v1/locations/1.json"});
-//                var model = new QuitoFrontend.Models.Profile();
-////                model.set("name",this.marker.name)
-//                model.set("articles",QuitoFrontend.ArticleList)
-//                model.set("desc","Dancing about Architecture")
-//                displayProfileView(model)
-//              }}
-//          )
-
-
-//          for (var i = 0; i < articles.length; i++) {
-//            var article = article[i];
-//            var articleId = article
-//            var jqxhr = $.get("http://QuitoFrontendwww.fromto.es/v1/locations.json", function (data) {
-//
-//              var model = new QuitoFrontend.Models.Profile({url:"http://www.fromto.es/v1/locations/1.json"});
-//              model.set("name",this.marker.name)
-//              model.set("articles",articleList)
-//              model.set("desc","Dancing about Architecture")
-//              displayProfileView(model)
-//
-//            })
-//          }
-
-
+          }
         });
       }
     }
@@ -21633,20 +21617,36 @@ function program1(depth0,data) {
   }
 
   buffer += "<div class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"http://placehold.it/40x40\" />\n		</div>\n		<div class=\"profile-people-name\">\n     ";
+  if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " ";
   if (helper = helpers.lastName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.lastName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n		</div>\n		<div class=\"profile-people-text\">\n      ";
-  if (helper = helpers.desc) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.desc); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  if (helper = helpers.about) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.about); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n		</div>\n		<hr/>\n	</div>\n	<div class=\"profile-description\">\n    ";
-  if (helper = helpers.desc) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.desc); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  if (helper = helpers.expert_in) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.expert_in); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n	</div>\n	<div class=\"profile-location\">\n		Bogota, Colombia\n	</div>\n	<div class=\"profile-work\">\n		Graphic Designer\n	</div>\n	<div class=\"profile-picture\">\n		<img class=\"image\" src=\"http://placehold.it/220x120\" />\n	</div>\n	<div class=\"profile-content\">\n		<!--<h1>Parc Güell</h1>-->\n		<!--<p>-->\n			<!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.-->\n		<!--</p>-->\n\n      <h1>"
+    + "\n	</div>\n	<div class=\"profile-location\">\n      ";
+  if (helper = helpers.nationality) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.nationality); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n	</div>\n	<div class=\"profile-work\">\n    ";
+  if (helper = helpers.profession) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.profession); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n	</div>\n	<div class=\"profile-picture\">\n		<img class=\"image\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" />\n	</div>\n	<div class=\"profile-content\">\n		<!--<h1>Parc Güell</h1>-->\n		<!--<p>-->\n			<!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.-->\n		<!--</p>-->\n\n      <h1>"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h1>\n      <h2>"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.article)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h1>\n      <p>"
+    + "</h2>\n      <p>"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.article)),stack1 == null || stack1 === false ? stack1 : stack1.content)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</p>\n  <p>\n    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
@@ -21886,7 +21886,7 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
     tagName: "ul",
     template: JST['app/scripts/templates/ProfileListView.hbs'],
     itemView : QuitoFrontend.Views.ProfileItemView,
-    itemViewContainer : '#shortProfiles',
+    itemViewContainer : '#shortProfiles'
 //    events : {
 //      'click .profileItem' : 'displayItem'
 //    },
@@ -21918,10 +21918,20 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
       console.log("display profile")
       var profile = new QuitoFrontend.Models.Profile();
       var model = this.model;
-      profile.set("first_name",model.get("first_name"))
-      profile.set("last_name",model.get("last_name"))
-      profile.set("articles",model.get("articles"))
+      profile.set("firstName",model.get("first_name"))
+      profile.set("lastName",model.get("last_name"))
+      profile.set("profession",model.get("profession"))
+      profile.set("nationality",model.get("nationality"))
+      profile.set("about",model.get("about"))
+      profile.set("expert_in",model.get("expert_in"))
+      if (model.get("articles") !== null) {
+        var articles = model.get("articles")
+        profile.set("article", articles.article)
+      }
+
+      var userId = model.get("id")
       displayProfileView(profile)
+//      fetchMarker(userId,"users");
     },
     destroy : function() {
       this.model.destroy();
