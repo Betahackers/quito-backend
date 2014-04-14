@@ -1,14 +1,15 @@
 module V2
   class LocationsController < BaseController
     load_and_authorize_resource
-
+    
+    has_scope :by_mood
+    has_scope :by_category
+    has_scope :by_user
+    has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
+    
     def index
-      @locations = Location.all
-      @locations = @locations.near(params[:ll], params[:radius].to_f / 1000, units: :km) if params[:ll]
-      @locations = @locations.with_mood(params[:mood]) if params[:mood]
-      @locations = @locations.with_category(params[:category]) if params[:category]
-      @locations = @locations.by_user_id(params[:user_id]) if params[:user_id]
-      @locations = @locations.includes(:articles) if params[:include_articles]
+      @locations = apply_scopes(@locations)      
     end
+    
   end
 end

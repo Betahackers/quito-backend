@@ -4,6 +4,11 @@ module V2
 
     before_action :authorize_json_only, except: :show
 
+    has_scope :by_mood
+    has_scope :by_category
+    has_scope :by_user
+    has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
+    
     def index
       @articles = Article.all
       @articles = @articles.where(user_id: params[:user_id] ) if params[:user_id]

@@ -1,1 +1,1 @@
-json.partial! @location
+json.partial! @article

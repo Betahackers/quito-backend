@@ -34,8 +34,8 @@ $(document).ready(function() {
       return markup;
   }
 
-  function locationFormatSelection(location) {
-      return location.name;
+  function locationFormatSelection(result) {
+      return result.name + ' - ' + result.location.address ;
   }
 
 
