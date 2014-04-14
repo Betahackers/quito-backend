@@ -56,7 +56,9 @@ module V2
     
     def update_depricated_scopes
       params[:by_mood] = old_moods[params[:mood]] || params[:mood]  if params[:mood]
+      params[:by_mood] = old_moods[params[:with_mood]] || params[:with_mood]  if params[:with_mood]
       params[:by_category] = old_categories[params[:category]] || params[:category]  if params[:category]
+      params[:by_category] = old_categories[params[:with_category]] || params[:with_category]  if params[:with_category]
       params[:by_user] = params[:user_id] if params[:user_id]
       params[:by_lat_long] = {lat: params[:li].split(',').first, long: params[:li].split(',').last, radius: params[:radius]} if params[:li]
     end
