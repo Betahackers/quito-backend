@@ -98,7 +98,7 @@ The following filters are available on all resources:
 * by_user (id of a User)
 * by_article (id of an Article)
 * by_location (id of a Location)
-* by_lat_long[lat, long, radius(optional)] (attribute of a Location)
+* by_lat_long {lat, long, radius(optional)} (attribute of a Location)
   * radius is in meters. default is 10 meters
   * hash of params as follows:
   ```
@@ -113,7 +113,7 @@ Filters can be mixed and matched.
 All filters, except by_lat_long, also accept an array of values. E.g. /articles.json?by_mood[]=social&by_mood[]=energetic
 This query wil return articles with moods social OR energetic. 
 
-Values passed in an array will be matched as an OR condition, whereas filters of different types are matched as an AND condition (?mood=energetic&category=fodd will return articles with energetic mood AND food category)
+Values passed in an array will be matched as an OR condition, whereas filters of different types are matched as an AND condition (?mood=energetic&category=food will return articles with energetic mood AND food category)
 
 Note: attributes belong to a specific resource type. I.e. 'mood' is an attribute of an article. If you filter locations by a mood, it will show all locations with articles tagged with that mood or moods. 
 
