@@ -1,0 +1,9 @@
+<tr>
+  <%= content_tag :td, user.first_name %>
+  <%= content_tag :td, user.last_name %>
+  <%= content_tag :td, user.email %>
+  <%= content_tag :td, user.role %>
+  <%= content_tag :td do %>
+    <%= link_to t(:edit), edit_user_path(user) %>
+  <% end %>
+</tr>

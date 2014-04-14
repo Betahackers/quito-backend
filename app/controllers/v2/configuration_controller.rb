@@ -1,6 +1,5 @@
-module V1
+module V2
   class ConfigurationController < BaseController
-    
   
     def show
       authorize! :read, :configuration

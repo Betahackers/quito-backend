@@ -1,0 +1,15 @@
+<div class="table-responsive">
+   <table class="table table-striped">
+     <thead>
+       <tr>
+         <%= content_tag :th, t(:title) %>
+         <%= content_tag :th, t(:content) %>
+         <%= content_tag :th, t(:tags) %>
+         <%= content_tag :th, t(:actions) %>
+       </tr>
+     </thead>
+     <tbody>
+       <%= render @articles %>
+     </tbody>
+   </table>
+ </div>

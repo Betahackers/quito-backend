@@ -1,4 +1,4 @@
-module V1
+module V2
   class UsersController < BaseController
     load_and_authorize_resource
 

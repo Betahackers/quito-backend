@@ -1,4 +1,4 @@
-module V1
+module V2
   class FoursquareController < BaseController
     def search
       render json: Foursquare.search_venues(params[:query])
