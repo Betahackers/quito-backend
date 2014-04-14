@@ -4,11 +4,11 @@ module V2
 
     before_action :authorize_json_only
     
-    has_scope :by_mood
-    has_scope :by_category
+    has_scope :by_mood, type: :array
+    has_scope :by_category, type: :array
     has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
-    has_scope :by_article
-    has_scope :by_location
+    has_scope :by_article, type: :array
+    has_scope :by_location, type: :array
   
     def index
       @users = apply_scopes(@users).includes(:articles, :locations)      

@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 
   scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})} 
   
-
   def admin?
     role == 'admin'
   end

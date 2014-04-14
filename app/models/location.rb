@@ -9,7 +9,7 @@ class Location < ActiveRecord::Base
   scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood.downcase})}
   scope :by_category, -> category { joins(:categories).where(tags: {name: category.downcase})}
   scope :by_user, -> user_id { joins(:articles).where(articles: {user_id: user_id})}
-  scope :by_lat_long, -> lat, long, radius = 1000 { near([lat, long], radius.to_f / 1000, units: :km)}
+  scope :by_lat_long, -> lat, long, radius = 100 { near([lat, long], radius.to_f / 1000, units: :km)}
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 
   
   validates :latitude , numericality: { greater_than:  -90, less_than:  90 }
