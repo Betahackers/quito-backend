@@ -5,9 +5,10 @@ class Location < ActiveRecord::Base
   has_many :articles, through: :article_locations
   has_many :moods, through: :articles
   has_many :categories, through: :articles
+  has_many :users, through: :articles
 
-  scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood.downcase})}
-  scope :by_category, -> category { joins(:categories).where(tags: {name: category.downcase})}
+  scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood})}
+  scope :by_category, -> category { joins(:categories).where(tags: {name: category})}
   scope :by_user, -> user_id { joins(:articles).where(articles: {user_id: user_id})}
   scope :by_lat_long, -> lat, long, radius = 100 { near([lat, long], radius.to_f / 1000, units: :km)}
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 

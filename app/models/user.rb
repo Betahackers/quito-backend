@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   validates :twitter_handle, format: /\A([a-zA-Z](_?[a-zA-Z0-9]+)*_?|_([a-zA-Z0-9]+_?)*)\z/, allow_blank: true
   validates :role, inclusion: {in: User::ROLES, message: "Role should be one of #{ROLES.join(", ")}"}
 
-  scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood.downcase})}
-  scope :by_category, -> category { joins(:categories).where(tags: {name: category.downcase})}
+  scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood})}
+  scope :by_category, -> category { joins(:categories).where(tags: {name: category})}
   scope :by_lat_long, -> lat, long, radius = 1000 { joins(:locations).where(locations: {id: Location.by_lat_long(lat, long, radius).map(&:id)})}
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 
   scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})} 
