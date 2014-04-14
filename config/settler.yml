@@ -1,19 +1,19 @@
 settings: &settings
   moods: &moods
     label: Mood options
-    value: 'Illegal, Sociable, Adventure, Active, Cultural, Romantic, Relaxed, Solitary'
+    value: 'lawbreaker, social, adventurous, energetic, intellectual, romantic, relaxed, lonely'
     editable: true
     deletable: false
-    typecast: ArrayTypecaster
+    typecast: TranslatedHashTypecaster
     validations:
       presence: true
       
   categories: &categories
     label: Category options
-    value: 'Eat, Drink, Healthy Life, Culture, Shopping, Dancing, Live Music, Walks'
+    value: 'food, healthy_life, culture, music, drinks, have_a_stroll, shopping, alternative'
     editable: true
     deletable: false
-    typecast: ArrayTypecaster
+    typecast: TranslatedHashTypecaster
     validations:
       presence: true
 

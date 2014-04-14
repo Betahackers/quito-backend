@@ -9,6 +9,7 @@ module V2
       @articles = @articles.where(user_id: params[:user_id] ) if params[:user_id]
       @articles = @articles.tagged_with(params[:mood], on: :moods) if params[:mood]
       @articles = @articles.tagged_with(params[:category], on: :categories) if params[:category]
+      @articles = @articles.where(user_id: current_user.id) if current_user && !params[:all_articles]  && request.format != :json
     end
 
     def show
@@ -22,7 +23,7 @@ module V2
       @article.user = current_user
       respond_to do |format|
         if @article.save
-          format.html { redirect_to @article, notice: 'Article added' }
+          format.html { redirect_to articles_path, notice: 'Article added' }
           format.json { render json: @article }
         else
           format.html { render :new, alert: 'failed :(' }
@@ -38,7 +39,7 @@ module V2
     def update
       respond_to do |format|
         if @article.update_attributes(article_params)
-          format.html { redirect_to @article, notice: 'Article updated' }
+          format.html { redirect_to articles_path, notice: 'Article updated' }
           format.json { render json: @article }
         else
           format.html { render :new, alert: 'failed :(' }

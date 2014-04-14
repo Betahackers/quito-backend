@@ -1,10 +1,15 @@
 <%= content_tag :h3, @article.title %>
 
 <dl class="dl-horizontal">
+  <dt><%= t(:location)%></dt>
+  <dd><%= @article.locations.map(&:name).join(', ')%></dd>
   <dt><%= t(:content)%></dt>
   <dd><%= @article.content%></dd>
-  <dt><%= t(:moods)%></dt>
-  <dd><%= @article.mood_list%></dd>
-  <dt><%= t(:categories)%></dt>
-  <dd><%= @article.category_list%></dd>
+  <dt><%= t(:tags)%></dt>
+  <dd>
+    <ul class="list-unstyled">
+      <li>Moods: <%= @article.mood_list.map {|m| t(m)}.join(', ') %></li>
+      <li>Categories: <%= @article.category_list.map {|c| t(c)}.join(', ') %></li>
+    </ul>
+  </dd>
 </dl>

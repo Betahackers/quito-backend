@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+<div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -7,18 +7,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">FromTo</a>
+      <%= link_to image_tag('/fromto.png'), "/app", class: "navbar-brand"%>
     </div>
     <div class="navbar-collapse collapse">
+      
+
       <p class="navbar-text navbar-right">
         <% if user_signed_in? %>
-            Logged in as <%= link_to current_user.full_name, edit_user_path(current_user) %>
+            Signed in as <%= link_to current_user.full_name, edit_user_path(current_user) %>
             |
             <%= link_to "Sign Out", destroy_user_session_path, {method: :delete} %>
         <% else %>
             <%= link_to "Sign In", new_user_session_path %>
         <% end %>
       </p>
+      
+      <ul class="nav navbar-nav navbar-right">
+          <li class="<%= I18n.locale == :en ? 'active' : '' %>"><%= link_to "en", locale: "en"%></li>
+          <li class="<%= I18n.locale == :es ? 'active' : '' %>"><%= link_to "es", locale: "es" %></li>
+          <li class=" divider-vertical"></li>
+      </ul>
+      
     </div>
   </div>
 </div>

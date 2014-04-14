@@ -1,19 +1,36 @@
 <div class='row'>
-  <div class='col-md-5'>
+  <div class='col-md-8'>
     <%= simple_form_for @user do |f| %>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
-      <%= f.input :email %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation %>
-      <%= f.input :role, collection: User::ROLES %>
-      <%= f.input :about %>
-      <%= f.input :nationality %>
-      <%= f.input :profession %>
-      <%= f.input :website_url %>
-      <%= f.input :twitter_handle %>
-      <%= f.input :expert_in %>
-      <%= f.submit %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= content_tag :h3, t('tell_the_world')%>
+        </div>
+        <div class="panel-body">
+          <%= f.input :first_name, label: t('first_name') %>    
+          <%= f.input :last_name, label: t('last_name') %>
+          <%= f.input :about, label: t('about'), hint: t('user.form.about_hint'), input_html: {rows: 7} %>
+          <%= f.input :nationality, label: t('nationality') %>
+          <%= f.input :profession, label: t('profession'), hint: t('user.form.profession_hint') %>
+          <%= f.input :website_url, label: t('website_url') %>
+          <%= f.input :twitter_handle, label: t('twitter_handle') %>
+          <%= f.input :expert_in, label: t('expert_in'), hint: t('user.form.expert_in_hint')  %>
+        </div>
+      </div>
+    
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3><small>Shhhhh...</small></h3>
+        </div>
+        <div class="panel-body">
+          <%= f.input :email, label: t('email') %>
+          <%= f.input :password, label: t('password') %>
+          <%= f.input :password_confirmation, label: t('password_confirmation') %>
+        </div>
+      </div>
+
+
+      <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', articles_path,  class: 'btn btn-default' %>
       
     <% end %>
   </div>

@@ -12,10 +12,10 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">
+      <div class="col-sm-2 col-sm-offset-1">
         <%= render 'layouts/sidebar' %>
       </div>
-      <div class="col-sm-9 col-md-10">
+      <div class="col-sm-8 ">
         <% flash.each do |name, msg| %>
           <% if msg.is_a?(String) %>
             <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">

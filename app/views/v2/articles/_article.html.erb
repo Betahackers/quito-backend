@@ -1,14 +1,16 @@
 <tr>
+  <%= content_tag :td, article.locations.map(&:name).join(', ') %>
+
   <%= content_tag :td, article.title %>
   <%= content_tag :td, article.content.truncate(30) %>
   <%= content_tag :td do %>
     <ul class="list-unstyled">
-      <li> Moods: <%= article.mood_list %></li>
-      <li>Categories: <%= article.category_list %></li>
+      <li> Moods: <%= article.mood_list.map {|m| t(m)}.join(', ') %></li>
+      <li>Categories: <%= article.category_list.map {|c| t(c)}.join(', ') %></li>
     </ul>
   <% end %>
   <%= content_tag :td do %>
-    <%= link_to t(:show), article_path(article)%>
+    <%#= link_to t(:show), article_path(article)%>
     <%= link_to t(:edit), edit_article_path(article)%>
   <% end %>
 </tr>

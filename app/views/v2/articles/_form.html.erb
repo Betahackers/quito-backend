@@ -1,14 +1,15 @@
 <div class='row'>
-  <div class='col-md-5'>
+  <div class='col-md-7'>
     <%= simple_form_for @article do |f| %>
       <%= f.simple_fields_for :article_locations do |a| %>
-        <%= a.input :foursquare_id, input_html: {class: 'foursquare_location_select'} %>
+        <%= a.input :foursquare_id, label: t('name'), input_html: {class: 'foursquare_location_select'}, hint: t('article.form.name_hint') %>
       <% end %>
-      <%= f.input :title %>
-      <%= f.input :content, input_html: {rows: 10}%>
-      <%= f.input :mood_list, collection: Article::MOODS, input_html: {multiple: true, class: 'select2_tags'} %>
-      <%= f.input :category_list, collection: Article::CATEGORIES, input_html: {multiple: true, class: 'select2_tags'} %>
-      <%= f.submit %>
+      <%= f.input :title, label: t('title'), hint: t('article.form.title_hint') %>
+      <%= f.input :content, label: t('content'), input_html: {rows: 10}, hint: t('article.form.content_hint') %>
+      <%= f.input :mood_list, label: t('mood_list'), collection: Settler.moods.value.map {|k,v| [v,k]}, input_html: {multiple: true, class: 'select2_tags'}, hint: t('article.form.mood_list_hint') %>
+      <%= f.input :category_list, label: t('category_list'), collection: Settler.categories.value.map {|k,v| [v,k]}, input_html: {multiple: true, class: 'select2_tags'}, hint: t('article.form.category_list_hint') %>
+      <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', articles_path,  class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

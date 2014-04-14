@@ -1,0 +1,79 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  name: "Nombre"
+  first_name: "Nombre"
+  last_name: "Apellido"
+  email: "Correo electrónico"
+  password: "Password"
+  password_confirmation: "Password confirmation"
+  role: "Role"
+  about: "Descripción breve de t"
+  nationality: "Ciudad y país de origen"
+  profession: "Profession"
+  website_url: "Website url"
+  twitter_handle: "Twitter handle"
+  expert_in: "Experto en"
+  title: "Título"
+  content: "Descripción"
+  mood_list: "Etiquetas anímicas"
+  category_list: "Etiquetas de categoría"
+  lawbreaker: "Canalla"
+  social: "Sociable"
+  adventurous: "Aventurero"
+  energetic: "Energético"
+  intellectual: "Intelectual"
+  romantic: "Romántico"
+  relaxed: "Relajado"
+  lonely: "Solitario"
+  food: "Comida"
+  healthy_life: "Vida sana"
+  culture: "Cultura"
+  music: "Música"
+  drinks: "Bebidas"
+  have_a_stroll: "Paseo"
+  shopping: "Tiendas"
+  alternative: "Alternativo"
+  articles: "Artículos"
+  add_an_article: "Añadir un artículo"
+  my_articles: "Mis artículos"
+  all_articles: "Todos los artículos"
+  users: "Usuarios"
+  actions: "Acciones"
+  tags: "Etiquetas"
+  edit: "Editar"
+  tell_the_world: "Dígale al mundo!!"
+  article:
+    form:
+      name_hint: "Busca el nombre de la actividad o el lugar"
+      title_hint: "Ponle un título a tu recomendación, por ej. Un restaurante chino con clientes chinos"
+      content_hint: "Da información específica, valiosa, si es posible. Que se hace allí? Cuándo? Qué hay que pedir? Por qué es especial?"
+      mood_list_hint: "Cómo debería sentirse la persona a la que recomiendas esta actividad? Los estados de ánimo para una cafetería podrían ser: sociable, solitario. Para el Parc Güell: solitario, relajado. Para un meublé: canalla, social, solu."
+      category_list_hint: "Cómo categorizarías esta actividad?, por ej. un museo de marihuana podría etiquetarse como 'Alternativo', un restaurante mejicano podría categorizarse como 'Comida'."
+  user:
+    form:
+      profession_hint: "Tu dedicación actual"
+      expert_in_hint: "TODO: Get hint from content team"
+      about_hint: "Escribe algo sobre tus aficiones, adicciones, defectos, amores, pasiones, aventuras, retos, ambiciones, optmismo, filosofía de vida, etc."
+
+  
+  
