@@ -11,11 +11,6 @@ class Location < ActiveRecord::Base
   scope :by_user, -> user_id { joins(:articles).where(articles: {user_id: user_id})}
   scope :by_lat_long, -> lat, long, radius = 1000 { near([lat, long], radius.to_f / 1000, units: :km)}
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 
-   
-  ### DEPRICATED SCOPES
-  scope :with_mood, ->(mood) { by_mood(mood)}
-  scope :with_category, ->(category) { by_category(category)}
-  scope :by_user_id, ->(user_id) {by_user(user_id)}
   
   validates :latitude , numericality: { greater_than:  -90, less_than:  90 }
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }
