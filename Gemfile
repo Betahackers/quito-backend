@@ -42,7 +42,7 @@ gem 'dalli'
 gem 'memcachier'
 gem 'simple_form', '~> 3.1.0.rc1'
 gem 'yajl-ruby'
-
+gem 'newrelic_rpm'
 
 gem "rmagick", require: false
 gem 'carrierwave'
