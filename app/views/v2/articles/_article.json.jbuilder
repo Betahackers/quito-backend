@@ -1,17 +1,18 @@
-json.article do
-  json.id article.id
-  json.title article.title
-  json.moods article.mood_list
-  json.categories article.category_list
-  json.content article.content
-  json.type article.article_type
+json.cache! article, expires_in: 5.minutes do
+  json.article do
+    json.id article.id
+    json.title article.title
+    json.moods article.mood_list
+    json.categories article.category_list
+    json.content article.content
+    json.type article.article_type
 
-  json.user do
-    json.partial! article.user if article.user
-  end unless controller_name == 'users'
+    json.user do
+      json.partial! article.user if article.user
+    end unless controller_name == 'users'
 
-  json.locations article.locations do |location|
-    json.partial! location
-  end if controller_name == 'articles'
-  
+    json.locations article.locations do |location|
+      json.partial! location
+    end if controller_name == 'articles'
+  end
 end
