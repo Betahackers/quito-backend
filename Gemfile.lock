@@ -262,6 +262,7 @@ GEM
       yard (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    yajl-ruby (1.2.0)
     yard (0.8.7.3)
 
 PLATFORMS
@@ -309,3 +310,4 @@ DEPENDENCIES
   simple_form (~> 3.1.0.rc1)
   uglifier (>= 1.3.0)
   versionist
+  yajl-ruby

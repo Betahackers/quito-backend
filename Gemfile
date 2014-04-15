@@ -41,6 +41,8 @@ gem 'has_scope'
 gem 'dalli'
 gem 'memcachier'
 gem 'simple_form', '~> 3.1.0.rc1'
+gem 'yajl-ruby'
+
 
 gem "rmagick", require: false
 gem 'carrierwave'
