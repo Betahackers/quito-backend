@@ -72,7 +72,7 @@ en:
   user:
     form:
       profession_hint: "Your current occupation"
-      expert_in_hint: "TODO: Get hint from content team"
+      expert_in_hint: "What types of places are you likely to recommend? e.g. 'Cheap eats' or 'Underground music'"
       about_hint: "Write something about your hobbies, addictions, flaws, love, passions, adventures, braveness, ambitions, optimism, philosophies, etc."
       
 

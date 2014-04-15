@@ -72,7 +72,7 @@ es:
   user:
     form:
       profession_hint: "Tu dedicación actual"
-      expert_in_hint: "TODO: Get hint from content team"
+      expert_in_hint: "Qué tipo de lugares estás propensos a recomendar? por ej. 'Comer barato' o 'música subterráneo'"
       about_hint: "Escribe algo sobre tus aficiones, adicciones, defectos, amores, pasiones, aventuras, retos, ambiciones, optmismo, filosofía de vida, etc."
 
   

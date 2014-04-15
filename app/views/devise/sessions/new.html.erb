@@ -1,15 +1,33 @@
 
 <%= simple_form_for resource, as: resource_name, url: session_path(resource_name), :html=> { class: 'form-signin' } do |f| %>
-  <h3 class='form-signin-heading'>WAIT! Who the duck are you?</h3>
-  <div class="form-inputs">
-    <%= f.input :email, label: false, autofocus: true, placeholder: 'Email address please!'  %>
-    <%= f.input :password, label: false, placeholder: 'and password' %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
 
-    <%= f.button :submit, "Sign in", class: 'btn btn-lg btn-primary btn-block' %>
-    <br/>
-    <%= render "devise/shared/links" %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class='form-signin-heading'>
+      Not so fast! 
+      <small>
+        who are you?
+        <small><%= link_to "I don't know", 'https://www.google.com/search?q=how%20to%20find%20yourself'%></small>
+      </small>
+      
+    </h3>
+    
+  </div>
+  <div class="panel-body">
+    <div class="form-inputs">
+      <%= f.input :email, label: false, autofocus: true, placeholder: 'Email address please!'  %>
+      <%= f.input :password, label: false, placeholder: 'and password' %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+      <%= f.button :submit, "Sign in", class: 'btn btn-lg btn-primary btn-block' %>
+      <br/>
+      <%= render "devise/shared/links" %>
+  </div>
+</div>
+
+
+
 
 <% end %>
 
