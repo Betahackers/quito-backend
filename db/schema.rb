@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413193058) do
+ActiveRecord::Schema.define(version: 20140415083059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,6 @@ ActiveRecord::Schema.define(version: 20140413193058) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "locations", ["foursquare_id"], name: "index_locations_on_foursquare_id", unique: true, using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "key",        null: false
@@ -100,6 +98,7 @@ ActiveRecord::Schema.define(version: 20140413193058) do
     t.datetime "deleted_at"
     t.string   "twitter_handle"
     t.string   "website_url"
+    t.string   "avatar"
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

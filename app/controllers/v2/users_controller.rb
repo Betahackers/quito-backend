@@ -22,14 +22,14 @@ module V2
   
     def create
       @user.role = 'member'
-      respond_to do |format|
-        if @user.save
-          format.html {redirect_to users_path}
-          format.json { render json: @user }
+      if @user.save
+        if user_params[:avatar].present? 
+          render :crop
         else
-          format.html {render :new}
-          format.json
+          redirect_to users_path
         end
+      else
+        render :new
       end
     end
   
@@ -42,17 +42,15 @@ module V2
          params[:user].delete("password")
          params[:user].delete("password_confirmation")
       end
-      
-
-      respond_to do |format|
-
-        if @user.update_attributes(user_params)
-          format.html  {redirect_to users_path}
-          format.json { render json: @user }
+    
+      if @user.update_attributes(user_params)
+        if user_params[:avatar].present?
+          render :crop
         else
-          format.html {render :edit}
-          format.json
+          redirect_to users_path
         end
+      else
+        render :new
       end
     end
   
@@ -75,7 +73,8 @@ module V2
   
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about,
-                                    :website_url, :twitter_handle, :expert_in, :nationality, :profession)
+                                    :website_url, :twitter_handle, :expert_in, :nationality, :profession,
+                                    :avatar, :avatar_cache)
     end
   
   end

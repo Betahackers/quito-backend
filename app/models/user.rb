@@ -3,7 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+         
   acts_as_paranoid
+  
+  mount_uploader :avatar, AvatarUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :crop_avatar
+  
   ROLES = ['member', 'admin']
   
   
@@ -34,4 +40,9 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+  
+  def crop_avatar
+    avatar.recreate_versions! if crop_x.present?
+  end
+  
 end

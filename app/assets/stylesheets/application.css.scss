@@ -12,6 +12,7 @@
  *
  *= require select2
  *= require select2-bootstrap
+ *= require jquery.Jcrop
  *= require_tree .
  *= require_self
  */
@@ -22,6 +23,11 @@
    padding-bottom: 25px;
  }
  
+ .btn-file > input {
+    transform: none;
+    -webkit-transform: none;
+ }
+
 .navbar-brand {
   padding-top: 6px;
   img {

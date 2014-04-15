@@ -1,19 +1,39 @@
 <div class='row'>
   <div class='col-md-8'>
-    <%= simple_form_for @user do |f| %>
+    <%= simple_form_for @user, :html => {:multipart => true} do |f| %>
       <div class="panel panel-default">
         <div class="panel-heading">
           <%= content_tag :h3, t('tell_the_world')%>
         </div>
         <div class="panel-body">
-          <%= f.input :first_name, label: t('first_name') %>    
-          <%= f.input :last_name, label: t('last_name') %>
+          <div class='row'>
+            <div class='col-md-6'>
+              <%= f.input :first_name, label: t('first_name') %>    
+              <%= f.input :last_name, label: t('last_name') %>
+            </div>
+            <div class='col-md-6'>
+              
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                  <img data-src="holder.js/100%x100%" alt="...">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                <div>
+                  <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+                  <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                </div>
+              </div>
+              <%#= f.input :avatar, label: false, as: :image_preview, input_html: {preview_version: :thumb}%>
+      				<%#= f.hidden_field :avatar_cache %>
+            </div>
+          </div>
           <%= f.input :expert_in, label: t('expert_in'), hint: t('user.form.expert_in_hint')  %>
           <%= f.input :about, label: t('about'), hint: t('user.form.about_hint'), input_html: {rows: 7} %>
           <%= f.input :nationality, label: t('nationality') %>
           <%= f.input :profession, label: t('profession'), hint: t('user.form.profession_hint') %>
           <%= f.input :website_url, label: t('website_url') %>
           <%= f.input :twitter_handle, label: t('twitter_handle') %>
+  				
         </div>
       </div>
     

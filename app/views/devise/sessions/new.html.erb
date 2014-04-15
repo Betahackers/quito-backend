@@ -1,5 +1,5 @@
 
-<%= simple_form_for resource, as: resource_name, url: session_path(resource_name), :html=> { class: 'form-signin' } do |f| %>
+<%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -19,7 +19,6 @@
       <%= f.input :password, label: false, placeholder: 'and password' %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
     </div>
-
       <%= f.button :submit, "Sign in", class: 'btn btn-lg btn-primary btn-block' %>
       <br/>
       <%= render "devise/shared/links" %>

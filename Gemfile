@@ -22,7 +22,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# gem 'spring',        group: :development
+# doesn't support rails 4.1 ??? https://github.com/rails/rails/issues/14115
 
 gem 'devise'
 gem 'cancancan'
@@ -39,8 +40,12 @@ gem 'settler'
 gem 'has_scope'
 gem 'dalli'
 gem 'memcachier'
+gem 'simple_form', '~> 3.1.0.rc1'
 
-gem 'simple_form', 					github: 'plataformatec/simple_form'
+gem "rmagick", require: false
+gem 'carrierwave'
+gem "fog"
+gem 'jcrop-rails-v2'
 
 gem 'pry'
 gem 'pry-rails'
