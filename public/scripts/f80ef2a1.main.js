@@ -20970,70 +20970,74 @@ _.extend(Marionette.Module, {
 
   $('#Illegal').on('click', function (e) {
     console.log("click Illegal man.")
-    fetchMarker("Illegal","mood");
+    fetchMarker("lawbreaker","by_mood");
   })
   $('#Sociable').on('click', function (e) {
     console.log("click Sociable man.")
-    fetchMarker("Sociable","mood");
+    fetchMarker("social","by_mood");
   })
   $('#Adventure').on('click', function (e) {
     console.log("click Adventure man.")
-    fetchMarker("Adventure","mood");
+    fetchMarker("adventurous","by_mood");
   })
   $('#Active').on('click', function (e) {
     console.log("click Active man.")
-    fetchMarker("Active","mood");
+    fetchMarker("energetic","by_mood");
   })
   $('#Cultural').on('click', function (e) {
     console.log("click Cultural man.")
-    fetchMarker("Cultural","mood");
+    fetchMarker("intellectual","by_mood");
   })
   $('#Romantic').on('click', function (e) {
     console.log("click Romantic man.")
-    fetchMarker("Romantic","mood");
+    fetchMarker("romantic","by_mood");
   })
   $('#Relaxed').on('click', function (e) {
     console.log("click Relaxed man.")
-    fetchMarker("Relaxed","mood");
+    fetchMarker("relaxed","by_mood");
   })
   $('#Solitary').on('click', function (e) {
     console.log("click Solitary man.")
-    fetchMarker("Solitary","mood");
+    fetchMarker("lonely","by_mood");
   })
 
 //  {"categories":["Eat","Drink","Healthy Life","Culture","Shopping","Dancing","Live Music","Walks"],
 
   $('#Eat').on('click', function (e) {
     console.log("click Eat man.")
-    fetchMarker("Eat","categories");
+    fetchMarker("food","by_category");
   })
   $('#Drink').on('click', function (e) {
     console.log("click Drink man.")
-    fetchMarker("Drink","categories");
+    fetchMarker("drinks","by_category");
   })
   $('#HealthyLife').on('click', function (e) {
     console.log("click Healthy Life man.")
-    fetchMarker("Healthy Life","categories");
+    fetchMarker("healthy_life","by_category");
   })
   $('#Culture').on('click', function (e) {
     console.log("click Culture man.")
-    fetchMarker("Culture","categories");
+    fetchMarker("culture","by_category");
   })
   $('#Shopping').on('click', function (e) {
     console.log("click Shopping man.")
-    fetchMarker("Shopping","categories");
+    fetchMarker("shopping","by_category");
   })
   $('#Dancing').on('click', function (e) {
     console.log("click Dancing man.")
-    fetchMarker("Dancing","categories");
+    fetchMarker("dancing","by_category");
   })
   $('#LiveMusic').on('click', function (e) {
     console.log("click Live Music man.")
-    fetchMarker("Live Music","categories");
+    fetchMarker("music","by_category");
   })
   $('#Walks').on('click', function (e) {
     console.log("click Walks man.")
-    fetchMarker("Walks","categories");
+    fetchMarker("have_a_stroll","by_category");
+  })
+  $('#alternative').on('click', function (e) {
+    console.log("click alternative man.")
+    fetchMarker("alternative","by_category");
   })
 
 
@@ -21050,7 +21054,8 @@ _.extend(Marionette.Module, {
   });
 
   function fetchMarker(markerType, type) {
-    var url = "http://" + Config.DevProxy + "www.fromto.es/v1/locations.json?"+type+"=" + markerType + "&include_articles=true"
+    $('#ProfileArticlePanel').hide()
+    var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType + "&include_articles=true"
     var jqxhr = $.get(url, function (data) {
       console.log("success");
       QuitoFrontend.markers = data
@@ -21081,7 +21086,6 @@ _.extend(Marionette.Module, {
         QuitoFrontend.markerDots.push(markerDot);
 
         google.maps.event.addListener(markerDot, 'click', function () {
-          console.log("hey");
           // http://www.fromto.es/v1/articles/1.json
           // http://www.fromto.es/v1/locations/1.json
           var articleList = []
@@ -21090,8 +21094,8 @@ _.extend(Marionette.Module, {
           var foursquare = {};
           var article = this.marker.articles[0]
           if (typeof article !== 'undefined') {
-            var articleId = article.id;
-            url = "http://" + Config.DevProxy + "www.fromto.es/v1/articles/" + articleId + ".json"
+            var articleId = article.article.id;
+            url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
             var jqxhr = $.get(url, function (data) {
               console.log("success");
               model.set("firstName",data.article.user.first_name)
@@ -21100,7 +21104,8 @@ _.extend(Marionette.Module, {
               model.set("moods",data.article.moods)
               //220x120
 //            width220
-              var photoUrlOrig = data.article.locations[0].foursquare_fields.photos.groups[0].items[1].prefix + "width220" + data.article.locations[0].foursquare_fields.photos.groups[0].items[1].suffix
+              var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[1]
+              var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
               var photoUrlArr = photoUrlOrig.split("://");
               var photoUrl = ""
               if (Config.DevProxy.length > 0) {
@@ -21109,7 +21114,7 @@ _.extend(Marionette.Module, {
                 photoUrl = photoUrlOrig
               }
               foursquare.photoUrl = photoUrl;
-              foursquare.name = data.article.locations[0].foursquare_fields.name;
+              foursquare.name = data.article.locations[0].location.foursquare.name;
               model.set("foursquare",foursquare)
               displayProfileView(model)
             })
@@ -21124,13 +21129,13 @@ _.extend(Marionette.Module, {
     }
     )
       .done(function () {
-        console.log("second success");
+//        console.log("second success");
       })
       .fail(function (e) {
         console.log("error");
       })
       .always(function () {
-        console.log("finished");
+//        console.log("finished");
       });
   }
 
@@ -21577,11 +21582,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<li>\n    <a href=\"#\">\n        <img src=\"";
+  buffer += "<a href=\"#\">\n    <img src=\"";
   if (helper = helpers.avatarUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.avatarUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"img-circle profile-avatar-tiny\">\n        ";
+    + "\" class=\"img-circle profile-avatar-tiny\">\n    ";
   if (helper = helpers.first_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.first_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -21589,7 +21594,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.last_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.last_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n    </a>\n</li>\n";
+    + "\n</a>\n\n";
   return buffer;
   });
 
@@ -21616,7 +21621,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"http://placehold.it/40x40\" />\n		</div>\n		<div class=\"profile-people-name\">\n     ";
+  buffer += "<div id=\"ProfileArticlePanel\" class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"http://placehold.it/40x40\" />\n		</div>\n		<div class=\"profile-people-name\">\n     ";
   if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -21735,7 +21740,7 @@ QuitoFrontend.Collections = QuitoFrontend.Collections || {};
     QuitoFrontend.Collections.ProfileCollection = Backbone.Collection.extend({
 
       model: QuitoFrontend.Models.Profile,
-      url:"http://" + Config.DevProxy + "www.fromto.es/v1/users.json",
+      url:"http://" + Config.DevProxy + "www.fromto.es/v2/users.json",
       parse:function(results) {
         var markers = results.users
         return markers;
@@ -21881,12 +21886,17 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
 (function () {
   'use strict';
 
-  QuitoFrontend.Views.ProfileListView = Backbone.Marionette.CompositeView.extend({
+  QuitoFrontend.Views.ProfileListView = Backbone.Marionette.CollectionView.extend({
 
     tagName: "ul",
     template: JST['app/scripts/templates/ProfileListView.hbs'],
     itemView : QuitoFrontend.Views.ProfileItemView,
-    itemViewContainer : '#shortProfiles'
+//    itemViewContainer : '#shortProfiles',
+    onBeforeRender: function(){
+//      this.model.set("index",this.options.itemIndex)
+      $(this.el).attr('id','shortProfiles');
+//      $(this.el).attr('style','background-color:' + rainbowPastel(this.model.get("len"), this.options.itemIndex));
+    }
 //    events : {
 //      'click .profileItem' : 'displayItem'
 //    },
@@ -21903,7 +21913,7 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
 (function () {
   'use strict';
 
-  QuitoFrontend.Views.ProfileItemView =  Backbone.Marionette.CompositeView.extend({
+  QuitoFrontend.Views.ProfileItemView =  Backbone.Marionette.ItemView.extend({
     tagName : 'li',
     template: JST['app/scripts/templates/ProfileItemView.hbs'],
 
@@ -21918,6 +21928,7 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
       console.log("display profile")
       var profile = new QuitoFrontend.Models.Profile();
       var model = this.model;
+      profile.set("id",model.get("id"))
       profile.set("firstName",model.get("first_name"))
       profile.set("lastName",model.get("last_name"))
       profile.set("profession",model.get("profession"))
@@ -21926,11 +21937,14 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
       profile.set("expert_in",model.get("expert_in"))
       if (model.get("articles") !== null) {
         var articles = model.get("articles")
-        profile.set("article", articles.article)
+        if (articles.length > 0) {
+          profile.set("article", articles[0].article)
+        }
       }
 
       var userId = model.get("id")
       displayProfileView(profile)
+      fetchMarker(userId,"by_user")
 //      fetchMarker(userId,"users");
     },
     destroy : function() {

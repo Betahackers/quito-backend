@@ -1,0 +1,165 @@
+var articles = [{
+    "article": [
+        {
+            "id": 1,
+            "title": "Lorem ipsum Restaurant",
+            "moods": [
+                "Solitary",
+                "Active",
+                "Cultural",
+                "Relaxed",
+                "Adventure"
+            ],
+            "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "type": "review",
+            "author": {
+                "id": 2,
+                "first_name": "Yonah",
+                "last_name": "Frost"
+            },
+            "locations": [
+                {
+                    "name": "W Hotel",
+                    "longitude": 2.18867,
+                    "latitude": 41.36839
+                },
+                {
+                    "name": "Port Olimpic",
+                    "longitude": 2.19820,
+                    "latitude": 41.38630
+                },
+                {
+                    "name": "Platja Marbella",
+                    "longitude": 2.21322,
+                    "latitude": 41.40066
+                },
+                {
+                    "name": "Sagrada Familia",
+                    "longitude": 2.17447,
+                    "latitude": 41.40357
+                },
+                {
+                    "name": "Tapas 24",
+                    "longitude": 2.17340,
+                    "latitude": 41.38506
+                },
+                {
+                    "name": "Palau del Musica Catalana",
+                    "longitude": 2.17486,
+                    "latitude": 41.38755
+                },
+
+
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Sed ut Bar",
+            "moods": [
+                "Sociable",
+                "Romantic",
+                "Adventure"
+            ],
+            "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+            "type": "review",
+            "author": {
+                "id": 2,
+                "first_name": "Yonah",
+                "last_name": "Frost"
+            },
+            "locations": [
+                {
+                    "name": 'Forn Baluard',
+                    "latitude": 41.380003,
+                    "longitude": 2.189012
+                },
+                {
+                    "name": 'Picasso Museum',
+                    "latitude": 41.387097,
+                    "longitude": 2.180893
+                },
+                {
+                    "name": 'Picasso Museum',
+                    "latitude": 41.382218,
+                    "longitude": 2.171752
+                },
+                {
+                    "name": 'La Boqueria',
+                    "latitude": 41.383716,
+                    "longitude": 2.170572
+                },
+                {
+                    "name": 'Fundació Antoni Tàpies',
+                    "latitude": 41.392023,
+                    "longitude": 2.163792
+                },
+                {
+                    "name": 'Cafe Godot',
+                    "latitude": 41.401021,
+                    "longitude": 2.160358
+                },
+                {
+                    "name": 'Pl de la Virreina',
+                    "latitude": 41.40469,
+                    "longitude": 2.157269
+                },
+                {
+                    "name": 'Park Güell',
+                    "latitude": 41.414974,
+                    "longitude": 2.152698
+                },
+                {
+                    "name": 'Taverna El Glop',
+                    "latitude": 41.405382,
+                    "longitude": 2.159543
+                },
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Bar hopping in Gracia",
+            "moods": [
+                "Sociable",
+                "Illegal",
+                "Romantic",
+                "Relaxed",
+                "Adventure"
+            ],
+            "content": "Bar hopping in gracia.  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+            "type": "itinerary",
+            "author": {
+                "id": 2,
+                "first_name": "Yonah",
+                "last_name": "Frost"
+            },
+            "locations": [
+                {
+                    "name": "Poble Sec",
+                    "longitude": 2.16525,
+                    "latitude": 41.37183
+                },
+                {
+                    "name": "Still Poble Sec",
+                    "longitude": 2.16156,
+                    "latitude": 41.37467
+                },
+                {
+                    "name": "Other Place",
+                    "longitude": 2.15902,
+                    "latitude": 41.38299
+                },
+                {
+                    "name": "Hidden Gem",
+                    "longitude": 2.15575,
+                    "latitude": 41.39046
+                },
+                {
+                    "name": "Sant Gervasi",
+                    "longitude": 2.14975,
+                    "latitude": 41.39703
+                },
+
+            ]
+        }
+    ]
+    }];
