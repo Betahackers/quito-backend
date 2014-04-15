@@ -11,7 +11,7 @@ class Article < ActiveRecord::Base
 
   scope :by_mood, -> mood { tagged_with(mood, on: :moods)}
   scope :by_category, -> category { tagged_with(category, on: :categories)}
-  scope :by_user, -> user_ids { where(user_id: user_ids)}
+  scope :by_user, -> user_ids { where(user_id: user_ids) }
   scope :by_lat_long, -> lat, long, radius = 1000 { joins(:locations).where(locations: {id: Location.by_lat_long(lat, long, radius).map(&:id)})}
   scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})}
   
