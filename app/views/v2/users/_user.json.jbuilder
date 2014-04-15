@@ -7,6 +7,9 @@ json.nationality user.nationality
 json.expert_in user.expert_in
 json.twitter_handle user.twitter_handle
 json.website_url user.website_url
+json.avatar_versions user.avatar_versions
+json.avatar_url_prefix user.avatar_url_prefix
+json.avatar_url_suffix user.avatar_url_suffix
 
 json.articles user.articles do |article|
   json.partial! article 

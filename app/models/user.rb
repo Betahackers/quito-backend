@@ -45,4 +45,16 @@ class User < ActiveRecord::Base
     avatar.recreate_versions! if crop_x.present?
   end
   
+  def avatar_versions
+   avatar.versions.keys
+  end
+  
+  def avatar_url_prefix
+   avatar.url.split("/")[0..-2].join("/") + '/'
+  end
+  
+  def avatar_url_suffix
+    avatar.url.split("/").last
+  end
+  
 end
