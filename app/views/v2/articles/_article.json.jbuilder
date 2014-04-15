@@ -1,4 +1,4 @@
-json.cache! article, expires_in: 5.minutes do
+json.cache! ['articles', article], expires_in: 10.minutes do
   json.article do
     json.id article.id
     json.title article.title
