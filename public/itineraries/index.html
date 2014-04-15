@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Betachallenge</title>
+	<meta charset="utf-8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=true"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="data5_images.json"></script>
+	<style>
+	body{
+		font-family: sans-serif;
+		font-size: 12px;
+	}
+	#timeline .marker{
+		cursor: pointer;
+	}
+	#timeline .label{
+		cursor: pointer;
+	}
+	#timeline .selected{
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body>
+<div id="map" style="width: 800px; height: 800px; float:left;"></div>
+<div id="sidebar" style="width: 150px; height: 800px; background-color:#DADAD8; float:left;">
+<svg id="timeline"></svg>
+</div>
+<script>
+$(document).ready(function(){
+
+	var container = document.getElementById('map');
+
+	var map = new google.maps.Map(container, {
+		zoom: 14,
+		center: new google.maps.LatLng(41.3897, 2.1699),
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeControl: false,
+	    streetViewControl: false
+	});
+
+	var colors = new Array();
+	colors[0] = "#000000";
+	colors[1] = "#FF0000";
+	colors[2] = "#00FF00";
+	colors[3] = "#0000FF";
+	colors[4] = "#FFFF00";
+
+
+	map.set('styles', [
+	{
+		featureType: 'road',
+		elementType: 'labels',
+		stylers: [
+		{ visibility: 'off' }
+		]
+	},
+	{
+		featureType: 'road',
+		elementType: 'geometry',
+		stylers: [
+		{ color: "#FFFFFF" }
+		]
+	},
+	{
+		featureType: 'road.highway',
+		elementType: 'geometry',
+		stylers: [
+		{ color: "#FFFFFF" },
+		{saturation: -100}
+		]
+	},
+	{
+		featureType: 'road.arterial',
+		elementType: 'geometry',
+		stylers: [
+		{ color: "#FFFFFF" },
+		{saturation: -100},
+		{lightness: 30},
+		]
+	},
+	{
+		featureType: "road.local",
+		stylers: [
+			{saturation: -100},
+			{lightness: 40},
+		]
+	},
+	{
+		featureType: 'transit',
+		elementType: 'geometry',
+		stylers: [
+		{ visibility: 'off' }
+		]
+	},
+	{
+		featureType: 'transit',
+		elementType: 'labels',
+		stylers: [
+		{ visibility: 'off' }
+		]
+	},
+	{
+		featureType: 'poi',
+		elementType: 'labels',
+		stylers: [
+		{ visibility: 'off' }
+		]
+	},
+	{
+		featureType: 'poi',
+		elementType: 'geometry',
+		stylers: [
+		{ visibility: 'off' }
+		]
+	},
+	{
+		featureType: "landscape",
+		stylers: [
+			{saturation: -100},
+			{lightness: 65},
+			{visibility: 'on'}
+		]
+	},
+	{
+	featureType: "administrative",
+	elementType: "labels",
+	stylers: [
+		{hue: "#ffff00"},
+		{saturation: -50},
+		{lightness: 60},
+	]
+	},
+	{
+		featureType: "water",
+		elementType: "geometry",
+		stylers: [
+			{hue: "#ffff33"},
+			{saturation: -97}
+		]
+	},
+	{
+		featureType: "water",
+		elementType: "labels",
+		stylers: [
+			{visibility: 'off'}
+		]
+	}
+	]);
+
+	var infowindow = new google.maps.InfoWindow();
+	var path;
+	var bounds = new google.maps.LatLngBounds();
+
+	for (var i = 0; i < articles[0].article.length; i++) {
+		var article = articles[0].article[i];
+		drawItinary(article, colors[article.id]);
+		if (i == 0) {
+			drawTimeline(article.locations, colors[article.id]);
+		}
+
+	}
+
+	// Draw the timeline in the sidebar
+	function drawItinary(article, color){
+
+		var mapLocations = article.locations;
+
+		if(mapLocations.length == 0){
+			return;
+		}
+
+		var positions = [];
+
+		for (var i = 0; i < mapLocations.length; i++) {
+
+			var mapLocation = mapLocations[i];
+			// console.log(mapLocation);
+
+			mapLocation.html = '';
+			mapLocation.html += '<b>' + mapLocation.name + '</b><br>';
+			if (mapLocation.image) {
+				mapLocation.html += '<img src="' + mapLocation.image + '"><br>';
+			}
+			mapLocation.html += 'Itinary: ' + article.title + '<br>';
+
+			var pos = new google.maps.LatLng(mapLocation.latitude, mapLocation.longitude);
+			var props = {
+				position: pos,
+				map: map,
+				icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					strokeColor: '#DDD9D5',
+					strokeOpacity: 1,
+					scale: 8
+				}
+			};
+			positions.push(pos);
+
+			mapLocation.marker = new google.maps.Marker(props);
+			google.maps.event.addListener(mapLocation.marker, 'click', (function(marker, i) {
+				return function() {
+					showMapLocation(marker, i);
+				}
+			})(mapLocation.marker, i));
+
+			// Extend bounds of map to include all locations
+			bounds.extend(mapLocation.marker.position);
+
+		}
+
+		if (mapLocations.length > 0) {
+			map.fitBounds(bounds);
+		}
+
+		var path = new google.maps.Polyline({
+			path: positions,
+			geodesic: true,
+			strokeColor: color,
+			strokeOpacity: 1.0,
+			strokeWeight: 2
+		});
+
+		// Add listener to each itinerary to draw the timeline on click
+		google.maps.event.addListener(path, 'click', (function(path) {
+			return function() {
+				drawTimeline(mapLocations, color)
+			}
+		})(path, i));
+
+		path.setMap(map);
+
+		//drawItinaryLines(positions);
+
+		function showMapLocation(marker, i){
+			infowindow.setContent(mapLocations[i].html);
+			infowindow.open(map, marker);
+		}
+
+	}
+
+	function drawItinaryLines (positions) {
+
+		var newPositions = [];
+
+		// Calculate the location positions from coordinates.
+		for (var i = 0; i < positions.length - 1; i++) {
+			var current = positions[i];
+			var next = positions[i+1];
+
+			var dLng = next.lng() - current.lng();
+			var dLat = next.lat() - current.lat();
+
+			if (Math.abs(dLng) > Math.abs(dLat)) {
+				newPositions.push(current);
+				newPositions.push(new google.maps.LatLng(current.lat(), next.lng()-dLat/2));
+				newPositions.push(new google.maps.LatLng(current.lat()+dLat/2, next.lng()));
+				newPositions.push(new google.maps.LatLng(next.lat(), next.lng()));
+				newPositions.push(next);
+			} else {
+				newPositions.push(current);
+				newPositions.push(new google.maps.LatLng(current.lat(), next.lng()-dLng/2));
+				newPositions.push(new google.maps.LatLng(current.lat()+dLat/2, next.lng()));
+				newPositions.push(new google.maps.LatLng(next.lat(), next.lng()));
+				newPositions.push(next);
+			}
+		};
+
+		path.setMap(map);
+
+	}
+
+	// Function to draw the timeline sidebar
+	function drawTimeline (mapLocations, color) {
+		//console.log(mapLocations);
+
+		// Remove previous timeline and add new container
+		d3.select("#timeline").remove();
+		d3.select("#sidebar").append("svg").attr("id","timeline");
+
+		// Calculate total travelling time
+		var offset = 25;
+		var xCoord = 15;
+		var yCoord = 25;
+
+		var totalTravelTime = 0;
+		mapLocations.forEach( function( key, val ) {
+			if (key.travel_time) {
+				totalTravelTime = totalTravelTime + key.travel_time;
+			}
+    	} );
+		//console.log(totalTravelTime);
+
+		// Draw lines corresponding to travel time
+		var locationCoordinates = [];
+		locationCoordinates.push(yCoord);
+
+		mapLocations.forEach( function( key, val ) {
+			if (key.travel_time) {
+				var destinationCoordinate = yCoord + key.travel_time / totalTravelTime * (800 - 2*offset);
+				locationCoordinates.push(destinationCoordinate);
+
+				if(key.travel_mode == "walking") {
+					drawWalkLine(xCoord, yCoord, xCoord, destinationCoordinate, color, key.travel_time);
+				} else {
+					drawMetroLine(xCoord, yCoord, xCoord, destinationCoordinate, color, key.travel_time);
+				}
+				yCoord = destinationCoordinate;
+			}
+
+		} );
+
+		// Draw locations in itinerary.
+		var counter = 0;
+		locationCoordinates.forEach( function( key, val ) {
+			drawLocation(xCoord, key, color, mapLocations[counter++]);
+		} );
+	}
+
+	// Function to draw one location in the sidebar timeline
+	function drawLocation (x, y, color, mapLocation) {
+
+		var group = d3.select("#timeline")
+			.append('g')
+			.attr("transform", "translate(" + x + "," + y + ")")
+			.attr("class", "marker");
+		group
+			.append("circle")
+				.attr("r", 10)
+				.attr("stroke", "#EDEDED")
+				.attr("stroke-width", "6")
+				.attr("fill", color);
+		group
+			.append("text")
+					.attr("x", 20)
+					.attr("y", 5)
+					.attr("class", "label")
+					.text(mapLocation.name);
+		group
+			.on("click", function(d) {
+				markerClick(this, mapLocation);
+			});
+
+
+	}
+
+	function markerClick(el, mapLocation){
+		d3.select("#timeline .selected").classed("selected", false);
+		d3.select(el).attr("class", "selected");
+		infowindow.setContent(mapLocation.html);
+		infowindow.open(map, mapLocation.marker);
+	}
+
+	// Function to draw a metro travel segment
+	function drawMetroLine (x1, y1, x2, y2, color, time) {
+		d3.select("#timeline")
+			.append("line")
+			.attr("x1", x1)
+			.attr("y1", y1)
+			.attr("x2", x2)
+			.attr("y2", y2)
+			.attr("stroke", color)
+			.attr("stroke-width", "3");
+		d3.select("#timeline")
+			.append("image")
+			.attr("xlink:href", "metro-train.svg")
+			.attr("x", x1+25)
+			.attr("y", (y1+y2)/2)
+			.attr("width", 20)
+			.attr("height", 20);
+		d3.select("#timeline")
+			.append("text")
+			.attr("x", x1+50)
+			.attr("y", (y1+y2)/2+13)
+			.attr("font-family", "sans-serif")
+			.attr("font-size","12px")
+			.attr("fill", "#888888")
+			.text(Math.round(time/60) + " minutes");
+	}
+
+	// Function to draw a walking segment
+	function drawWalkLine (x1, y1, x2, y2, color, time) {
+		d3.select("#timeline")
+			.append("line")
+			.attr("x1", x1)
+			.attr("y1", y1)
+			.attr("x2", x2)
+			.attr("y2", y2)
+			.attr("stroke", color)
+			.attr("stroke-width", "3")
+			.attr("stroke-dasharray","5,5");
+		d3.select("#timeline")
+			.append("image")
+			.attr("xlink:href", "walking-man.svg")
+			.attr("x", x1+25)
+			.attr("y", (y1+y2)/2-8)
+			.attr("width", 20)
+			.attr("height", 20);
+		d3.select("#timeline")
+			.append("text")
+			.attr("x", x1+50)
+			.attr("y", (y1+y2)/2+5)
+			.attr("font-family", "sans-serif")
+			.attr("font-size","12px")
+			.attr("fill", "#888888")
+			.text(Math.round(time/60) + " minutes");
+
+	}
+});
+</script>
+</body>
+</html>
