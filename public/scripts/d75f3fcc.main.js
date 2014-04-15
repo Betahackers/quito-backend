@@ -21058,23 +21058,34 @@ _.extend(Marionette.Module, {
     var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType + "&include_articles=true"
     var jqxhr = $.get(url, function (data) {
       console.log("success");
-      QuitoFrontend.markers = data
+      //QuitoFrontend.markers = data
       //var markers = new QuitoFrontend.Collections.MarkerCollection(QuitoFrontend.markers)
-      var markers = data.locations;
-//    markers.fetch( {
-//      success: function(record){
-//        console.log("Fetched record: " + JSON.stringify(record));
-//      }})
+      QuitoFrontend.markers = data.locations;
 
-      if (QuitoFrontend.markerDots) {
-        for (var i = 0; i < QuitoFrontend.markerDots.length; i++) {
-            QuitoFrontend.markerDots[i].setMap(null);
+        if (type === 'by_user') {
+          var model = new QuitoFrontend.Models.Profile();
+          if ((typeof QuitoFrontend.markers[0].location.articles !== 'undefined') && (QuitoFrontend.markers[0].location.articles.length > 0)) {
+            var user = QuitoFrontend.markers[0].location.articles[0].article.user;
+            var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.jpg";
+            if (user.avatar_url_suffix !== "avatar.jpg") {
+              userThumbnailUrl = "http://www.fromto.es" + data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
+            }
+            model.set("user",user)
+            model.set("userThumbnailUrl",userThumbnailUrl)
+            displayProfileView(model)
+          }
         }
-      }
+
+        if (QuitoFrontend.markerDots) {
+          for (var i = 0; i < QuitoFrontend.markerDots.length; i++) {
+            QuitoFrontend.markerDots[i].setMap(null);
+          }
+        }
+
       QuitoFrontend.markerDots = [];
 
-      for (var i = 0; i < markers.length; i++) {
-        var marker = markers[i].location
+      for (var i = 0; i < QuitoFrontend.markers.length; i++) {
+        var marker = QuitoFrontend.markers[i].location
 
         var markerDot = new google.maps.Marker({
             position: new google.maps.LatLng(marker.latitude, marker.longitude),
@@ -21098,24 +21109,33 @@ _.extend(Marionette.Module, {
             url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
             var jqxhr = $.get(url, function (data) {
               console.log("success");
+              model.set("user",data.article.user)
+              // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
+              var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.jpg";
+              if (data.article.user.avatar_url_suffix !== "avatar.jpg") {
+                userThumbnailUrl = "http://www.fromto.es" + data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
+              }
+              model.set("userThumbnailUrl",userThumbnailUrl)
               model.set("firstName",data.article.user.first_name)
               model.set("lastName",data.article.user.last_name)
               model.set("article",data.article)
               model.set("moods",data.article.moods)
               //220x120
 //            width220
-              var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[1]
-              var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
-              var photoUrlArr = photoUrlOrig.split("://");
-              var photoUrl = ""
-              if (Config.DevProxy.length > 0) {
-                photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
-              } else {
-                photoUrl = photoUrlOrig
+              if (typeof data.article.locations === 'undefined') {
+                var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[1]
+                var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
+                var photoUrlArr = photoUrlOrig.split("://");
+                var photoUrl = ""
+                if (Config.DevProxy.length > 0) {
+                  photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
+                } else {
+                  photoUrl = photoUrlOrig
+                }
+                foursquare.photoUrl = photoUrl;
+                foursquare.name = data.article.locations[0].location.foursquare.name;
+                model.set("foursquare",foursquare)
               }
-              foursquare.photoUrl = photoUrl;
-              foursquare.name = data.article.locations[0].location.foursquare.name;
-              model.set("foursquare",foursquare)
               displayProfileView(model)
             })
           } else {
@@ -21143,40 +21163,6 @@ _.extend(Marionette.Module, {
 
     QuitoFrontend.ProfileView = new QuitoFrontend.Views.ProfileView({selectedProfile:"Jorge", model:model});
     QuitoFrontend.mainRegion.show(QuitoFrontend.ProfileView)
-  }
-
-  function rainbowPastel(numOfSteps, step) {
-    // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
-    // Adam Cole, 2011-Sept-14
-    // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
-
-    var r, g, b;
-    var h = step / numOfSteps;
-    var i = ~~(h * 6);
-    var f = h * 6 - i;
-    var q = 1 - f;
-    switch(i % 6){
-      case 0: r = 1, g = f, b = 0; break;
-      case 1: r = q, g = 1, b = 0; break;
-      case 2: r = 0, g = 1, b = f; break;
-      case 3: r = 0, g = q, b = 1; break;
-      case 4: r = f, g = 0, b = 1; break;
-      case 5: r = 1, g = 0, b = q; break;
-    }
-//  console.log("numOfSteps: " + numOfSteps + " step: " + step + "h: " + h + " i: " + i +" f: " + f +" q: " + q + " i%6: " + i%6 + " r: " + r + " g: " + g + " b: " + b)
-//  var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
-    var red = ~ ~(r * 255);
-    var green = ~ ~(g * 255);
-    var blue = ~ ~(b * 255);
-    // pastel kudos: http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
-    // mix the color - in this case, white (255,255,255)
-
-    red = (red + 255) / 2;
-    green = (green + 255) / 2;
-    blue = (blue + 255) / 2;
-
-    var c = "#" + ("00" + (~~red).toString(16)).slice(-2) + ("00" + (~~green).toString(16)).slice(-2) + ("00" + (~~blue).toString(16)).slice(-2);
-    return (c);
   }
   
   
@@ -21621,30 +21607,22 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"ProfileArticlePanel\" class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"http://placehold.it/40x40\" />\n		</div>\n		<div class=\"profile-people-name\">\n     ";
-  if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += "<div id=\"ProfileArticlePanel\" class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"";
+  if (helper = helpers.userThumbnailUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.userThumbnailUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + " ";
-  if (helper = helpers.lastName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.lastName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n		</div>\n		<div class=\"profile-people-text\">\n      ";
-  if (helper = helpers.about) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.about); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n		</div>\n		<hr/>\n	</div>\n	<div class=\"profile-description\">\n    ";
-  if (helper = helpers.expert_in) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.expert_in); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n	</div>\n	<div class=\"profile-location\">\n      ";
-  if (helper = helpers.nationality) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.nationality); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n	</div>\n	<div class=\"profile-work\">\n    ";
-  if (helper = helpers.profession) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.profession); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
+    + "\" />\n		</div>\n		<div class=\"profile-people-name\">\n     "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.first_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.last_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n		</div>\n		<div class=\"profile-people-text\">\n      "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.about)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n		</div>\n		<hr/>\n	</div>\n	<div class=\"profile-description\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.expert_in)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n	</div>\n	<div class=\"profile-location\">\n      "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.nationality)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n	</div>\n	<div class=\"profile-work\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.profession)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n	</div>\n	<div class=\"profile-picture\">\n		<img class=\"image\" src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" />\n	</div>\n	<div class=\"profile-content\">\n		<!--<h1>Parc Güell</h1>-->\n		<!--<p>-->\n			<!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.-->\n		<!--</p>-->\n\n      <h1>"
@@ -21819,6 +21797,7 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
 //      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
       initializeMap()
+      fetchMarker("home","all");
     },
     showPanel: function(e) {
       console.log("showing profile panel.")
