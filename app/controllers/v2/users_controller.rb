@@ -47,7 +47,7 @@ module V2
         if user_params[:avatar].present?
           render :crop
         else
-          redirect_to users_path
+          redirect_to articles_path
         end
       else
         render :new
