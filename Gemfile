@@ -36,6 +36,9 @@ gem 'select2-rails'
 gem 'rails_12factor'
 gem 'figaro'
 gem 'settler'
+gem 'has_scope'
+gem 'dalli'
+gem 'memcachier'
 
 gem 'simple_form', 					github: 'plataformatec/simple_form'
 

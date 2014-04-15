@@ -17,7 +17,9 @@ module V1
     def new
     end
   
-    def create    
+    def create  
+      @user.role = 'member'
+        
       respond_to do |format|
         if @user.save
           format.html {redirect_to users_path}

@@ -8,7 +8,7 @@ json.article do
 
   json.user do
     json.partial! article.user if article.user
-  end
+  end unless controller_name == 'users'
 
   json.locations article.locations do |location|
     json.partial! location

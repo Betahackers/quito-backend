@@ -4,12 +4,15 @@ module V2
 
     before_action :authorize_json_only, except: :show
 
+    has_scope :by_mood, type: :array
+    has_scope :by_category, type: :array
+    has_scope :by_user, type: :array
+    has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
+    has_scope :by_location, type: :array
+    
     def index
-      @articles = Article.all
-      @articles = @articles.where(user_id: params[:user_id] ) if params[:user_id]
-      @articles = @articles.tagged_with(params[:mood], on: :moods) if params[:mood]
-      @articles = @articles.tagged_with(params[:category], on: :categories) if params[:category]
-      @articles = @articles.where(user_id: current_user.id) if current_user && !params[:all_articles]  && request.format != :json
+      @articles = apply_scopes(@articles).includes(:locations, :user)   
+      @articles = @articles.where(user_id: current_user.id) if current_user && !params[:all_articles]  && request.format != :json      
     end
 
     def show

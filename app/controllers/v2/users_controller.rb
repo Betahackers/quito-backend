@@ -3,12 +3,15 @@ module V2
     load_and_authorize_resource
 
     before_action :authorize_json_only
+    
+    has_scope :by_mood, type: :array
+    has_scope :by_category, type: :array
+    has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
+    has_scope :by_article, type: :array
+    has_scope :by_location, type: :array
   
     def index
-      respond_to do |format|
-        format.html { authorize! :manage, User, :message => "Unable to view users" }
-        format.json
-      end
+      @users = apply_scopes(@users).includes(:articles, :locations)
     end
   
     def show
@@ -17,7 +20,8 @@ module V2
     def new
     end
   
-    def create    
+    def create
+      @user.role = 'member'
       respond_to do |format|
         if @user.save
           format.html {redirect_to users_path}
