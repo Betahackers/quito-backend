@@ -6,7 +6,7 @@ json.cache! [params.hash, location], expires_in: 10.minutes do
     json.latitude location.latitude
     
     json.articles location.articles do |article|
-      json.partial! article unless params[:by_user] && article.user_id != params[:by_user]
+      json.partial! article unless params[:by_user] && !params[:by_user].include?(article.user_id.to_s)
     end if controller_name == 'locations'
   
     json.foursquare location.foursquare_fields if params[:include_foursquare] == 'true'
