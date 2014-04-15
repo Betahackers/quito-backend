@@ -1,4 +1,4 @@
-json.cache! ['users', user], expires_in: 10.minutes do
+json.cache! [params.hash, user], expires_in: 10.minutes do
   json.id user.id
   json.first_name user.first_name
   json.last_name user.last_name
