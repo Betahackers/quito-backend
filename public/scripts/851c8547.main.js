@@ -21080,7 +21080,7 @@ _.extend(Marionette.Module, {
       $('.profile').css("background-color","#6d97cb");
     }
 
-    var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType + "&include_articles=true"
+    var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType;
     var jqxhr = $.get(url, function (data) {
 //      console.log("success");
       //QuitoFrontend.markers = data
@@ -21106,6 +21106,10 @@ _.extend(Marionette.Module, {
             }
             model.set("user",user)
             model.set("userThumbnailUrl",userThumbnailUrl)
+            var foursquare = {}
+            foursquare.photoUrl = userThumbnailUrl;
+            $('.profile-picture').css("width","240px");
+            model.set("foursquare",foursquare)
             displayProfileView(model)
           }
         }
@@ -21157,17 +21161,22 @@ _.extend(Marionette.Module, {
               //220x120
 //            width220
               if (typeof data.article.locations !== 'undefined') {
-                var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[1]
-                var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
-                var photoUrlArr = photoUrlOrig.split("://");
-                var photoUrl = ""
-                if (Config.DevProxy.length > 0) {
-                  photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
-                } else {
-                  photoUrl = photoUrlOrig
-                }
-                foursquare.photoUrl = photoUrl;
                 foursquare.name = data.article.locations[0].location.foursquare.name;
+                foursquare.canonicalUrl = data.article.locations[0].location.foursquare.canonicalUrl;
+                if (data.article.locations[0].location.foursquare.photos.groups.length > 0) {
+                  var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[0]
+                  var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
+                  var photoUrlArr = photoUrlOrig.split("://");
+                  var photoUrl = ""
+                  if (Config.DevProxy.length > 0) {
+                    photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
+                  } else {
+                    photoUrl = photoUrlOrig
+                  }
+                  foursquare.photoUrl = photoUrl;
+                } else {
+                  console.log("No image for " + data.article.locations[0].location.foursquare.canonicalUrl)
+                }
                 model.set("foursquare",foursquare)
               }
               displayProfileView(model)
@@ -21634,6 +21643,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  var buffer = "", stack1;
+  buffer += "\n		<img class=\"image\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" id=\"profile-image\"/>\n    ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
   var buffer = "";
   buffer += "\n        "
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
@@ -21657,16 +21675,25 @@ function program1(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.nationality)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n	</div>\n	<div class=\"profile-work\">\n    "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.profession)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n	</div>\n	<div class=\"profile-picture\">\n		<img class=\"image\" src=\""
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\n	</div>\n	<div class=\"profile-content\">\n		<!--<h1>Parc Güell</h1>-->\n		<!--<p>-->\n			<!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.-->\n		<!--</p>-->\n\n      <h1>"
+    + "\n	</div>\n  <div class=\"profile-twitter\">\n    <a href=\"twitter.com/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n	</div>\n    <div class=\"profile-url\">\n        <a href=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">website</a>\n    </div>\n	<div class=\"profile-picture\">\n    ";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	</div>\n	<div class=\"profile-content\">\n      <h1><a href=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.canonicalUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=\"_blank\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h1>\n      <h2>"
+    + "</a></h1>\n      <h2>"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.article)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</h2>\n      <p>"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.article)),stack1 == null || stack1 === false ? stack1 : stack1.content)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</p>\n  <p>\n    ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  </p>\n\n	</div>\n</div>";
   return buffer;
