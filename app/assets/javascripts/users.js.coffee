@@ -18,7 +18,7 @@ class AvatarCropper
     $('#user_crop_w').val(coords.w)
     $('#user_crop_h').val(coords.h)
     @updatePreview(coords)
-
+  
   updatePreview: (coords) =>
           $('#preview').css
                   width: Math.round(100/coords.w * $('#cropbox').width()) + 'px'

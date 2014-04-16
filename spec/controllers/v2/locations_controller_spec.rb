@@ -56,10 +56,10 @@ describe V2::LocationsController do
         let(:radius) { '800' }
         let(:search_result) {
           [:betahaus, :montjuic, :tibidabo].map{|factory|
-            FactoryGirl.build(factory)
+            FactoryGirl.create(factory)
           }
         }
-        let(:expected_ids) { search_result.map{|l| l.foursquare_id}.sort }
+        let(:expected_ids) { search_result.map{|l| l.id}.sort }
 
         before(:each) do
           allow(Location)
@@ -71,7 +71,7 @@ describe V2::LocationsController do
         it 'returns correct data' do
           get :index, format: :json, by_lat_long: {lat: lat, long: long, radius: radius}
           returned_ids = JSON.parse(response.body)['locations']
-                            .map{|r| r['location']['foursquare_id']}
+                            .map{|r| r['location']['id']}
                             .sort
           puts JSON.parse(response.body)
           expect(returned_ids).to eq(expected_ids)
