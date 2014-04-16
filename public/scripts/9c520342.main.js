@@ -13118,9 +13118,9 @@ $(document).ready(function () {
     var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType;
     var jqxhr = $.get(url, function (data) {
 //      console.log("success");
-      //QuitoFrontend.markers = data
-      //var markers = new QuitoFrontend.Collections.MarkerCollection(QuitoFrontend.markers)
-      QuitoFrontend.markers = data.locations;
+        //QuitoFrontend.markers = data
+        //var markers = new QuitoFrontend.Collections.MarkerCollection(QuitoFrontend.markers)
+        QuitoFrontend.markers = data.locations;
 
         if (type === 'by_user') {
           var model = new QuitoFrontend.Models.Profile();
@@ -13156,77 +13156,147 @@ $(document).ready(function () {
           }
         }
 
-      QuitoFrontend.markerDots = [];
+        QuitoFrontend.markerDots = [];
 
-      for (var i = 0; i < QuitoFrontend.markers.length; i++) {
-        var marker = QuitoFrontend.markers[i].location
+        var infoWindow = new google.maps.InfoWindow()
 
-        var markerDot = new google.maps.Marker({
+        for (var i = 0; i < QuitoFrontend.markers.length; i++) {
+          var marker = QuitoFrontend.markers[i].location
+
+          var markerDot = new google.maps.Marker({
             position: new google.maps.LatLng(marker.latitude, marker.longitude),
             map: QuitoFrontend.map,
             icon: 'marker-images/point_' + type + '.png',
-            marker: marker
-        });
-        
-        QuitoFrontend.markerDots.push(markerDot);
+            marker: marker,
+            animation: google.maps.Animation.DROP
+          });
 
-        google.maps.event.addListener(markerDot, 'click', function () {
-          // http://www.fromto.es/v1/articles/1.json
-          // http://www.fromto.es/v1/locations/1.json
-          var articleList = []
-          var articles = this.marker.articles;
-          var model = new QuitoFrontend.Models.Profile();
-          model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
-          var foursquare = {};
-          var article = this.marker.articles[0]
-          if (typeof article !== 'undefined') {
-            var articleId = article.article.id;
-            url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
-            var jqxhr = $.get(url, function (data) {
+          QuitoFrontend.markerDots.push(markerDot);
+
+//          google.maps.event.addListener(markerDot, 'click', function () {
+//
+//            var articleList = []
+//            var articles = this.marker.articles;
+//            var model = new QuitoFrontend.Models.Profile();
+//            model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
+//            var foursquare = {};
+//            var article = this.marker.articles[0]
+//            if (typeof article !== 'undefined') {
+//              var articleId = article.article.id;
+//              url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
+//              var jqxhr = $.get(url, function (data) {
+////              console.log("success");
+//                model.set("user",data.article.user)
+//                // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
+//                var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
+//                if (data.article.user.avatar_url_suffix !== "avatar.png") {
+//                  userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
+//                }
+//                model.set("userThumbnailUrl",userThumbnailUrl)
+//                model.set("firstName",data.article.user.first_name)
+//                model.set("lastName",data.article.user.last_name)
+//                model.set("article",data.article)
+//                model.set("moods",data.article.moods)
+//
+//                if (typeof data.article.locations !== 'undefined') {
+//                  foursquare.name = data.article.locations[0].location.foursquare.name;
+//                  foursquare.canonicalUrl = data.article.locations[0].location.foursquare.canonicalUrl;
+//                  infoWindow.setContent(foursquare.name);
+//                  infoWindow.open(QuitoFrontend.map, this);
+//
+//                  if (data.article.locations[0].location.foursquare.photos.groups.length > 0) {
+//                    var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[0]
+//                    var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
+//                    var photoUrlArr = photoUrlOrig.split("://");
+//                    var photoUrl = ""
+//                    if (Config.DevProxy.length > 0) {
+//                      photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
+//                    } else {
+//                      photoUrl = photoUrlOrig
+//                    }
+//                    foursquare.photoUrl = photoUrl;
+//                  } else {
+//                    console.log("No image for " + data.article.locations[0].location.foursquare.canonicalUrl)
+//                  }
+//                  model.set("foursquare",foursquare)
+//                }
+//                displayProfileView(model)
+//              })
+//            } else {
+//              foursquare.name = this.marker.name
+//              foursquare.id = this.marker.foursquare_id
+//              model.set("foursquare",foursquare)
+//              displayProfileView(model)
+//            }
+//          });
+
+          google.maps.event.addListener(markerDot, 'click', (function(marker, i) {
+            return function() {
+              var articleList = []
+              var articles = this.marker.articles;
+              var model = new QuitoFrontend.Models.Profile();
+              model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
+              var foursquare = {};
+              var article = this.marker.articles[0]
+
+              //              infowindow.setContent(locations[i][0]);
+//              infowindow.open(map, marker);
+              infoWindow.setContent(this.marker.name);
+              infoWindow.open(QuitoFrontend.map, this);
+
+              if (typeof article !== 'undefined') {
+                var articleId = article.article.id;
+                url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
+                var jqxhr = $.get(url, function (data) {
 //              console.log("success");
-              model.set("user",data.article.user)
-              // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
-              var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
-              if (data.article.user.avatar_url_suffix !== "avatar.png") {
-                userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
-              }
-              model.set("userThumbnailUrl",userThumbnailUrl)
-              model.set("firstName",data.article.user.first_name)
-              model.set("lastName",data.article.user.last_name)
-              model.set("article",data.article)
-              model.set("moods",data.article.moods)
-              //220x120
-//            width220
-              if (typeof data.article.locations !== 'undefined') {
-                foursquare.name = data.article.locations[0].location.foursquare.name;
-                foursquare.canonicalUrl = data.article.locations[0].location.foursquare.canonicalUrl;
-                if (data.article.locations[0].location.foursquare.photos.groups.length > 0) {
-                  var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[0]
-                  var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
-                  var photoUrlArr = photoUrlOrig.split("://");
-                  var photoUrl = ""
-                  if (Config.DevProxy.length > 0) {
-                    photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
-                  } else {
-                    photoUrl = photoUrlOrig
+                  model.set("user",data.article.user)
+                  // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
+                  var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
+                  if (data.article.user.avatar_url_suffix !== "avatar.png") {
+                    userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
                   }
-                  foursquare.photoUrl = photoUrl;
-                } else {
-                  console.log("No image for " + data.article.locations[0].location.foursquare.canonicalUrl)
-                }
+                  model.set("userThumbnailUrl",userThumbnailUrl)
+                  model.set("firstName",data.article.user.first_name)
+                  model.set("lastName",data.article.user.last_name)
+                  model.set("article",data.article)
+                  model.set("moods",data.article.moods)
+
+                  if (typeof data.article.locations !== 'undefined') {
+                    foursquare.name = data.article.locations[0].location.foursquare.name;
+                    foursquare.canonicalUrl = data.article.locations[0].location.foursquare.canonicalUrl;
+//                    infoWindow.setContent(foursquare.name);
+//                    infoWindow.open(QuitoFrontend.map, this);
+
+                    if (data.article.locations[0].location.foursquare.photos.groups.length > 0) {
+                      var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[0]
+                      var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
+                      var photoUrlArr = photoUrlOrig.split("://");
+                      var photoUrl = ""
+                      if (Config.DevProxy.length > 0) {
+                        photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
+                      } else {
+                        photoUrl = photoUrlOrig
+                      }
+                      foursquare.photoUrl = photoUrl;
+                    } else {
+                      console.log("No image for " + data.article.locations[0].location.foursquare.canonicalUrl)
+                    }
+                    model.set("foursquare",foursquare)
+                  }
+                  displayProfileView(model)
+                })
+              } else {
+                foursquare.name = this.marker.name
+                foursquare.id = this.marker.foursquare_id
                 model.set("foursquare",foursquare)
+                displayProfileView(model)
               }
-              displayProfileView(model)
-            })
-          } else {
-            foursquare.name = this.marker.name
-            foursquare.id = this.marker.foursquare_id
-            model.set("foursquare",foursquare)
-            displayProfileView(model)
-          }
-        });
+
+            }
+          })(marker, i));
+
+        }
       }
-    }
     )
       .done(function () {
 //        console.log("second success");
