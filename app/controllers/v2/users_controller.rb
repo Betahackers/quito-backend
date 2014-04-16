@@ -74,7 +74,7 @@ module V2
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :about,
                                     :website_url, :twitter_handle, :expert_in, :nationality, :profession,
-                                    :avatar, :avatar_cache)
+                                    :avatar, :avatar_cache, :crop_x, :crop_y, :crop_w, :crop_h)
     end
   
   end
