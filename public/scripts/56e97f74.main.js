@@ -13597,7 +13597,7 @@ function program3(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.nationality)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n	</div>\n	<div class=\"profile-work\">\n    "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.profession)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n	</div>\n  <div class=\"profile-twitter\">\n    <a href=\"twitter.com/"
+    + "\n	</div>\n  <div class=\"profile-twitter\">\n    <a href=\"http://twitter.com/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" target=\"_blank\">"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
