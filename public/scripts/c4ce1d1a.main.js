@@ -1,6 +1,6 @@
 window.Config = {}
-//Config.DevProxy = "127.0.0.1:9292/";
-Config.DevProxy = "";
+Config.DevProxy = "127.0.0.1:9292/";
+//Config.DevProxy = "";
 
 /*!
  * Bootstrap v3.1.1 (http://getbootstrap.com)
@@ -21040,21 +21040,45 @@ _.extend(Marionette.Module, {
     fetchMarker("alternative","by_category");
   })
 
+    $(function () {
+        // Get this now, when the menus are collapsed.
+        QuitoFrontend.profilesButtonTop = $(".profiles-box").offset().top;
+    });
 
-  $("#profilesLink").click(function () {
-    if (!$(".profiles-container").hasClass("in")) {
-      var windowHeight = $(window).height();
-      var boxTop = $(".profiles-box").offset().top;
-      var boxHeight = $(".profiles-box").outerHeight();
-      var newHeight = windowHeight - (boxTop + boxHeight);
-      $(".profiles-expanded").css("height", newHeight + "px");
-    }
+    $(".sidebar-box a").click(function () {
+        var collapsibleChild = $(this).parent().find(".collapse");
+                
+        if ($(this).parent().hasClass("profiles-box")) {
+            if (!$(".profiles-container").hasClass("in")) {
+                var windowHeight = $(window).height();
+                var boxTop = QuitoFrontend.profilesButtonTop;
+                var boxHeight = $(".profiles-box").outerHeight();
+                var newHeight = windowHeight - (boxTop + boxHeight);
+                $(".profiles-expanded").css("height", newHeight + "px");
+            }
+        }
 
-    $(".profiles-container").collapse("toggle");
-  });
+        collapsibleChild.collapse("toggle");
+        $(".collapse.in").not(collapsibleChild).collapse("hide");
+    });
 
   function fetchMarker(markerType, type) {
+    
     $('#ProfileArticlePanel').hide()
+    if (type === 'by_mood') {
+      //background-color: #49c4c1;
+      $('.profile').css("background-color","#49c4c1");
+    } else if (type === 'by_category') {
+      //background-color: rgba(154,147,210,1);
+      $('.profile').css("background-color","rgba(154,147,210,1)");
+    } else  if (type === 'by_user') {
+      //background-color: rgba(147,204,58,1);
+      $('.profile').css("background-color","rgba(147,204,58,1)");
+    } else  {
+        //background-color: #6d97cb;
+      $('.profile').css("background-color","#6d97cb");
+    }
+
     var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType + "&include_articles=true"
     var jqxhr = $.get(url, function (data) {
       console.log("success");
@@ -21066,9 +21090,9 @@ _.extend(Marionette.Module, {
           var model = new QuitoFrontend.Models.Profile();
           if ((typeof QuitoFrontend.markers[0].location.articles !== 'undefined') && (QuitoFrontend.markers[0].location.articles.length > 0)) {
             var user = QuitoFrontend.markers[0].location.articles[0].article.user;
-            var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.jpg";
-            if (user.avatar_url_suffix !== "avatar.jpg") {
-              userThumbnailUrl = "http://www.fromto.es" + data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
+            var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
+            if (user.avatar_url_suffix !== "avatar.png") {
+              userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
             }
             model.set("user",user)
             model.set("userThumbnailUrl",userThumbnailUrl)
@@ -21111,9 +21135,9 @@ _.extend(Marionette.Module, {
               console.log("success");
               model.set("user",data.article.user)
               // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
-              var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.jpg";
-              if (data.article.user.avatar_url_suffix !== "avatar.jpg") {
-                userThumbnailUrl = "http://www.fromto.es" + data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
+              var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
+              if (data.article.user.avatar_url_suffix !== "avatar.png") {
+                userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
               }
               model.set("userThumbnailUrl",userThumbnailUrl)
               model.set("firstName",data.article.user.first_name)
