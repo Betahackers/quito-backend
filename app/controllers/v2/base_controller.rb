@@ -20,7 +20,7 @@ module V2
     end
     
     def set_cach_key_from_params
-      @cach_key = params.slice(:by_mood, :by_article, :by_user, :by_category, :by_location, :controller).hash
+      @cach_key = params.slice(:by_mood, :by_article, :by_user, :by_category, :by_location, :controller, :include_foursquare).hash
     end
 
   end
