@@ -12,6 +12,7 @@ module V2
   
     def index
       @users = apply_scopes(@users).includes(:articles, :locations)
+      @users = @users.with_article if request.format == :json
     end
   
     def show

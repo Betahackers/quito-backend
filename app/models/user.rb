@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
   scope :by_category, -> category { joins(:categories).where(tags: {name: category})}
   scope :by_lat_long, -> lat, long, radius = 1000 { joins(:locations).where(locations: {id: Location.by_lat_long(lat, long, radius).map(&:id)})}
   scope :by_article, -> article_ids {joins(:articles).where(articles: {id: article_ids})} 
-  scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})} 
+  scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})}
+  scope :with_article, -> { joins(:articles) }
   
   def admin?
     role == 'admin'
