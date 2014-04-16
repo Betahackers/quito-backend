@@ -1,4 +1,4 @@
-json.cache! [params.hash, location], expires_in: 10.minutes do
+json.cache! [@cach_key, location], expires_in: 10.minutes do
   json.location do
     json.id location.id
     json.name location.name
