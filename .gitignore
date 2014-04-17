@@ -20,3 +20,4 @@
 
 # Ignore figaro env file
 /config/application.yml
+.env
