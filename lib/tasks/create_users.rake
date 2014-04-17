@@ -2,7 +2,7 @@ task create_users: :environment do
   email_array = ENV['emails'].split(',')
   required_attributes = [:first_name, :last_name, :about, :profession, :nationality, :expert_in]
   email_array.each do |email|
-    user = User.where(email: email.strip).first_or_initialize(password: '21ed3!38#NOibb', role: 'member')
+    user = User.where(email: email.downcase.strip).first_or_initialize(password: '21ed3!38#NOibb', role: 'member')
     if user.persisted?
       puts "Found User #{user.id}"
     else      
