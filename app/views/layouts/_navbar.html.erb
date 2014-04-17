@@ -22,7 +22,6 @@
         <% end %>
       </p>
       <% if user_signed_in? %>
-      
         <ul class="nav navbar-nav navbar-right">
             <li class="<%= I18n.locale == :en ? 'active' : '' %>"><%= link_to "en", locale: "en"%></li>
             <li class="<%= I18n.locale == :es ? 'active' : '' %>"><%= link_to "es", locale: "es" %></li>

@@ -1,5 +1,5 @@
 module V2
-  class ArticlesController < BaseController
+  class ArticlesController < BaseController    
     load_and_authorize_resource
 
     before_action :authorize_json_only, except: :show
@@ -26,7 +26,8 @@ module V2
       @article.user = current_user
       respond_to do |format|
         if @article.save
-          format.html { redirect_to articles_path, notice: 'Article added' }
+          flash[:notice] = "Article added!! Add another? (or #{ActionController::Base.helpers.link_to('<b>go back</b>'.html_safe, articles_path)})"
+          format.html { redirect_to new_article_path}
           format.json { render json: @article }
         else
           format.html { render :new, alert: 'failed :(' }

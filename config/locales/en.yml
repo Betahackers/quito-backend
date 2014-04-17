@@ -62,6 +62,7 @@ en:
   tags: "Tags"
   edit: "Edit"
   tell_the_world: "Tell the world!!"
+  edit_my_profile: "Edit my profile"
   article:
     form:
       name_hint: "Search the name of the activity or the place"

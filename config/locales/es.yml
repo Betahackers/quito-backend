@@ -62,6 +62,7 @@ es:
   tags: "Etiquetas"
   edit: "Editar"
   tell_the_world: "Dígale al mundo!!"
+  edit_my_profile: "Cambiar mi perfil"
   article:
     form:
       name_hint: "Busca el nombre de la actividad o el lugar"

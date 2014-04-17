@@ -8,7 +8,8 @@ module V2
     has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
     
     def index
-      @locations = apply_scopes(@locations) #.includes(articles: :user)      
+      @locations = @locations.joins(:articles).includes(articles: :user)     
+      @locations = apply_scopes(@locations)  
     end
     
   end
