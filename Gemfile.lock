@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/mislav/will_paginate.git
+  revision: ca7d45f955066f0a01d500769a8efbb6acc4032c
+  specs:
+    will_paginate (3.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -312,4 +318,5 @@ DEPENDENCIES
   simple_form (~> 3.1.0.rc1)
   uglifier (>= 1.3.0)
   versionist
+  will_paginate!
   yajl-ruby

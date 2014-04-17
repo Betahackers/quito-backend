@@ -11,8 +11,10 @@ module V2
     has_scope :by_location, type: :array
     
     def index
-      @articles = apply_scopes(@articles).includes(:locations, :user)   
+      @articles = apply_scopes(@articles).includes(:locations, :user)  
       @articles = @articles.where(user_id: current_user.id) if current_user && !params[:all_articles]  && request.format != :json      
+      # Dont paginate for now. send everything
+      # @articles = @articles.paginate(page: params[:page], per_page: 100)
     end
 
     def show

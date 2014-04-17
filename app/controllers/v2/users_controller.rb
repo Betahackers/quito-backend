@@ -13,6 +13,8 @@ module V2
     def index
       @users = apply_scopes(@users).includes(:articles, :locations)
       @users = @users.with_article if request.format == :json
+      # Dont paginate for now. send everything
+      # @users = @users.paginate(page: params[:page], per_page: 100)      
     end
   
     def show
@@ -25,8 +27,10 @@ module V2
       @user.role = 'member'
       if @user.save
         if user_params[:avatar].present? 
+          flash[:notice] = 'Go crop yo-self!'
           render :crop
         else
+          flash[:notice] = 'Saved. Thank you!'
           redirect_to users_path
         end
       else
@@ -46,8 +50,10 @@ module V2
     
       if @user.update_attributes(user_params)
         if user_params[:avatar].present?
+          flash[:notice] = 'Go crop yo-self!'
           render :crop
         else
+          flash[:notice] = "Relax, you've been saved..."
           redirect_to articles_path
         end
       else

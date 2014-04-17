@@ -10,6 +10,8 @@ module V2
     def index
       @locations = @locations.joins(:articles).includes(articles: :user)     
       @locations = apply_scopes(@locations)  
+      # Dont paginate for now. send everything
+      # @locations = @locations.paginate(page: params[:page], per_page: 100)
     end
     
   end

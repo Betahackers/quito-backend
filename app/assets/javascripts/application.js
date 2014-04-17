@@ -19,6 +19,8 @@
 
 
 $(document).ready(function() {
+
+  $('.btn').button()
   
 
   function locationFormatResult(result) {

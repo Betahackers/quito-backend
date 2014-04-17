@@ -43,6 +43,7 @@ gem 'memcachier'
 gem 'simple_form', '~> 3.1.0.rc1'
 gem 'yajl-ruby'
 gem 'newrelic_rpm'
+gem 'will_paginate', github: 'mislav/will_paginate'
 
 gem "rmagick", require: false
 gem 'carrierwave'
