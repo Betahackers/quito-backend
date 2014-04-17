@@ -10,15 +10,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/bootstrap.css">
-
-
-        <!-- endbuild -->
-        <!-- build:js scripts/vendor/modernizr.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
+        <link rel="stylesheet" href="styles/d3fb1437.main.css">
+        <script src="scripts/vendor/8677fae9.modernizr.js"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -39,14 +32,14 @@
                 <a id="moodsDropdown" href="#">Moods</a>
                 <div id="moods" class="collapse">
                     <ul>
-                        <li id="Illegal"><a href="#"><img src="images/lawbreaker.png"/>Lawbreaker</a></li>
-                        <li id="Sociable"><a href="#"><img src="images/social.png"/>Social</a></li>
-                        <li id="Adventure"><a href="#"><img src="images/alternative.png"/>Adventurous</a></li>
-                        <li id="Active"><a href="#"><img src="images/energetic.png"/>Energetic</a></li>
-                        <li id="Cultural"><a href="#"><img src="images/intellectual.png"/>Philosophical</a></li>
-                        <li id="Romantic"><a href="#"><img src="images/romantic.png"/>Romantic</a></li>
-                        <li id="Relaxed"><a href="#"><img src="images/relaxed.png"/>Relaxed</a></li>
-                        <li id="Solitary"><a href="#"><img src="images/lonely.png"/>Lonely</a></li>
+                        <li id="Illegal"><a href="#"><img src="images/lawbreaker.png">Lawbreaker</a></li>
+                        <li id="Sociable"><a href="#"><img src="images/social.png">Social</a></li>
+                        <li id="Adventure"><a href="#"><img src="images/alternative.png">Adventurous</a></li>
+                        <li id="Active"><a href="#"><img src="images/energetic.png">Energetic</a></li>
+                        <li id="Cultural"><a href="#"><img src="images/intellectual.png">Philosophical</a></li>
+                        <li id="Romantic"><a href="#"><img src="images/romantic.png">Romantic</a></li>
+                        <li id="Relaxed"><a href="#"><img src="images/relaxed.png">Relaxed</a></li>
+                        <li id="Solitary"><a href="#"><img src="images/lonely.png">Lonely</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,14 +48,14 @@
                 <a id="categoriesDropdown" href="#">Activities</a>
                 <div id="categories" class="collapse">
                     <ul>
-                        <li id="Eat"><a href="#"><img src="images/food.png"/>Food</a></li>
-                        <li id="Drink"><a href="#"><img src="images/drinks.png"/>Drinks</a></li>
-                        <li id="Healthy Life"><a href="#"><img src="images/healthylife.png"/>Healthy Life</a></li>
-                        <li id="Culture"><a href="#"><img src="images/culture.png"/>Culture</a></li>
-                        <li id="Shopping"><a href="#"><img src="images/shopping.png"/>Shopping</a></li>
-                        <li id="Live Music"><a href="#"><img src="images/music.png"/>Music</a></li>
-                        <li id="Walks"><a href="#"><img src="images/haveastroll.png"/>Have a stroll</a></li>
-                        <li id="alternative"><a href="#"><img src="images/alternative.png"/>Alternative</a></li>
+                        <li id="Eat"><a href="#"><img src="images/food.png">Food</a></li>
+                        <li id="Drink"><a href="#"><img src="images/drinks.png">Drinks</a></li>
+                        <li id="Healthy Life"><a href="#"><img src="images/healthylife.png">Healthy Life</a></li>
+                        <li id="Culture"><a href="#"><img src="images/culture.png">Culture</a></li>
+                        <li id="Shopping"><a href="#"><img src="images/shopping.png">Shopping</a></li>
+                        <li id="Live Music"><a href="#"><img src="images/music.png">Music</a></li>
+                        <li id="Walks"><a href="#"><img src="images/haveastroll.png">Have a stroll</a></li>
+                        <li id="alternative"><a href="#"><img src="images/alternative.png">Alternative</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +85,7 @@
         
         <div id="about-dialog" class="modal custom fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="about-container">
-                <canvas id='about-canvas' width='800' height='300'>Your browser does not support the Canvas element.</canvas>
+                <canvas id="about-canvas" width="800" height="300">Your browser does not support the Canvas element.</canvas>
             </div>
         </div>
 
@@ -106,49 +99,10 @@
             ga('create','UA-45895640-2', 'fromto.es');ga('send','pageview');
         </script>
 	
-        <!-- build:js scripts/vendor.js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/underscore/underscore.js"></script>
-        <script src="bower_components/backbone/backbone.js"></script>
-        <script src="bower_components/handlebars/handlebars.js"></script>
-
-        <!-- endbuild -->
+        <script src="scripts/86ee225a.vendor.js"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK2j29aS720hndwhtfi1wPPSWhxXqthfM&sensor=true"></script>
 
-        <!-- build:js({.tmp,app}) scripts/main.js -->
-        <script src="scripts/config.js"></script>
-        <script src="scripts/vendor/bootstrap.js"></script>
-        <script src="scripts/vendor/has.js"></script>
-        <script src="scripts/vendor/url.js"></script>
-        <script src="scripts/vendor/tween.js"></script>
-        <script src="scripts/vendor/two.js"></script>
-        <script src="scripts/vendor/underscore.js"></script>
-        <script src="scripts/vendor/backbone-pouch.js"></script>
-        <script src="scripts/vendor/backbone.marionette.js"></script>
-        <script src="scripts/App.js"></script>
-        <script src="scripts/utils.js"></script>
-        <script src="scripts/aboutbox.js"></script>
-        <script src="scripts/AppController.js"></script>
-        <script src="scripts/templates.js"></script>
-        <script src="scripts/models/Profile.js"></script>
-        <script src="scripts/routers/AppRouter.js"></script>
-        <script src="scripts/views/ProfileView.js"></script>
-        <script src="scripts/collections/ProfileCollection.js"></script>
-        <script src="scripts/collections/MoodCollection.js"></script>
-        <script src="scripts/models/Home.js"></script>
-        <script src="scripts/views/HomeView.js"></script>
-        <script src="scripts/views/MapView.js"></script>
-        <script src="scripts/views/ProfileView.js"></script>
-        <script src="scripts/views/CategoryView.js"></script>
-        <script src="scripts/views/ProfileListView.js"></script>
-        <script src="scripts/views/ProfileItemView.js"></script>
-        <script src="scripts/views/MoodListView.js"></script>
-        <script src="scripts/views/MoodItemView.js"></script>
-        <script src="scripts/collections/MarkerCollection.js"></script>
-        <script src="scripts/collections/ArticleCollection.js"></script>
-        <script src="scripts/models/Marker.js"></script>
-        <script src="scripts/models/Article.js"></script>
-        <!-- endbuild -->
+        <script src="scripts/808c352e.main.js"></script>
 </body>
 </html>
