@@ -4,8 +4,8 @@ json.cache! [@cach_key, location], expires_in: 10.minutes do
     json.name location.name
     json.longitude location.longitude
     json.latitude location.latitude
-    json.created_at location.created_at
-    json.updated_at location.updated_at
+    json.created_at location.created_at.to_s(:db)  
+    json.updated_at location.updated_at.to_s(:db)  
     
     json.articles location.articles.by_user(params[:by_user]) do |article|
       json.partial! article

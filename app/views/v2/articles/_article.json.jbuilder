@@ -6,8 +6,8 @@ json.cache! [@cach_key, article], expires_in: 10.minutes do
     json.categories article.category_list
     json.content article.content
     json.type article.article_type
-    json.created_at article.created_at
-    json.updated_at article.updated_at
+    json.created_at article.created_at.to_s(:db)  
+    json.updated_at article.updated_at.to_s(:db)  
 
     json.user do
       json.partial! article.user if article.user

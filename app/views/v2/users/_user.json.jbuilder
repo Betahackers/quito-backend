@@ -11,8 +11,8 @@ json.cache! [@cach_key, user], expires_in: 10.minutes do
   json.avatar_versions user.avatar_versions
   json.avatar_url_prefix user.avatar_url_prefix
   json.avatar_url_suffix user.avatar_url_suffix
-  json.created_at user.created_at
-  json.updated_at user.updated_at
+  json.created_at user.created_at.to_s(:db)  
+  json.updated_at user.updated_at.to_s(:db)  
   
 
   json.articles user.articles do |article|
