@@ -11,6 +11,9 @@ json.cache! [@cach_key, user], expires_in: 10.minutes do
   json.avatar_versions user.avatar_versions
   json.avatar_url_prefix user.avatar_url_prefix
   json.avatar_url_suffix user.avatar_url_suffix
+  json.created_at user.created_at
+  json.updated_at user.updated_at
+  
 
   json.articles user.articles do |article|
     json.partial! article 
