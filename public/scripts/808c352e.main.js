@@ -13163,72 +13163,31 @@ $(document).ready(function () {
         for (var i = 0; i < QuitoFrontend.markers.length; i++) {
           var marker = QuitoFrontend.markers[i].location
 
+          var markerImage = type;
+          if (type === 'all') {
+            var randomChoice = Math.floor(Math.random() * (3 - 1 + 1)) + 1
+            switch (randomChoice) {
+              case 1:
+                markerImage = "by_mood"
+                break;
+              case 2:
+                markerImage = "by_category"
+                break;
+              case 3:
+                markerImage = "by_user"
+                break;
+            }
+          }
+
           var markerDot = new google.maps.Marker({
             position: new google.maps.LatLng(marker.latitude, marker.longitude),
             map: QuitoFrontend.map,
-            icon: 'marker-images/point_' + type + '.png',
-            marker: marker,
-            animation: google.maps.Animation.DROP
+            icon: 'marker-images/point_' + markerImage + '.png',
+            marker: marker
+//            animation: google.maps.Animation.DROP
           });
 
           QuitoFrontend.markerDots.push(markerDot);
-
-//          google.maps.event.addListener(markerDot, 'click', function () {
-//
-//            var articleList = []
-//            var articles = this.marker.articles;
-//            var model = new QuitoFrontend.Models.Profile();
-//            model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
-//            var foursquare = {};
-//            var article = this.marker.articles[0]
-//            if (typeof article !== 'undefined') {
-//              var articleId = article.article.id;
-//              url = "http://" + Config.DevProxy + "www.fromto.es/v2/articles/" + articleId + ".json?include_foursquare=true"
-//              var jqxhr = $.get(url, function (data) {
-////              console.log("success");
-//                model.set("user",data.article.user)
-//                // 			<img class="profile-image" src="http://www.fromto.es{{user.avatar_url_prefix}}{{user.avatar_url_suffix}}" />
-//                var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
-//                if (data.article.user.avatar_url_suffix !== "avatar.png") {
-//                  userThumbnailUrl = data.article.user.avatar_url_prefix + data.article.user.avatar_url_suffix;
-//                }
-//                model.set("userThumbnailUrl",userThumbnailUrl)
-//                model.set("firstName",data.article.user.first_name)
-//                model.set("lastName",data.article.user.last_name)
-//                model.set("article",data.article)
-//                model.set("moods",data.article.moods)
-//
-//                if (typeof data.article.locations !== 'undefined') {
-//                  foursquare.name = data.article.locations[0].location.foursquare.name;
-//                  foursquare.canonicalUrl = data.article.locations[0].location.foursquare.canonicalUrl;
-//                  infoWindow.setContent(foursquare.name);
-//                  infoWindow.open(QuitoFrontend.map, this);
-//
-//                  if (data.article.locations[0].location.foursquare.photos.groups.length > 0) {
-//                    var photosTree = data.article.locations[0].location.foursquare.photos.groups[0].items[0]
-//                    var photoUrlOrig = photosTree.prefix + "width220" + photosTree.suffix
-//                    var photoUrlArr = photoUrlOrig.split("://");
-//                    var photoUrl = ""
-//                    if (Config.DevProxy.length > 0) {
-//                      photoUrl = "http://" + Config.DevProxy + photoUrlArr[1]
-//                    } else {
-//                      photoUrl = photoUrlOrig
-//                    }
-//                    foursquare.photoUrl = photoUrl;
-//                  } else {
-//                    console.log("No image for " + data.article.locations[0].location.foursquare.canonicalUrl)
-//                  }
-//                  model.set("foursquare",foursquare)
-//                }
-//                displayProfileView(model)
-//              })
-//            } else {
-//              foursquare.name = this.marker.name
-//              foursquare.id = this.marker.foursquare_id
-//              model.set("foursquare",foursquare)
-//              displayProfileView(model)
-//            }
-//          });
 
           google.maps.event.addListener(markerDot, 'click', (function(marker, i) {
             return function() {
@@ -13604,10 +13563,14 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
   buffer += "<a href=\"#\">\n    <img src=\"";
-  if (helper = helpers.avatarUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.avatarUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  if (helper = helpers.avatar_url_prefix) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.avatar_url_prefix); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"img-circle profile-avatar-tiny\">\n    ";
+    + "thumb_";
+  if (helper = helpers.avatar_url_suffix) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.avatar_url_suffix); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"/>";
   if (helper = helpers.first_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.first_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -13655,7 +13618,11 @@ function program3(depth0,data) {
   if (helper = helpers.userThumbnailUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.userThumbnailUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" />\n		</div>\n		<div class=\"profile-people-name\">\n     "
+    + "\" />\n      <!--<img class=\"profile-image\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.avatar_url_prefix)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "thumb_"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.avatar_url_suffix)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\"/>-->\n    </div>\n		<div class=\"profile-people-name\">\n     "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.first_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + " "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.last_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -13669,7 +13636,7 @@ function program3(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.profession)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n	</div>\n  <div class=\"profile-twitter\">\n    <a href=\"http://twitter.com/"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" target=\"_blank\">"
+    + "\" target=\"_blank\">@"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</a>\n	</div>\n  <div class=\"profile-url\">\n      <a href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
