@@ -16,6 +16,7 @@ class Article < ActiveRecord::Base
   scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})}
   
   validates :title, :content, :user_id, :mood_list, :category_list, presence: true
+  validates :content, length: {maximum: 270}
   
   def author
     user

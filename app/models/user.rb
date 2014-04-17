@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   validates :website_url, format: URI::regexp(%w(http https)), allow_blank: true
   validates :twitter_handle, format: /\A([a-zA-Z](_?[a-zA-Z0-9]+)*_?|_([a-zA-Z0-9]+_?)*)\z/, allow_blank: true
   validates :role, inclusion: {in: User::ROLES, message: "Role should be one of #{ROLES.join(", ")}"}
-
+  validates :about, length: {maximum: 270}
+  
   scope :by_mood, -> mood { joins(:moods).where(tags: {name: mood})}
   scope :by_category, -> category { joins(:categories).where(tags: {name: category})}
   scope :by_lat_long, -> lat, long, radius = 1000 { joins(:locations).where(locations: {id: Location.by_lat_long(lat, long, radius).map(&:id)})}

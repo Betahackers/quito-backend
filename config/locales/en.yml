@@ -67,14 +67,14 @@ en:
     form:
       name_hint: "Search the name of the activity or the place"
       title_hint: "Give a title to your recommendation, e.g. Weirdest cocktail in the world"
-      content_hint: "Give specific, if possible juicy information. What do you do there? When do you? What do you order? Why is it special?"
+      content_hint: "In 270 chars or less, give specific, if possible juicy information. What do you do there? When do you? What do you order? Why is it special?"
       mood_list_hint: "To a person with which mood would you recommend this activity? e.g. The moods for a coffeebar could be: social, lonely. The moods for Parc Guell could be: relaxed, lonely. The moods for a sex club could be: lawbreaker, adventurous, lonely :)"
       category_list_hint: "How do you categorize the activity?, e.g. visiting a weed museum could be 'Alternative', a Mexican restaurant would be 'Food'."
   user:
     form:
       profession_hint: "Your current occupation"
       expert_in_hint: "What types of places are you likely to recommend? e.g. 'Cheap eats' or 'Underground music'"
-      about_hint: "Write something about your hobbies, addictions, flaws, love, passions, adventures, braveness, ambitions, optimism, philosophies, etc."
+      about_hint: "In 270 chars or less, write something about your hobbies, addictions, flaws, love, passions, adventures, braveness, ambitions, optimism, philosophies, etc."
       
 
   

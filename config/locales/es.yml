@@ -67,14 +67,14 @@ es:
     form:
       name_hint: "Busca el nombre de la actividad o el lugar"
       title_hint: "Ponle un título a tu recomendación, por ej. Un restaurante chino con clientes chinos"
-      content_hint: "Da información específica, valiosa, si es posible. Que se hace allí? Cuándo? Qué hay que pedir? Por qué es especial?"
+      content_hint: "En 270 caracteres o menos, da información específica, valiosa, si es posible. Que se hace allí? Cuándo? Qué hay que pedir? Por qué es especial?"
       mood_list_hint: "Cómo debería sentirse la persona a la que recomiendas esta actividad? Los estados de ánimo para una cafetería podrían ser: sociable, solitario. Para el Parc Güell: solitario, relajado. Para un meublé: canalla, social, solu."
       category_list_hint: "Cómo categorizarías esta actividad?, por ej. un museo de marihuana podría etiquetarse como 'Alternativo', un restaurante mejicano podría categorizarse como 'Comida'."
   user:
     form:
       profession_hint: "Tu dedicación actual"
       expert_in_hint: "Qué tipo de lugares estás propensos a recomendar? por ej. 'Comer barato' o 'música subterráneo'"
-      about_hint: "Escribe algo sobre tus aficiones, adicciones, defectos, amores, pasiones, aventuras, retos, ambiciones, optmismo, filosofía de vida, etc."
+      about_hint: "En 270 caracteres o menos, escribe algo sobre tus aficiones, adicciones, defectos, amores, pasiones, aventuras, retos, ambiciones, optmismo, filosofía de vida, etc."
 
   
   
