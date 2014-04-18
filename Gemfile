@@ -45,8 +45,8 @@ gem 'yajl-ruby'
 gem 'newrelic_rpm'
 gem 'will_paginate', github: 'mislav/will_paginate'
 
-gem "rmagick", require: false
 gem 'carrierwave'
+gem 'mini_magick'
 gem "fog"
 gem 'jcrop-rails-v2'
 
