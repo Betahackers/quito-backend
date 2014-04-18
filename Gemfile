@@ -55,8 +55,8 @@ gem 'pry-rails'
 
 gem 'foursquare2'
 
-gem 'unicorn'
-
+# gem 'unicorn'
+gem 'puma'
 group :test, :development do
   gem 'rspec', '>= 3.0.0.beta2'
   gem 'rspec-rails', '>= 3.0.0.beta2'
