@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :article_location do
     association :article
-    association :location
+    association :random_location
   end
 end

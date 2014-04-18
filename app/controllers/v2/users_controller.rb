@@ -57,7 +57,7 @@ module V2
           redirect_to articles_path
         end
       else
-        render :new
+        render :edit
       end
     end
   
