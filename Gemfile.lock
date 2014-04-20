@@ -126,6 +126,7 @@ GEM
     has_scope (0.5.1)
     hashie (2.1.0)
     hike (1.2.3)
+    hodel_3000_compliant_logger (0.1.1)
     i18n (0.6.9)
     jbuilder (2.0.6)
       activesupport (>= 3.0.0, < 5)
@@ -160,6 +161,9 @@ GEM
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oink (0.10.1)
+      activerecord
+      hodel_3000_compliant_logger
     orm_adapter (0.5.0)
     paranoia (2.0.2)
       activerecord (~> 4.0)
@@ -304,6 +308,7 @@ DEPENDENCIES
   memcachier
   mini_magick
   newrelic_rpm
+  oink
   paranoia
   pg
   pry

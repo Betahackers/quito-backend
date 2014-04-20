@@ -79,6 +79,8 @@ Rails.application.configure do
       :domain => 'www.fromto.es', # your domain to identify your server when connecting
   }
 
+  config.middleware.use( Oink::Middleware, :logger => Hodel3000CompliantLogger.new(STDOUT))
+  
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
