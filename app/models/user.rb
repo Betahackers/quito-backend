@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   scope :by_location, -> location_ids {joins(:locations).where(locations: {id: location_ids})}
   scope :with_article, -> { joins(:articles) }
   
+  after_update :touch_articles_and_locatinos
+  
   def admin?
     role == 'admin'
   end
@@ -57,6 +59,13 @@ class User < ActiveRecord::Base
   
   def avatar_url_suffix
     avatar.url.split("/").last
+  end
+  
+  private
+  
+  def touch_articles_and_locatinos
+    articles.each(&:touch)
+    locations.each(&:touch)
   end
   
 end

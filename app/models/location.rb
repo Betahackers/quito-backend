@@ -15,6 +15,8 @@ class Location < ActiveRecord::Base
   
   validates :latitude , numericality: { greater_than:  -90, less_than:  90 }
   validates :longitude, numericality: { greater_than: -180, less_than: 180 }
+  
+  after_update :touch_articles_and_users
 
   def foursquare_fields
     @foursquare_fields ||= Foursquare.fetch_venue(self.foursquare_id)
@@ -29,4 +31,12 @@ class Location < ActiveRecord::Base
       l.longitude = hash['location']['lng']
     end rescue nil
   end
+  
+  private
+  
+  def touch_articles_and_users
+    articles.each(&:touch)
+    users.each(&:touch)
+  end
+  
 end

@@ -28,6 +28,13 @@ class Article < ActiveRecord::Base
     else
       "review"
     end
-  end  
+  end
+  
+  private
+  
+  def touch_user_and_location
+    user.touch
+    locations.each(&:touch)
+  end
 
 end
