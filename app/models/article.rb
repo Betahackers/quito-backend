@@ -18,6 +18,8 @@ class Article < ActiveRecord::Base
   validates :title, :content, :user_id, :mood_list, :category_list, presence: true
   validates :content, length: {maximum: 270}
   
+  after_update :touch_user_and_location
+  
   def author
     user
   end
