@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415083059) do
+ActiveRecord::Schema.define(version: 20140422131239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140415083059) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.datetime "deleted_at"
+    t.string   "cached_category_list"
+    t.string   "cached_mood_list"
   end
 
   add_index "articles", ["deleted_at"], name: "index_articles_on_deleted_at", using: :btree

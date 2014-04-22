@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.1"
+ruby "2.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -53,11 +53,8 @@ gem 'jcrop-rails-v2'
 gem 'pry'
 gem 'pry-rails'
 
+gem 'faraday', '~> 0.8.9'
 gem 'foursquare2'
-
-gem 'puma'
-
-gem "oink"
 
 group :test, :development do
   gem 'rspec', '>= 3.0.0.beta2'
@@ -81,7 +78,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

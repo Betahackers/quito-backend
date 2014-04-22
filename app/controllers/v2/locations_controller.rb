@@ -8,10 +8,9 @@ module V2
     has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
     
     def index
-      @locations = @locations.joins(:articles).includes(articles: :user)     
+      @locations = @locations.joins(:articles).includes(:articles, articles: :user)     
       @locations = apply_scopes(@locations)  
-      # Dont paginate for now. send everything
-      # @locations = @locations.paginate(page: params[:page], per_page: 100)
+      @locations = @locations.paginate(page: params[:page], per_page: 200)
     end
     
   end
