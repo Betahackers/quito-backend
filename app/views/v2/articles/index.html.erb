@@ -1,7 +1,7 @@
 <h2 class="sub-header">Articles</h2>
 <ul class="nav nav-tabs">
   
-  <li class="<%= params[:all_articles] ? '' : 'active' %>"><%= link_to t('my_articles'), default_articles_path %></li>
-  <li class="<%= params[:all_articles] ? 'active' : '' %>"><%= link_to t('all_articles'), default_articles_path(all_articles: true) %></li>
+  <li class="<%= params[:all_articles] ? '' : 'active' %>"><%= link_to t('my_articles'), articles_path %></li>
+  <li class="<%= params[:all_articles] ? 'active' : '' %>"><%= link_to t('all_articles'), articles_path(all_articles: true) %></li>
 </ul>
 <%= render 'articles'%>

@@ -28,8 +28,8 @@ module V2
       @article.user = current_user
       respond_to do |format|
         if @article.save
-          flash[:notice] = "Article added!! Add another? (or #{ActionController::Base.helpers.link_to('<b>go back</b>'.html_safe, default_articles_path)})"
-          format.html { redirect_to new_default_article_path}
+          flash[:notice] = "Article added!! Add another? (or #{ActionController::Base.helpers.link_to('<b>go back</b>'.html_safe, articles_path)})"
+          format.html { redirect_to new_article_path}
           format.json { render json: @article }
         else
           format.html { render :new, alert: 'failed :(' }
@@ -45,7 +45,7 @@ module V2
     def update
       respond_to do |format|
         if @article.update_attributes(article_params)
-          format.html { redirect_to default_articles_path, notice: 'Article updated' }
+          format.html { redirect_to articles_path, notice: 'Article updated' }
           format.json { render json: @article }
         else
           format.html { render :new, alert: 'failed :(' }
@@ -57,7 +57,7 @@ module V2
     def destroy
       @article.destroy
       respond_to do |format|
-        format.html { redirect_to default_articles_path, notice: 'Article deleted' }
+        format.html { redirect_to articles_path, notice: 'Article deleted' }
         format.json
       end
     end

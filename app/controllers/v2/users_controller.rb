@@ -31,7 +31,7 @@ module V2
           render :crop
         else
           flash[:notice] = 'Saved. Thank you!'
-          redirect_to default_users_path
+          redirect_to users_path
         end
       else
         render :new
@@ -54,7 +54,7 @@ module V2
           render :crop
         else
           flash[:notice] = "Relax, you've been saved..."
-          redirect_to default_articles_path
+          redirect_to articles_path
         end
       else
         render :edit
@@ -64,7 +64,7 @@ module V2
     def destroy
       @user.destroy
       respond_to do |format|
-        format.html {redirect_to default_users_path }
+        format.html {redirect_to users_path }
         format.json
       end
     end
