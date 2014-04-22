@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(user)
-    articles_url
+    default_articles_url
   end
   
   def after_sign_out_path_for(user)

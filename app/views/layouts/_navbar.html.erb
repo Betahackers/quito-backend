@@ -14,7 +14,7 @@
 
       <p class="navbar-text navbar-right">
         <% if user_signed_in? %>
-            Signed in as <%= link_to current_user.full_name, edit_user_path(current_user) %>
+            Signed in as <%= link_to current_user.full_name, edit_default_user_path(current_user) %>
             |
             <%= link_to "Sign Out", destroy_user_session_path, {method: :delete} %>
         <% else %>

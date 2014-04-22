@@ -9,7 +9,7 @@
       <%= f.input :mood_list, label: t('mood_list'), collection: Settler.moods.value.map {|k,v| [v,k]}, input_html: {multiple: true, class: 'select2_tags'}, hint: t('article.form.mood_list_hint') %>
       <%= f.input :category_list, label: t('category_list'), collection: Settler.categories.value.map {|k,v| [v,k]}, input_html: {multiple: true, class: 'select2_tags'}, hint: t('article.form.category_list_hint') %>
       <%= f.submit class: 'btn btn-primary' %>
-      <%= link_to 'Cancel', articles_path,  class: 'btn btn-default' %>
+      <%= link_to 'Cancel', default_articles_path,  class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

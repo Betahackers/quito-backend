@@ -22,7 +22,7 @@ module V1
         
       respond_to do |format|
         if @user.save
-          format.html {redirect_to users_path}
+          format.html {redirect_to default_users_path}
           format.json { render json: @user }
         else
           format.html {render :new}
@@ -45,7 +45,7 @@ module V1
       respond_to do |format|
 
         if @user.update_attributes(user_params)
-          format.html  {redirect_to users_path}
+          format.html  {redirect_to default_users_path}
           format.json { render json: @user }
         else
           format.html {render :edit}
@@ -57,7 +57,7 @@ module V1
     def destroy
       @user.destroy
       respond_to do |format|
-        format.html {redirect_to users_path }
+        format.html {redirect_to default_users_path }
         format.json
       end
     end

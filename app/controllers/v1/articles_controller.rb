@@ -50,7 +50,7 @@ module V1
     def destroy
       @article.destroy
       respond_to do |format|
-        format.html { redirect_to articles_path, notice: 'Article deleted' }
+        format.html { redirect_to default_articles_path, notice: 'Article deleted' }
         format.json
       end
     end

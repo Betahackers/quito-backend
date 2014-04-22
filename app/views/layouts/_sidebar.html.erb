@@ -4,9 +4,9 @@
       <%= image_tag current_user.avatar.thumb.url, class: 'img-circle'%>
       <span class='glyphicon glyphicon-hand-left'></span><small> You</small>
   </li>
-  <%= content_tag :li, link_to(t(:users), users_path) if current_user.admin? %>
-  <%= content_tag :li, link_to(t(:articles), articles_path) %>
-  <%= content_tag :li, link_to(t(:add_an_article), new_article_path) if can? :create, Article %>
-  <%= content_tag :li, link_to(t(:edit_my_profile), edit_user_path(current_user)) %>
+  <%= content_tag :li, link_to(t(:users), default_users_path) if current_user.admin? %>
+  <%= content_tag :li, link_to(t(:articles), default_articles_path) %>
+  <%= content_tag :li, link_to(t(:add_an_article), new_default_article_path) if can? :create, Article %>
+  <%= content_tag :li, link_to(t(:edit_my_profile), edit_default_user_path(current_user)) %>
 </ul>
 
