@@ -20,7 +20,8 @@ module V2
     end
     
     def set_cach_key_from_params
-      @cach_key = params.slice(:by_mood, :by_article, :by_user, :by_category, :by_location, :controller, :include_foursquare).hash
+      #these are the only params used to determine the content of the json partial
+      @cach_key = params.slice(:by_user, :controller, :include_foursquare).hash
     end
 
   end
