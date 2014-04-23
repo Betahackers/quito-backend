@@ -13614,7 +13614,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div id=\"ProfileArticlePanel\" class=\"profile\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"";
+  buffer += "<div id=\"ProfileArticlePanel\" class=\"profile\">\n        <div class=\"profile-inner\">\n	<div class=\"profile-header\">\n		<div class=\"profile-people-img\">\n			<img class=\"profile-image\" src=\"";
   if (helper = helpers.userThumbnailUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.userThumbnailUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -13654,7 +13654,7 @@ function program3(depth0,data) {
     + "</p>\n  <p>\n    ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </p>\n\n	</div>\n</div>";
+  buffer += "\n  </p>\n\n	</div>\n        </div>\n</div>";
   return buffer;
   });
 /*global QuitoFrontend, Backbone*/
