@@ -286,33 +286,33 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on
+  acts-as-taggable-on (~> 3.1.1)
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
-  cancancan
-  carrierwave
+  cancancan (~> 1.7.1)
+  carrierwave (~> 0.10.0)
   coffee-rails (~> 4.0.0)
-  dalli
-  devise
+  dalli (~> 2.7.0)
+  devise (~> 3.2.4)
   factory_girl_rails
   faraday (~> 0.8.9)
-  figaro
-  fog
-  foursquare2
-  geocoder
+  figaro (~> 0.7.0)
+  fog (~> 1.22.0)
+  foursquare2 (~> 1.9.8)
+  geocoder (~> 1.2.0)
   guard
   guard-rspec
   guard-shell
-  has_scope
+  has_scope (~> 0.5.1)
   jbuilder (~> 2.0)
-  jcrop-rails-v2
+  jcrop-rails-v2 (~> 0.9.12.3)
   jquery-rails
-  memcachier
-  mini_magick
+  memcachier (~> 0.0.2)
+  mini_magick (~> 3.7.0)
   newrelic_rpm
-  paranoia
-  pg
+  paranoia (~> 2.0.2)
+  pg (~> 0.17.1)
   pry
   pry-rails
   rails (= 4.1.0)
@@ -324,11 +324,11 @@ DEPENDENCIES
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  select2-rails
-  settler
+  select2-rails (~> 3.5.4)
+  settler (~> 2.0.1)
   simple_form (~> 3.1.0.rc1)
   uglifier (>= 1.3.0)
   unicorn
   versionist (~> 1.2.1)
   will_paginate!
-  yajl-ruby
+  yajl-ruby (~> 1.2.0)
