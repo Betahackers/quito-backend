@@ -12983,6 +12983,12 @@ $(document).ready(function () {
 
 
 
+QuitoFrontend.backgroundColors = {
+  "by_mood": ["rgb(42, 197, 193)", "rgb(177, 231, 230)"],
+  "by_user": ["rgb(139, 204, 86)", "rgb(209, 235, 182)"],
+  "by_category": ["rgb(156, 146, 205)", "rgb(216, 211, 235)"]
+};
+
   function initializeMap() {
       var mapOptions = {
           center: new google.maps.LatLng(41.39479, 2.1487679),
@@ -13097,7 +13103,6 @@ $(document).ready(function () {
   function getProfilePanelBackgroundColor(type) {
     var bgcolor = ""
     if (type === 'by_mood') {
-      //background-color: #49c4c1;
       bgcolor = "#49c4c1";
     } else if (type === 'by_category') {
       //background-color: rgba(154,147,210,1);
@@ -13112,9 +13117,9 @@ $(document).ready(function () {
     return bgcolor;
   }
   function fetchMarker(markerType, type) {
+
     
     $('#ProfileArticlePanel').hide()
-    var profilePanelBackgroundColor = getProfilePanelBackgroundColor(type);
     var url = "http://" + Config.DevProxy + "www.fromto.es/v2/locations.json?"+type+"=" + markerType;
     var jqxhr = $.get(url, function (data) {
 //      console.log("success");
@@ -13124,7 +13129,7 @@ $(document).ready(function () {
 
         if (type === 'by_user') {
           var model = new QuitoFrontend.Models.Profile();
-          model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
+          model.set("panelBackgroundColors", QuitoFrontend.backgroundColors[type]);
           if ((typeof QuitoFrontend.markers[0].location.articles !== 'undefined') && (QuitoFrontend.markers[0].location.articles.length > 0)) {
             var user = null;
             if (typeof QuitoFrontend.markers[0].location.articles[0].article !== 'undefined') {
@@ -13138,7 +13143,7 @@ $(document).ready(function () {
             }
             var userThumbnailUrl = "http://www.fromto.es/images/fallback/thumb_avatar.png";
             if ((user != null) && (user.avatar_url_suffix !== "avatar.png")) {
-              userThumbnailUrl = user.avatar_url_prefix + user.avatar_url_suffix;
+              userThumbnailUrl = user.avatar_url_prefix + "medium_" + user.avatar_url_suffix;
             }
             model.set("user",user)
             model.set("userThumbnailUrl",userThumbnailUrl)
@@ -13161,30 +13166,16 @@ $(document).ready(function () {
         var infoWindow = new google.maps.InfoWindow()
 
         for (var i = 0; i < QuitoFrontend.markers.length; i++) {
-          var marker = QuitoFrontend.markers[i].location
+          var marker = QuitoFrontend.markers[i].location;
 
-          var markerImage = type;
-          if (type === 'all') {
-            var randomChoice = Math.floor(Math.random() * (3 - 1 + 1)) + 1
-            switch (randomChoice) {
-              case 1:
-                markerImage = "by_mood"
-                break;
-              case 2:
-                markerImage = "by_category"
-                break;
-              case 3:
-                markerImage = "by_user"
-                break;
-            }
-          }
+          var markerType = (type === "all") ? ["by_mood", "by_category", "by_user"][Math.floor(Math.random() * 3)] : type;
 
+        marker.type = markerType;
           var markerDot = new google.maps.Marker({
             position: new google.maps.LatLng(marker.latitude, marker.longitude),
             map: QuitoFrontend.map,
-            icon: 'marker-images/point_' + markerImage + '.png',
-            marker: marker
-//            animation: google.maps.Animation.DROP
+            icon: 'marker-images/point_' + markerType + '.png',
+            marker: marker,
           });
 
           QuitoFrontend.markerDots.push(markerDot);
@@ -13194,7 +13185,7 @@ $(document).ready(function () {
               var articleList = []
               var articles = this.marker.articles;
               var model = new QuitoFrontend.Models.Profile();
-              model.set("profilePanelBackgroundColor", profilePanelBackgroundColor);
+              model.set("panelBackgroundColors", QuitoFrontend.backgroundColors[marker.type]);
               var foursquare = {};
               var article = this.marker.articles[0]
 
@@ -13273,6 +13264,7 @@ $(document).ready(function () {
     QuitoFrontend.ProfileView = new QuitoFrontend.Views.ProfileView({selectedProfile:"Jorge", model:model});
     QuitoFrontend.mainRegion.show(QuitoFrontend.ProfileView)
   }
+
   
   
 (function () {
@@ -13562,7 +13554,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<a href=\"#\">\n    <img src=\"";
+  buffer += "<a href=\"#\">\n    <img class=\"profile-image-small\" src=\"";
   if (helper = helpers.avatar_url_prefix) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.avatar_url_prefix); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -13570,15 +13562,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.avatar_url_suffix) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.avatar_url_suffix); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\"/>";
+    + "\"/><div class=\"profile-name\">";
   if (helper = helpers.first_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.first_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + " ";
+    + "<br />";
   if (helper = helpers.last_name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.last_name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n</a>\n\n";
+    + "</div>\n</a>\n\n";
   return buffer;
   });
 
@@ -13599,13 +13591,33 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
+  buffer += "\n    <a href=\"http://twitter.com/"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=\"_blank\">@"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n    ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n      <a href=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=\"_blank\">website</a>\n    ";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
   buffer += "\n		<img class=\"image\" src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" id=\"profile-image\"/>\n    ";
   return buffer;
   }
 
-function program3(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = "";
   buffer += "\n        "
@@ -13634,14 +13646,14 @@ function program3(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.nationality)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n	</div>\n	<div class=\"profile-work\">\n    "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.profession)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n	</div>\n  <div class=\"profile-twitter\">\n    <a href=\"http://twitter.com/"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" target=\"_blank\">@"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</a>\n	</div>\n  <div class=\"profile-url\">\n      <a href=\""
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" target=\"_blank\">website</a>\n  </div>\n	<div class=\"profile-picture\">\n    ";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    + "\n	</div>\n  <div class=\"profile-twitter\">\n    ";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.twitter_handle), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n	</div>\n  <div class=\"profile-url\">\n    ";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </div>\n	<div class=\"profile-picture\">\n    ";
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.photoUrl), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	</div>\n	<div class=\"profile-content\">\n      <h1><a href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.foursquare)),stack1 == null || stack1 === false ? stack1 : stack1.canonicalUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -13652,7 +13664,7 @@ function program3(depth0,data) {
     + "</h2>\n      <p>"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.article)),stack1 == null || stack1 === false ? stack1 : stack1.content)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</p>\n  <p>\n    ";
-  stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.moods), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  </p>\n\n	</div>\n        </div>\n</div>";
   return buffer;
@@ -13725,8 +13737,10 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
     selectedProfile: null,
 
     onShow: function(){
-      var profilePanelBackgroundColor = this.model.get("profilePanelBackgroundColor")
-      $('.profile').css("background-color",profilePanelBackgroundColor);
+//        var panelBackgroundColors = QuitoFrontend.backgroundColors;
+        var panelBackgroundColors = this.model.get("panelBackgroundColors");
+      $(".profile").css("background-color", panelBackgroundColors[0]);
+        $(".profile-content").css("background-color", panelBackgroundColors[1]);
     }
 
   });
@@ -13947,6 +13961,7 @@ QuitoFrontend.Views = QuitoFrontend.Views || {};
       }
 
       var userId = model.get("id")
+      profile.set("panelBackgroundColors", QuitoFrontend.backgroundColors["by_user"]);
       displayProfileView(profile)
       fetchMarker(userId,"by_user")
 //      fetchMarker(userId,"users");
