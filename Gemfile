@@ -25,36 +25,36 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'spring',        group: :development
 # doesn't support rails 4.1 ??? https://github.com/rails/rails/issues/14115
 
-gem 'devise'
-gem 'cancancan'
-gem 'pg'
+gem 'acts-as-taggable-on', '~> 3.1.1'
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'geocoder'
-gem 'versionist', '~> 1.2.1'
-gem 'acts-as-taggable-on'
-gem 'paranoia'
-gem 'select2-rails'
-gem 'rails_12factor'
-gem 'figaro'
-gem 'settler'
-gem 'has_scope'
-gem 'dalli'
-gem 'memcachier'
-gem 'simple_form', '~> 3.1.0.rc1'
-gem 'yajl-ruby'
-gem 'newrelic_rpm'
-gem 'will_paginate', github: 'mislav/will_paginate'
-
-gem 'carrierwave'
-gem 'mini_magick'
-gem "fog"
-gem 'jcrop-rails-v2'
-
+gem 'cancancan', '~> 1.7.1'
+gem 'carrierwave', '~> 0.10.0'
+gem 'dalli', '~> 2.7.0'
+gem 'devise', '~> 3.2.4'
+gem 'faraday', '~> 0.8.9'
+gem 'figaro', '~> 0.7.0'
+gem "fog", '~> 1.22.0'
+gem 'foursquare2', '~> 1.9.8'
+gem 'geocoder', '~> 1.2.0'
+gem 'has_scope', '~> 0.5.1'
+gem 'jcrop-rails-v2', '~> 0.9.12.3'
+gem 'memcachier', '~> 0.0.2'
+gem 'mini_magick', '~> 3.7.0'
+gem 'newrelic_rpm', '~> '
+gem 'paranoia', '~> 2.0.2'
+gem 'pg', '~> 0.17.1'
 gem 'pry'
 gem 'pry-rails'
+gem 'rails_12factor'
+gem 'select2-rails', '~> 3.5.4'
+gem 'settler', '~> 2.0.1'
+gem 'simple_form', '~> 3.1.0.rc1'
+gem 'versionist', '~> 1.2.1'
+gem 'will_paginate', github: 'mislav/will_paginate'
+gem 'yajl-ruby', '~> 1.2.0'
 
-gem 'faraday', '~> 0.8.9'
-gem 'foursquare2'
+
+
 
 group :test, :development do
   gem 'rspec', '>= 3.0.0.beta2'
