@@ -13289,7 +13289,7 @@ QuitoFrontend.backgroundColors = {
         'Fabienne Plangger',
         'Bert Balcaen',
         'Bernard Schembri',
-        'Anderj Dragisic',
+        'Andrej Dragisic',
         'Alessandra Fardin',
         '\u00DAlfur Kristj\u00E1nsson',
         'Rouli Diamantopoulou',
@@ -13604,7 +13604,9 @@ function program3(depth0,data) {
   var buffer = "", stack1;
   buffer += "\n      <a href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" target=\"_blank\">website</a>\n    ";
+    + "\" target=\"_blank\">"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.user)),stack1 == null || stack1 === false ? stack1 : stack1.website_url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n    ";
   return buffer;
   }
 
