@@ -1,15 +1,12 @@
 module V2
   class ConfigurationController < BaseController
-  
+   skip_load_resource 
     def show
-      authorize! :read, :configuration
       @categories = Settler.categories.value
       @moods = Settler.moods.value
     end
     
     def update
-      authorize! :update, :configuration
-      #write code to update configuration
     end
     
   end

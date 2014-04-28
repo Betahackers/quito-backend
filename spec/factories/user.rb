@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:first_name) {|n| "first#{n}"}
     sequence(:last_name) {|n| "last#{n}"}
-    sequence(:email) {|n| "user#{n}@email.com"}
+    sequence(:email) {|n| "testuser#{n}@email.com"}
     role 'member'
     about 'Im very interesting'
     profession 'goofball'

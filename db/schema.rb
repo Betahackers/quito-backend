@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424112656) do
+ActiveRecord::Schema.define(version: 20140428161445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20140424112656) do
     t.datetime "deleted_at"
     t.string   "cached_category_list"
     t.string   "cached_mood_list"
+    t.string   "kind"
+    t.integer  "request_count"
   end
 
   add_index "articles", ["deleted_at"], name: "index_articles_on_deleted_at", using: :btree
@@ -42,6 +44,13 @@ ActiveRecord::Schema.define(version: 20140424112656) do
     t.string   "foursquare_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "request_count"
+  end
+
+  create_table "search_misses", force: true do |t|
+    t.string   "query"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,6 +111,7 @@ ActiveRecord::Schema.define(version: 20140424112656) do
     t.string   "twitter_handle"
     t.string   "website_url"
     t.string   "avatar"
+    t.integer  "request_count"
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree

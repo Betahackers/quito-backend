@@ -1,7 +1,5 @@
 module V2
-  class ArticlesController < BaseController    
-    load_and_authorize_resource
-
+  class ArticlesController < BaseController
     before_action :authorize_json_only, except: :show
 
     has_scope :by_mood, type: :array
@@ -11,10 +9,17 @@ module V2
     has_scope :by_location, type: :array
     
     def index
-      @articles = apply_scopes(@articles).includes(:locations, :user)  
+      @articles = apply_scopes(@articles)
+      @articles = @articles.joins(:user, :locations).eager_load(:user, :locations) 
       @articles = @articles.where(user_id: current_user.id) if current_user && !params[:all_articles]  && request.format != :json      
-      # Dont paginate for now. send everything
-      # @articles = @articles.paginate(page: params[:page], per_page: 100)
+      
+      ## Geocoder and will_paginate/kaminari have an issue. tracked here: https://github.com/alexreisner/geocoder/issues/630
+      ## Disabled kaminari for now
+      # @articles = @articles.page(params[:page]).per(parms[:per_page])
+      ## For now do it as an array
+      params[:offset] ||= 0
+      params[:limit] ||= 200
+      @articles = @articles.drop(params[:offset].to_i).take(params[:limit].to_i)
     end
 
     def show

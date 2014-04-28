@@ -6,7 +6,7 @@ json.article do
   json.moods @article.mood_list
   json.categories @article.category_list
   json.content @article.content
-  json.type @article.article_type
+  json.kind @article.kind
   json.user do
     json.id @article.user.try(:id)
     json.first_name @article.user.try(:first_name)

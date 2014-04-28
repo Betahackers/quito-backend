@@ -2,7 +2,6 @@
 <ul class="nav nav-pills nav-stacked sidebar">
   <li id='sidebar-thumbnail'>
       <%= image_tag current_user.avatar.thumb.url, class: 'img-circle'%>
-      <span class='glyphicon glyphicon-hand-left'></span><small> You</small>
   </li>
   <%= content_tag :li, link_to(t(:users), users_path) if current_user.admin? %>
   <%= content_tag :li, link_to(t(:articles), articles_path) %>

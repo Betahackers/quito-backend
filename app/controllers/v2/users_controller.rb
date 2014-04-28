@@ -1,7 +1,5 @@
 module V2
   class UsersController < BaseController
-    load_and_authorize_resource
-
     before_action :authorize_json_only
     
     has_scope :by_mood, type: :array
@@ -11,10 +9,17 @@ module V2
     has_scope :by_location, type: :array
   
     def index
-      @users = apply_scopes(@users).includes(:articles, :locations)
-      @users = @users.with_article if request.format == :json
-      # Dont paginate for now. send everything
-      # @users = @users.paginate(page: params[:page], per_page: 100)      
+      @users = apply_scopes(@users)
+      @users = @users.joins(articles: :locations).eager_load(:articles, articles: :locations) 
+
+
+      ## Geocoder and will_paginate/kaminari have an issue. tracked here: https://github.com/alexreisner/geocoder/issues/630
+      ## Disabled kaminari for now
+      # @users = @users.page(params[:page]).per(parms[:per_page])
+      ## For now do it as an array
+      params[:offset] ||= 0
+      params[:limit] ||= 200
+      @users = @users.drop(params[:offset].to_i).take(params[:limit].to_i)    
     end
   
     def show

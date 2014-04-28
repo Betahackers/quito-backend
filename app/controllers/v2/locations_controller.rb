@@ -1,16 +1,23 @@
 module V2
   class LocationsController < BaseController
-    load_and_authorize_resource
-    
     has_scope :by_mood, type: :array
     has_scope :by_category, type: :array
     has_scope :by_user, type: :array
     has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
     
     def index
-      @locations = @locations.joins(:articles).includes(:articles, articles: :user)     
       @locations = apply_scopes(@locations)  
-      @locations = @locations.paginate(page: params[:page], per_page: 200)
+      # Use eager load to avoid including all users when locations are filtered by a specific user.
+      @locations = @locations.joins(articles: :user).eager_load(:articles, articles: :user)      
+            
+      ## Geocoder and will_paginate/kaminari have an issue. tracked here: https://github.com/alexreisner/geocoder/issues/630
+      ## Disabled kaminari for now
+      # @locations = @locations.page(params[:page]).per(parms[:per_page])
+      ## For now do it as an array
+      params[:offset] ||= 0
+      params[:limit] ||= 200
+      @locations = @locations.drop(params[:offset].to_i).take(params[:limit].to_i)
+      
     end
     
   end

@@ -9,6 +9,7 @@ class Ability
       if user.admin?
         can :manage, :all
       elsif user.member?
+        can [:search, :find], Foursquare
         can :manage, User, id: user.id
         can :manage, Article
       end

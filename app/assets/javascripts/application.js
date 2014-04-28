@@ -45,8 +45,9 @@ $(document).ready(function() {
 $(".foursquare_location_select").select2({
     minimumInputLength: 4,
     ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-        url: "/v1/foursquare",
+        url: "/v2/foursquare",
         dataType: 'json',
+        quietMillis: 500,
         data: function (term, page) {
             return {
                 query: term, // search term

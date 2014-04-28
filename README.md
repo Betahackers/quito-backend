@@ -67,7 +67,7 @@ Articles have the following attributes:
 * mood_list
 * category_list
 * content
-* article_type
+* kind
 * user (hash of the authoring users params)
 * locations (array of locations belonging to article. will include foursquare params if include_foursquare=true )
 

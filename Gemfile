@@ -50,7 +50,7 @@ gem 'select2-rails', '~> 3.5.4'
 gem 'settler', '~> 2.0.1'
 gem 'simple_form', '~> 3.1.0.rc1'
 gem 'versionist', '~> 1.2.1'
-gem 'will_paginate', github: 'mislav/will_paginate'
+gem 'kaminari'
 gem 'yajl-ruby', '~> 1.2.0'
 
 

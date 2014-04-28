@@ -1,12 +1,12 @@
 module Foursquare
   extend self
 
-  def client
+  def client(options={})
     @client ||= Foursquare2::Client.new(
       client_id: ENV['FOURSQUARE_CLIENT_ID'],
       client_secret: ENV['FOURSQUARE_CLIENT_SECRET'],
       api_version: '20140412',
-      connection_middleware: [[FaradayMiddleware::Caching, Rails.cache]]
+      connection_middleware: ([[FaradayMiddleware::Caching, Rails.cache]] unless options[:no_cache])
     )
   end
 
@@ -15,7 +15,7 @@ module Foursquare
   end
 
   def search_venues input
-    client.search_venues({
+    client(no_cache: true).search_venues({
       ll: barcelona,
       query: input,
     })['venues']

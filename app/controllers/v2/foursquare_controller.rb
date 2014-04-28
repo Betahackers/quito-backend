@@ -1,7 +1,10 @@
 module V2
   class FoursquareController < BaseController
+    skip_load_resource 
     def search
-      render json: Foursquare.search_venues(params[:query])
+      venues = Foursquare.search_venues(params[:query])
+      SearchMiss.create(query: params[:query]) if venues.empty?
+      render json: venues
     end
     
     def find
