@@ -5,7 +5,12 @@ module V2
     has_scope :by_user, type: :array
     has_scope :by_lat_long, using: [:lat, :long, :radius], type: :hash
     
+    
     def index
+      JbuilderTemplate.class_eval do
+        include MultiFetchFragments
+      end
+      
       @locations = apply_scopes(@locations)  
       # Use eager load to avoid including all users when locations are filtered by a specific user.
       @locations = @locations.joins(articles: :user).eager_load(:articles, articles: :user)      
