@@ -24,16 +24,16 @@ $(document).ready(function() {
   
 
   function locationFormatResult(result) {
-      var markup = "<table class='location-result'><tr>";
-      if (result.categories !== undefined) {
+      var markup = "<table class='location-result'><tr><td class='location-thumbnail' style='min-width: 32px;'>";
+      if (result.categories !== undefined && result.categories[0] !== undefined ) {
           var category = result.categories[0]
-          markup += "<td class='location-thumbnail'><img src='" + category.icon.prefix + "32" + category.icon.suffix + "'/></td>";
+          markup += "<img src='" + category.icon.prefix + "32" + category.icon.suffix + "'/>";
       }
-      markup += "<td class='location-info'><div class='location-title'>&nbsp;" + result.name + "</div>";
-      if (result.location !== undefined) {
-          markup += "<small class='location-address'>&nbsp;" + result.location.address + "</small>";
+      markup += "</td><td class='location-info'><div class='location-title'>&nbsp;" + result.name + "</div><small class='location-address'>&nbsp;";
+      if (result.location !== undefined && result.location.address !== undefined) {
+          markup += result.location.address;
       }
-      markup += "</td></tr></table>";
+      markup += "</small></td></tr></table>";
       return markup;
   }
 
