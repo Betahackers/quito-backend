@@ -6,7 +6,7 @@ json.location do
   json.request_count location.request_count
   json.created_at location.created_at.to_s(:db)  
   json.updated_at location.updated_at.to_s(:db)  
-  
+
   json.articles location.articles do |article|
     json.partial! article
   end if controller_name == 'locations'

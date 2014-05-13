@@ -1,10 +1,9 @@
 GIT
-  remote: git://github.com/joshblour/jbuilder.git
-  revision: 7e934ca2d7c805fb1f9669b954d3f23126aa01f6
+  remote: git://github.com/joshblour/scope_cache_key.git
+  revision: 04b35b42dd53a89ea8183d5895acf6c0ae8d643f
   specs:
-    jbuilder (2.0.7)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
+    scope_cache_key (0.0.1)
+      activerecord (>= 3.2.9)
 
 GEM
   remote: https://rubygems.org/
@@ -131,6 +130,11 @@ GEM
     hashie (2.1.1)
     hike (1.2.3)
     i18n (0.6.9)
+    jbuilder (2.0.6)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
+    jbuilder_cache_multi (0.0.1)
+      jbuilder (~> 2.0)
     jcrop-rails-v2 (0.9.12.3)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
@@ -307,7 +311,8 @@ DEPENDENCIES
   guard-rspec
   guard-shell
   has_scope (~> 0.5.1)
-  jbuilder (~> 2.0)!
+  jbuilder (~> 2.0)
+  jbuilder_cache_multi
   jcrop-rails-v2 (~> 0.9.12.3)
   jquery-rails
   kaminari
@@ -326,6 +331,7 @@ DEPENDENCIES
   rspec (>= 3.0.0.beta2)
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
+  scope_cache_key!
   sdoc (~> 0.4.0)
   select2-rails (~> 3.5.4)
   settler (~> 2.0.1)

@@ -17,9 +17,9 @@ module V2
       ## Disabled kaminari for now
       # @articles = @articles.page(params[:page]).per(parms[:per_page])
       ## For now do it as an array
-      params[:offset] ||= 0
-      params[:limit] ||= 200
-      @articles = @articles.drop(params[:offset].to_i).take(params[:limit].to_i)
+      # params[:offset] ||= 0
+      # params[:limit] ||= 200
+      # @articles = @articles.drop(params[:offset].to_i).take(params[:limit].to_i)
     end
 
     def show
