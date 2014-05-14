@@ -58,7 +58,6 @@ Rails.application.configure do
   # else
     # config.cache_store = :dalli_store
   # end
-  config.cache_store = :redis_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
