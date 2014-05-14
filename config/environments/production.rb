@@ -58,8 +58,10 @@ Rails.application.configure do
   # else
     # config.cache_store = :dalli_store
   # end
-  redis_url = ENV["REDISCLOUD_URL"] || "redis://localhost:6379/0/quito-backend"
-  config.cache_store = :redis_store, redis_url
+  # redis_url = ENV["REDISCLOUD_URL"] || "redis://localhost:6379/0/quito-backend"
+  # config.cache_store = :redis_store, redis_url
+  config.cache_store = :memory_store, { size: 64.megabytes }
+  
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
