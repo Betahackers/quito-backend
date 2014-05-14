@@ -67,7 +67,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    dalli (2.7.0)
     debug_inspector (0.0.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -153,7 +152,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (3.7.0)
@@ -316,7 +314,6 @@ DEPENDENCIES
   cancancan (~> 1.7.1)
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.0.0)
-  dalli (~> 2.7.0)
   devise (~> 3.2.4)
   factory_girl_rails
   faraday (~> 0.8.9)
@@ -333,7 +330,6 @@ DEPENDENCIES
   jcrop-rails-v2 (~> 0.9.12.3)
   jquery-rails
   kaminari
-  memcachier (~> 0.0.2)
   mini_magick (~> 3.7.0)
   newrelic_rpm
   paranoia (~> 2.0.2)
