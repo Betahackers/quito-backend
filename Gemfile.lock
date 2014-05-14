@@ -213,6 +213,20 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redis (3.0.7)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
     redis-store (1.1.4)
       redis (>= 2.2)
     rspec (3.0.0.beta2)
@@ -331,7 +345,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
-  redis-store
+  redis-rails
   rspec (>= 3.0.0.beta2)
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
