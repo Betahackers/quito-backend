@@ -212,6 +212,9 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    redis (3.0.7)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     rspec (3.0.0.beta2)
       rspec-core (= 3.0.0.beta2)
       rspec-expectations (= 3.0.0.beta2)
@@ -328,6 +331,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  redis-store
   rspec (>= 3.0.0.beta2)
   rspec-rails (>= 3.0.0.beta2)
   sass-rails (~> 4.0.3)
