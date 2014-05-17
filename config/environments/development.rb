@@ -30,8 +30,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
   
-  # config.cache_store = :redis_store
-  config.cache_store = :memory_store, { size: 64.megabytes }
+  config.cache_store = :dalli_store
   
 
   # Adds additional error checking when serving assets at runtime.
