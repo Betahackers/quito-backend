@@ -53,11 +53,11 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  # if ENV["MEMCACHEDCLOUD_SERVERS"]
-  #   config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(','), { :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"] }
-  # else
+  if ENV["MEMCACHEDCLOUD_SERVERS"]
+    config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(','), { :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"] }
+  else
     config.cache_store = :dalli_store
-  # end
+  end
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -77,7 +77,7 @@ Rails.application.configure do
       :port => 587, # ports 587 and 2525 are also supported with STARTTLS
       :enable_starttls_auto => true, # detects and uses STARTTLS
       :user_name => "#{ENV['MANDRILL_USERNAME']}",
-      :password => "#{ENV['MANDRILL_PASSWORD']}", # SMTP password is any valid API key
+      :password => "#{ENV['MANDRILL_APIKEY']}", # SMTP password is any valid API key
       :authentication => 'login', # Mandrill supports 'plain' or 'login'
       :domain => 'www.fromto.es', # your domain to identify your server when connecting
   }
