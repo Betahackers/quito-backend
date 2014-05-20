@@ -3,3 +3,8 @@
 require ::File.expand_path('../config/environment',  __FILE__)
 use Rack::Static, :urls => ['/carrierwave'], :root => 'tmp' # adding this line
 run Rails.application
+
+require 'gctools/oobgc'
+if defined?(Unicorn::HttpRequest)
+  use GC::OOB::UnicornMiddleware
+end
