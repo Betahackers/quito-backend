@@ -57,6 +57,7 @@ gem 'versionist', '~> 1.2.1'
 gem 'kaminari'
 gem 'yajl-ruby', '~> 1.2.0'
 gem 'scope_cache_key', github: 'joshblour/scope_cache_key'
+gem 'unicorn-worker-killer'
 
 group :test, :development do
   gem 'rspec', '>= 3.0.0.beta2'
