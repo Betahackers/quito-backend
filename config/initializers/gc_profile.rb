@@ -1,1 +1,1 @@
-GC::Profiler.enable
+# GC::Profiler.enable
